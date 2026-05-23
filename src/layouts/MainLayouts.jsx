@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../pages/Footer'
 import Faq from '../pages/Faq'
+import Contact from '../pages/Contact'
 
 
 const MainLayouts = ({children}) => {
@@ -12,6 +13,7 @@ const MainLayouts = ({children}) => {
       <main>
         {children}
       </main>
+      <Contact/>
       <Faq />
       <Footer />
     </>
