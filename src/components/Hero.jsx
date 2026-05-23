@@ -7,7 +7,7 @@ import { HiOutlineBars3, HiOutlineUser } from "react-icons/hi2";
 
 const Hero = () => {
 
-  // Container animation for fade in + slide up
+  // Container animation for fade in + slide up animayion
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
