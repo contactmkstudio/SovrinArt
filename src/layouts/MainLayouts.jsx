@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../pages/Footer'
 import Faq from '../pages/Faq'
 
+
 const MainLayouts = ({children}) => {
   return (
     <>
