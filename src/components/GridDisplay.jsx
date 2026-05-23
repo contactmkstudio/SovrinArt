@@ -39,11 +39,11 @@ const GridDisplay = () => {
             initial="initial"
           >
             <span className='text-black'>Art </span>
-            <span className='bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent' style={{ textShadow: '0 0 30px rgba(234, 179, 8, 0.5)' }}>
+            <span className='bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent' style={{ textShadow: '0 0 30px rgba(234, 179, 8, 0.5)' }}>
               Gallery
             </span>
             <motion.span 
-              className='absolute bottom-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full' 
+              className='absolute bottom-0 right-0 h-1 bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full' 
               style={{ boxShadow: '0 0 10px rgba(234, 179, 8, 0.6)' }}
               variants={{
                 initial: { width: '45%' },
@@ -74,7 +74,7 @@ const GridDisplay = () => {
               style={{ willChange: 'transform' }}
               loading="lazy"
             />
-            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+            <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
           </motion.div>
 
           {/* Regular items */}
@@ -91,7 +91,7 @@ const GridDisplay = () => {
                 style={{ willChange: 'transform' }}
                 loading="lazy"
               />
-              <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+              <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
             </motion.div>
           ))}
 
@@ -109,55 +109,7 @@ const GridDisplay = () => {
                 style={{ willChange: 'transform' }}
                 loading="lazy"
               />
-              <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-            </motion.div>
-          ))}
-
-          {/* Tall item - spans 1x2 */}
-          <motion.div
-            className='row-span-2 relative overflow-hidden rounded-2xl shadow-lg group cursor-pointer border border-yellow-600/20'
-            variants={itemVariants}
-          >
-            <img
-              src={gridImages[5].src}
-              alt={gridImages[5].alt}
-              className='w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
-              style={{ willChange: 'transform' }}
-              loading="lazy"
-            />
-            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-          </motion.div>
-
-          {/* Wide item - spans 2x1 */}
-          <motion.div
-            className='col-span-2 relative overflow-hidden rounded-2xl shadow-lg group cursor-pointer border border-yellow-600/20'
-            variants={itemVariants}
-          >
-            <img
-              src={gridImages[6].src}
-              alt={gridImages[6].alt}
-              className='w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
-              style={{ willChange: 'transform' }}
-              loading="lazy"
-            />
-            <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-          </motion.div>
-
-          {/* Regular items */}
-          {gridImages.slice(7).map((image) => (
-            <motion.div
-              key={image.id}
-              className='relative overflow-hidden rounded-2xl shadow-lg group cursor-pointer border border-yellow-600/20'
-              variants={itemVariants}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className='w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
-                style={{ willChange: 'transform' }}
-                loading="lazy"
-              />
-              <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+              <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
             </motion.div>
           ))}
         </motion.div>

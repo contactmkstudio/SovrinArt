@@ -40,7 +40,7 @@ const Faq = () => {
   };
 
   return (
-     <section className='relative bg-black overflow-hidden'>
+     <section className='relative bg-black overflow-hidden' style={{ WebkitTapHighlightColor: 'transparent' }}>
       
       {/* Premium Animated Background Component */}
       <PremiumBackground />
@@ -49,7 +49,7 @@ const Faq = () => {
           FAQ CONTENT SECTION
           Main content layer positioned above background
           ============================================ */}
-      <div className='relative z-10 flex flex-col justify-center items-center text-white px-5 py-10 md:p-10'>
+      <div className='relative z-10 flex flex-col justify-center items-center text-white px-5 py-10 md:p-10' style={{ WebkitTapHighlightColor: 'transparent' }}>
         
         {/* Page Title - Fades in when scrolled into view */}
         <motion.h1 
@@ -81,6 +81,7 @@ const Faq = () => {
             <motion.div
               key={index}
               className='border border-white/20 rounded-lg overflow-hidden'
+              style={{ WebkitTapHighlightColor: 'transparent' }}
               initial={{ opacity: 0, y: 50 }}        
               whileInView={{ opacity: 1, y: 0 }}     
               viewport={{ once: true, amount: 0.2 }} 
@@ -89,7 +90,8 @@ const Faq = () => {
               {/* Question Button - Clickable header */}
               <button
                 onClick={() => toggleFaq(index)}
-                className='w-full flex justify-between items-center p-4 md:p-6 text-left hover:bg-white/5 transition-colors duration-300'
+                className='w-full flex justify-between items-center p-4 md:p-6 text-left hover:bg-yellow-500/5 focus:outline-none focus-visible:outline-none active:outline-none transition-colors duration-300'
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 <h3 className='font-cormorant text-sm md:text-base tracking-wide pr-4'>
                   {faq.question}

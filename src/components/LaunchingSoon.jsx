@@ -110,7 +110,7 @@ const LaunchingSoon = () => {
             }}
           >
             {/* Decorative Top Border */}
-            <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-600 to-transparent' />
+            <div className='absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-yellow-600 to-transparent' />
 
             {/* Close Button - Premium Style */}
             <button
@@ -173,7 +173,7 @@ const LaunchingSoon = () => {
                 className='flex justify-center mb-8'
               >
                 <motion.h1 
-                  className='font-hurricane text-6xl md:text-8xl tracking-widest font-bold bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-600 bg-clip-text text-transparent'
+                  className='font-hurricane text-6xl md:text-8xl tracking-widest font-bold bg-linear-to-r from-yellow-600 via-yellow-400 to-yellow-600 bg-clip-text text-transparent'
                   initial={{ opacity: 0, filter: "blur(10px)" }}
                   animate={{ opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
@@ -189,7 +189,7 @@ const LaunchingSoon = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className='text-center mb-6'
               >
-                <h2 className='font-cormorant text-5xl md:text-7xl font-bold mb-3 bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-600 bg-clip-text text-transparent tracking-wide'>
+                <h2 className='font-cormorant text-5xl md:text-7xl font-bold mb-3 bg-linear-to-r from-yellow-600 via-yellow-400 to-yellow-600 bg-clip-text text-transparent tracking-wide'>
                   Launching Soon
                 </h2>
                 <div className='flex justify-center gap-2'>
@@ -230,9 +230,9 @@ const LaunchingSoon = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                <div className='h-px flex-1 bg-gradient-to-r from-transparent via-yellow-600 to-yellow-500' />
+                <div className='h-px flex-1 bg-linear-to-r from-transparent via-yellow-600 to-yellow-500' />
                 <div className='w-3 h-3 rounded-full bg-yellow-600 shadow-lg shadow-yellow-600/60' />
-                <div className='h-px flex-1 bg-gradient-to-l from-yellow-500 via-yellow-600 to-transparent' />
+                <div className='h-px flex-1 bg-linear-to-l from-yellow-500 via-yellow-600 to-transparent' />
               </motion.div>
             </div>
 

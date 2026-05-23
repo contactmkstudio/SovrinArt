@@ -40,7 +40,7 @@ const PremiumBackground = () => {
 
       {/* Large Golden Orb - Bottom Center */}
       <motion.div
-        className='absolute bottom-0 left-1/2 w-[500px] h-[500px] bg-[#b8860b] rounded-full'
+        className='absolute bottom-0 left-1/2 w-125 h-125 bg-[#b8860b] rounded-full'
         style={{ filter: 'blur(130px)', transform: 'translateX(-50%)' }}
         animate={{
           scale: [1, 1.15, 1],
@@ -100,4 +100,4 @@ const PremiumBackground = () => {
   )
 }
 
-export default PremiumBackground
+export default React.memo(PremiumBackground)

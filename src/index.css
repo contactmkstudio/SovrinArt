@@ -8,3 +8,13 @@
   --font-marvel: "Marvel", sans-serif;
 }
 
+/* Remove tap highlight on mobile devices */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+

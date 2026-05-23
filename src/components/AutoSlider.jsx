@@ -29,7 +29,7 @@ const AutoSlider = () => {
               key={`${item.id}-${index}`}
               className='flex items-center gap-3 whitespace-nowrap border border-yellow-600 rounded-full px-4 py-2'
             >
-              <Icon className='text-yellow-600 text-2xl md:text-3xl flex-shrink-0' />
+              <Icon className='text-yellow-600 text-2xl md:text-3xl shrink-0' />
               <span className='text-black font-marvel text-sm md:text-base tracking-wide'>
                 {item.text}
               </span>
