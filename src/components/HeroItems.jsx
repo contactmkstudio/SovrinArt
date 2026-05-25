@@ -7,7 +7,7 @@ const HeroItems = () => {
     {name: 'Home', link: '/home'},
     {name: 'About', link: '/about'},
     {name: 'Contact', link: '/contact'},
-    {name: 'Artist' , link:'/artist'},
+    {name: 'Login' , link:'/login'},
   ]
 
   // Container animation
