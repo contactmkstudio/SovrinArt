@@ -15,14 +15,29 @@ const ProductDetailedView = ({ product }) => {
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
           
           {/* Left Section - Images (Fixed/Sticky) */}
-          <div className='lg:sticky lg:top-24 lg:h-fit flex gap-4'>
+          <div className='lg:sticky lg:top-24 lg:h-fit flex flex-col lg:flex-row-reverse gap-4'>
             
+            {/* Main Product Image */}
+            <motion.div 
+              className='flex-1 overflow-hidden aspect-square lg:aspect-auto'
+              style={{ backgroundColor: '#FFF8EC' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              key={selectedImage}
+            >
+              <img 
+                src={product.images[selectedImage]} 
+                alt={product.name}
+                className='w-full h-full object-cover'
+              />
+            </motion.div>
+
             {/* Thumbnail Images */}
-            <div className='flex flex-col gap-3 overflow-y-auto max-h-150 scrollbar-thin'>
+            <div className='flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto lg:max-h-150 scrollbar-thin'>
               {product.images.map((img, index) => (
                 <motion.div
                   key={index}
-                  className='cursor-pointer border-2 overflow-hidden'
+                  className='cursor-pointer border-2 overflow-hidden shrink-0'
                   style={{ 
                     borderColor: selectedImage === index ? '#546B41' : '#DCCCAC',
                     width: '80px',
@@ -40,21 +55,6 @@ const ProductDetailedView = ({ product }) => {
                 </motion.div>
               ))}
             </div>
-
-            {/* Main Product Image */}
-            <motion.div 
-              className='flex-1 overflow-hidden'
-              style={{ backgroundColor: '#FFF8EC' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              key={selectedImage}
-            >
-              <img 
-                src={product.images[selectedImage]} 
-                alt={product.name}
-                className='w-full h-full object-cover'
-              />
-            </motion.div>
           </div>
 
           {/* Right Section - Product Info (Scrollable) */}

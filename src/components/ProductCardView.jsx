@@ -77,9 +77,9 @@ const ProductCardView = ({ id, image, name, price }) => {
           from <span className='font-bold' style={{ color: '#546B41' }}>₹{price.toLocaleString('en-IN')}</span>
         </motion.p>
 
-        {/* View Details Button - Shows on Hover */}
+        {/* View Details Button - Shows on Hover (Desktop) / Always Visible (Mobile) */}
         <motion.button
-          className='mt-3 w-full py-2 font-cormorant font-semibold opacity-0 group-hover:opacity-100 transition-all duration-300'
+          className='mt-3 w-full py-2 font-cormorant font-semibold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300'
           style={{
             backgroundColor: '#546B41',
             color: '#FFF8EC'
