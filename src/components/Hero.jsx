@@ -3,7 +3,7 @@ import sovrinHero from '../assets/sovrinHero.webp'
 import sovrinHero2 from '../assets/sovrinHero2.webp'
 import { motion } from 'framer-motion'
 import HeroItems from './HeroItems'
-import { HiOutlineBars3, HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineUser } from "react-icons/hi2";
 
 const Hero = () => {
 
@@ -49,10 +49,10 @@ const Hero = () => {
           <div className='mt-1.5 md:mt-24 flex flex-col space-y-5'>
              
               <div className='flex justify-between items-center p-2.5 md:p-0 '>
-                <div>
-                  <HiOutlineBars3 size={28} className='text-white md:hidden'/>
+                <div className='flex-1 md:hidden'>
+                  {/* Space for hamburger - handled by Sidebar in MainLayouts */}
                 </div>
-                <div>
+                <div className='flex-1 flex justify-center'>
                   <motion.h1 
                     className='font-hurricane text-xl tracking-widest md:text-4xl text-center font-bold text-white'
                     initial={{ opacity: 0, filter: "blur(10px)" }}
@@ -62,8 +62,8 @@ const Hero = () => {
                     Sovrinart
                   </motion.h1>
                 </div>
-                <div>
-                  <HiOutlineUser size={28} className='text-white md:hidden'/>
+                <div className='flex-1 flex justify-end md:hidden'>
+                  <HiOutlineUser size={28} className='text-white'/>
                 </div> 
               </div>
               

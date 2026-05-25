@@ -8,12 +8,12 @@ const Login = () => {
   return (
     <div className='min-h-screen flex items-center justify-center p-4' style={{ background: 'linear-gradient(135deg, #FFF8EC 0%, #DCCCAC 100%)' }}>
       <motion.div 
-        className='w-full max-w-6xl h-150 md:h-175 rounded-3xl overflow-hidden shadow-2xl'
+        className='w-full max-w-6xl rounded-3xl overflow-hidden shadow-2xl'
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className='grid grid-cols-1 lg:grid-cols-2 h-full'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 min-h-150 lg:h-175'>
           
           {/* Left Side - Image */}
           <motion.div 
@@ -53,13 +53,13 @@ const Login = () => {
 
           {/* Right Side - Login Form */}
           <motion.div 
-            className='flex items-center justify-center p-8 md:p-12'
+            className='flex items-center justify-center p-6 md:p-8 lg:p-12'
             style={{ backgroundColor: '#FFF8EC' }}
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className='w-full max-w-md'>
+            <div className='w-full max-w-md py-8 md:py-0'>
               
               {/* Back Button */}
               <Link to="/" className='inline-flex items-center gap-2 mb-6 font-cormorant text-sm font-semibold hover:underline transition-all' style={{ color: '#546B41' }}>
