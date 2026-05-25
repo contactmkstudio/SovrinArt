@@ -14,11 +14,16 @@ const ProductCardView = ({ id, image, name, price }) => {
       onClick={handleClick}
       className='group cursor-pointer overflow-hidden'
       style={{ backgroundColor: '#FFF8EC' }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -8 }}
+      initial={{ opacity: 0, y: 50, scale: 0.9, rotateX: -15 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.25, 0.46, 0.45, 0.94],
+        scale: { duration: 0.5 },
+        rotateX: { duration: 0.6 }
+      }}
+      whileHover={{ y: -12, scale: 1.02, transition: { duration: 0.3 } }}
     >
       {/* Image Container */}
       <div className='relative overflow-hidden aspect-square'>
@@ -26,33 +31,51 @@ const ProductCardView = ({ id, image, name, price }) => {
           src={image}
           alt={name}
           className='w-full h-full object-cover'
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.6 }}
+          initial={{ scale: 1.2, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          whileHover={{ scale: 1.15 }}
         />
         {/* Gradient Overlay on Hover */}
-        <div 
+        <motion.div 
           className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
           style={{ background: 'linear-gradient(to top, rgba(84, 107, 65, 0.7), transparent)' }}
         />
       </div>
 
       {/* Product Info */}
-      <div className='p-4' style={{ borderTop: '2px solid #DCCCAC' }}>
+      <motion.div 
+        className='p-4' 
+        style={{ borderTop: '2px solid #DCCCAC' }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         {/* Product Name */}
-        <h3 
+        <motion.h3 
           className='font-cormorant text-lg md:text-xl font-bold mb-1 line-clamp-2'
           style={{ color: '#546B41' }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           {name}
-        </h3>
+        </motion.h3>
 
         {/* Price */}
-        <p 
+        <motion.p 
           className='font-marvel text-sm md:text-base'
           style={{ color: '#99AD7A' }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
           from <span className='font-bold' style={{ color: '#546B41' }}>₹{price.toLocaleString('en-IN')}</span>
-        </p>
+        </motion.p>
 
         {/* View Details Button - Shows on Hover */}
         <motion.button
@@ -66,7 +89,7 @@ const ProductCardView = ({ id, image, name, price }) => {
         >
           View Details
         </motion.button>
-      </div>
+      </motion.div>
     </motion.div>
   )
 }
