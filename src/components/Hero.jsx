@@ -48,19 +48,17 @@ const Hero = () => {
        {/* {banner Text} */}
        <div className="absolute inset-0 flex flex-col justify-between bg-black/20 ">
           {/* {Headrer-Content} */}
-          <div className='mt-8 md:mt-24 flex flex-col space-y-5 '>
+          <div className='mt-8 md:mt-24 flex flex-col space-y-5'>
 
              
-              <div className='flexjustify-between items-center px-2.5 py-2 md:p-0 relative z-10'>
+              <div className='flex justify-between items-center px-2.5 py-2 md:p-0 relative z-10'>
                 {/* Hamburger Menu - Mobile Only */}
-                <motion.button
+                <button
                   onClick={() => setIsSidebarOpen(true)}
                   className='md:hidden p-2'
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
                 >
                   <HiOutlineBars3 className='text-white text-3xl' />
-                </motion.button>
+                </button>
 
                 {/* Sovrinart Text */}
                 <div className='grow flex justify-center'>
