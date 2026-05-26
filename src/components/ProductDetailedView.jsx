@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { HiOutlineHeart, HiHeart } from 'react-icons/hi2'
+import Navbar from './Navbar'
+import NewArtLaunch from './NewArtLaunch'
 
 const ProductDetailedView = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0)
@@ -10,8 +12,15 @@ const ProductDetailedView = ({ product }) => {
   const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL']
 
   return (
-    <div className='min-h-screen py-20' style={{ backgroundColor: '#FAFAFA' }}>
-      <div className='max-w-7xl mx-auto px-4'>
+    <div className='min-h-screen' style={{ backgroundColor: '#FAFAFA' }}>
+      
+      {/* {new launch component} */}
+      <NewArtLaunch />
+
+      {/* Navbar with Sovrinart Header */}
+      <Navbar />
+
+      <div className='max-w-7xl mx-auto px-4 pb-20 pt-8'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
           
           {/* Left Section - Images (Fixed/Sticky) */}

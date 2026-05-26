@@ -3,8 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false)
+const Sidebar = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) => {
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
+  
+  // Use external state if provided, otherwise use internal state
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen
+  const setIsOpen = externalSetIsOpen || setInternalIsOpen
 
   const navigationLinks = [
     { name: 'Home', link: '/' },
@@ -58,15 +62,17 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Hamburger Menu Button - Visible only on mobile/tablet */}
-      <motion.button
-        onClick={() => setIsOpen(true)}
-        className='md:hidden fixed top-6 left-4 z-40 p-2'
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <HiOutlineBars3 className='text-white text-3xl' />
-      </motion.button>
+      {/* Hamburger Menu Button - Only render if not controlled externally */}
+      {externalIsOpen === undefined && (
+        <motion.button
+          onClick={() => setIsOpen(true)}
+          className='md:hidden fixed top-11 left-2.5 z-50 p-2'
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <HiOutlineBars3 className='text-white text-3xl' />
+        </motion.button>
+      )}
 
       {/* Sidebar and Overlay */}
       <AnimatePresence>

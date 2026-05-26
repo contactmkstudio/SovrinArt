@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import sovrinHero from '../assets/sovrinHero.webp'
 import sovrinHero2 from '../assets/sovrinHero2.webp'
 import { motion } from 'framer-motion'
 import HeroItems from './HeroItems'
-import { HiOutlineUser } from "react-icons/hi2";
+import Sidebar from './Sidebar'
+import { HiOutlineUser, HiOutlineBars3 } from "react-icons/hi2"
 
 const Hero = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   // Container animation for fade in + slide up animayion
   const containerVariants = {
@@ -38,21 +40,30 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-dvh ">
+    <section className="relative min-h-dvh">
 
        {/* {banner}  */}
        <img src={sovrinHero} alt="Sovrin Hero" className='absolute h-full w-full object-cover inset-0'/>
 
        {/* {banner Text} */}
-       <div className="absolute inset-0 flex flex-col justify-between bg-black/20">
+       <div className="absolute inset-0 flex flex-col justify-between bg-black/20 ">
           {/* {Headrer-Content} */}
-          <div className='mt-1.5 md:mt-24 flex flex-col space-y-5'>
+          <div className='mt-8 md:mt-24 flex flex-col space-y-5 '>
+
              
-              <div className='flex justify-between items-center p-2.5 md:p-0 '>
-                <div className='flex-1 md:hidden'>
-                  {/* Space for hamburger - handled by Sidebar in MainLayouts */}
-                </div>
-                <div className='flex-1 flex justify-center'>
+              <div className='flexjustify-between items-center px-2.5 py-2 md:p-0 relative z-10'>
+                {/* Hamburger Menu - Mobile Only */}
+                <motion.button
+                  onClick={() => setIsSidebarOpen(true)}
+                  className='md:hidden p-2'
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <HiOutlineBars3 className='text-white text-3xl' />
+                </motion.button>
+
+                {/* Sovrinart Text */}
+                <div className='grow flex justify-center'>
                   <motion.h1 
                     className='font-hurricane text-xl tracking-widest md:text-4xl text-center font-bold text-white'
                     initial={{ opacity: 0, filter: "blur(10px)" }}
@@ -62,7 +73,9 @@ const Hero = () => {
                     Sovrinart
                   </motion.h1>
                 </div>
-                <div className='flex-1 flex justify-end md:hidden'>
+
+                {/* Profile Icon - Mobile Only */}
+                <div className='md:hidden p-2'>
                   <HiOutlineUser size={28} className='text-white'/>
                 </div> 
               </div>
@@ -121,6 +134,9 @@ const Hero = () => {
               </motion.button>
           </motion.div>
        </div>
+
+       {/* Sidebar */}
+       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
     </section>
   )
 }

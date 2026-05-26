@@ -8,10 +8,10 @@ const LaunchingSoon = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Show the component after 2.5 seconds
+    // Show the component after 10 seconds
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 2500)
+    }, 10000)
 
     return () => clearTimeout(timer)
   }, [])

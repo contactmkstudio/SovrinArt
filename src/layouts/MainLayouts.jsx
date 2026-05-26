@@ -1,5 +1,4 @@
 import React from 'react'
-import Sidebar from '../components/Sidebar'
 import Footer from '../pages/Footer'
 import Faq from '../pages/Faq'
 import Contact from '../pages/Contact'
@@ -11,8 +10,6 @@ import AutoSlider from '../components/AutoSlider'
 const MainLayouts = ({children}) => {
   return (
     <>
-      <Sidebar />
-
       <main>
         {children}
       </main>

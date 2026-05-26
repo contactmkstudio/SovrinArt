@@ -1,6 +1,7 @@
 import React from 'react'
 import Home from '../pages/Home'
 import ProductCard from '../pages/ProductCard'
+import ViewAll from '../pages/ViewAll'
 import ProductDetail from '../pages/ProductDetail'
 import { BrowserRouter, Routes , Route, Navigate } from 'react-router-dom'
 import MainLayouts from '../layouts/MainLayouts'
@@ -22,7 +23,7 @@ const AppRoutes = () => {
                     <Home />
                 </MainLayouts>
             } />
-                
+            <Route path='/products' element={<ViewAll />}/> 
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
