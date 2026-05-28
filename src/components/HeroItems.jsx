@@ -1,14 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import AboutPopup from './AboutPopup'
 
 const HeroItems = () => {
+  const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const navigate = useNavigate()
 
    const pages = [
     {name: 'Home', link: '/home'},
     {name: 'About', link: '/about'},
-    {name: 'Contact', link: '/contact'},
+    {name: 'Contact', link: '#contact-section'},
     {name: 'Login' , link:'/login'},
   ]
+
+  const handleClick = (e, page) => {
+    e.preventDefault()
+    
+    if (page.name === 'Contact') {
+      const element = document.querySelector('#contact-section')
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }
+    } else if (page.name === 'About') {
+      setIsAboutOpen(true)
+    } else {
+      navigate(page.link)
+    }
+  }
 
   // Container animation
   const containerVariants = {
@@ -46,7 +68,11 @@ const HeroItems = () => {
               className='group'
               variants={itemVariants}
             >
-                <a href={page.link} className='relative'>
+                <a 
+                  href={page.link} 
+                  className='relative cursor-pointer'
+                  onClick={(e) => handleClick(e, page)}
+                >
                     <h1 className='hidden md:block font-megrim tracking-[5px] text-xl font-bold text-white'>
                     {page.name}
                     </h1> 
@@ -55,6 +81,9 @@ const HeroItems = () => {
             </motion.li>
             ))}
         </motion.ul>
+        
+        {/* About Popup */}
+        <AboutPopup isOpen={isAboutOpen} setIsOpen={setIsAboutOpen} />
       </div>
   )
 }

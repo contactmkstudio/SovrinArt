@@ -127,6 +127,17 @@ const Hero = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.1, transition: { type: "spring", bounce: 0.3, duration: 0.9 } }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setTimeout(() => {
+                    const element = document.querySelector('#contact-section')
+                    if (element) {
+                      element.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      })
+                    }
+                  }, 100)
+                }}
               >
                 <h1 className='font-marvel group-hover:font-hurricane tracking-[2px] md:tracking-[6px] font-bold md:font-extrabold transition-all duration-300'>CONTACT</h1>
               </motion.button>

@@ -2,22 +2,46 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
+import AboutPopup from './AboutPopup'
 
 const Sidebar = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false)
+  const [isAboutOpen, setIsAboutOpen] = useState(false)
   
   // Use external state if provided, otherwise use internal state
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen
   const setIsOpen = externalSetIsOpen || setInternalIsOpen
 
   const navigationLinks = [
-    { name: 'Home', link: '/' },
-    { name: 'Products', link: '/products' },
-    { name: 'About', link: '/about' },
-    { name: 'Contact', link: '/contact' },
-    { name: 'Login', link: '/login' },
-    { name: 'Register', link: '/register' },
+    { name: 'Home', link: '/', type: 'route' },
+    { name: 'Products', link: '/products', type: 'route' },
+    { name: 'About', link: '/about', type: 'popup' },
+    { name: 'Contact', link: '#contact-section', type: 'scroll' },
+    { name: 'Login', link: '/login', type: 'route' },
+    { name: 'Register', link: '/register', type: 'route' },
   ]
+
+  const handleLinkClick = (e, item) => {
+    if (item.type === 'popup') {
+      e.preventDefault()
+      setIsAboutOpen(true)
+      setIsOpen(false)
+    } else if (item.type === 'scroll') {
+      e.preventDefault()
+      setIsOpen(false)
+      setTimeout(() => {
+        const element = document.querySelector(item.link)
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          })
+        }
+      }, 300)
+    } else {
+      setIsOpen(false)
+    }
+  }
 
   // Sidebar animation variants
   const sidebarVariants = {
@@ -131,13 +155,23 @@ const Sidebar = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) => {
                       initial="hidden"
                       animate="visible"
                     >
-                      <Link
-                        to={item.link}
-                        onClick={() => setIsOpen(false)}
-                        className='block py-3 px-4 rounded-lg font-cormorant text-xl font-semibold text-white hover:bg-yellow-400/20 transition-all duration-300 border-b border-white/10'
-                      >
-                        {item.name}
-                      </Link>
+                      {item.type === 'route' ? (
+                        <Link
+                          to={item.link}
+                          onClick={(e) => handleLinkClick(e, item)}
+                          className='block py-3 px-4 rounded-lg font-cormorant text-xl font-semibold text-white hover:bg-yellow-400/20 transition-all duration-300 border-b border-white/10'
+                        >
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <a
+                          href={item.link}
+                          onClick={(e) => handleLinkClick(e, item)}
+                          className='block py-3 px-4 rounded-lg font-cormorant text-xl font-semibold text-white hover:bg-yellow-400/20 transition-all duration-300 border-b border-white/10 cursor-pointer'
+                        >
+                          {item.name}
+                        </a>
+                      )}
                     </motion.li>
                   ))}
                 </ul>
@@ -153,6 +187,9 @@ const Sidebar = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) => {
           </>
         )}
       </AnimatePresence>
+      
+      {/* About Popup */}
+      <AboutPopup isOpen={isAboutOpen} setIsOpen={setIsAboutOpen} />
     </>
   )
 }

@@ -1,39 +1,37 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiChevronDown } from 'react-icons/hi2'
 import PremiumBackground from '../components/PremiumBackground'
+import { faqApi } from '../api/apiService'
 
 
 
 const Faq = () => {
-
-  
   const [openIndex, setOpenIndex] = useState(null);
+  const [faqs, setFaqs] = useState([])
 
-  
-  const faqData = [
-    {
-      question: "How do I commission an artwork?",
-      answer: "To commission an artwork, simply contact us through our website or email us at contact@sovrinart.com. We'll discuss your vision, preferences, and requirements to create a custom piece just for you."
-    },
-    {
-      question: "What is the pricing for commissions?",
-      answer: "Our pricing varies based on the size, complexity, and medium of the artwork. Please contact us for a personalized quote."
-    },
-    {
-      question: "What is the turnaround time for a commission?",
-      answer: "The turnaround time depends on the complexity of the artwork and our current workload. We will provide an estimated completion date when you contact us."
-    },
-    {
-      question: "Do you offer international shipping?",
-      answer: "Yes, we offer international shipping. Shipping costs will be calculated based on the destination and size of the artwork."   
-    },
-    {
-      question: "Can I visit your studio?",
-      answer: "Yes, we welcome visitors to our studio. Please contact us in advance to schedule a visit."
-    },
-  ]
+  // fetches faqs api and sets faqs state
+  const fetchFaqs = async () => {    
+    console.log("called");
+       
+    try {
+      const response = await faqApi.getAllFaqs();
+      console.log({response});
+      setFaqs(response)
+      return response
+    } catch (error) {
+      console.error('Error fetching FAQs:', error)
+      setFaqs([]) 
+      return []
+    } 
+  } 
 
+  // Fetch FAQs on component mount
+  useEffect(()=>{
+     fetchFaqs()
+  },[])
+
+ 
   
   const toggleFaq = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -77,7 +75,7 @@ const Faq = () => {
             FAQ ACCORDION ITEMS
             ============================================ */}
         <div className='w-full max-w-3xl mt-10 space-y-4'>
-          {faqData.map((faq, index) => (
+          {faqs.map((faq, index) => (
             <motion.div
               key={index}
               className='border border-white/20 rounded-lg overflow-hidden'

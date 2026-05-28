@@ -4,6 +4,7 @@ import Navbar from '../components/Sidebar'
 import LaunchingSoon from '../components/LaunchingSoon'
 import NewArtLaunch from '../components/NewArtLaunch'
 import EmailSignupModal from '../components/EmailSignupModal'
+import Contact from './Contact'
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
         <Hero />  
         <LaunchingSoon />
         <EmailSignupModal />
+
     </div>
   )
 }

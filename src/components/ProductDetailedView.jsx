@@ -182,6 +182,27 @@ const ProductDetailedView = ({ product }) => {
                 <li>• Certificate of authenticity included</li>
               </ul>
             </div>
+
+            {/* What's Included With Your Order */}
+            <div className='mt-8 pt-8 border-t-2' style={{ borderColor: '#DCCCAC' }}>
+              <h3 className='font-cormorant text-xl font-bold mb-3' style={{ color: '#546B41' }}>
+                What's Included With Your Order
+              </h3>
+              <ul className='space-y-2 font-marvel text-sm' style={{ color: '#99AD7A' }}>
+                <li>• Original Handmade Artwork</li>
+                <li>• Secure Protective Packaging</li>
+                <li>• Personalized Thank You Note</li>
+                <li>• Certificate of Authenticity*</li>
+                <li>• Certificate of Ownership*</li>
+                <li>• Official Receipt / Invoice (Provided via Email)</li>
+                <li>• Artwork Care Instructions</li>
+                <li>• Future Discount Code*</li>
+                <li>• Exclusive Collectibles & Mini Artwork*</li>
+              </ul>
+              <p className='mt-3 font-marvel text-xs italic' style={{ color: '#99AD7A' }}>
+                *Included with selected, eligible, or randomly chosen orders only.
+              </p>
+            </div>
           </div>
         </div>
       </div>

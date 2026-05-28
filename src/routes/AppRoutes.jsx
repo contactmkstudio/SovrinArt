@@ -7,6 +7,9 @@ import { BrowserRouter, Routes , Route, Navigate } from 'react-router-dom'
 import MainLayouts from '../layouts/MainLayouts'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import TermsAndConditions from '../pages/TermsAndConditions'
+import AdminDashboard from '../adminpanel/pages/AdminDashboard'
+import AddFaq from '../adminpanel/pages/AddFaq'
 
 
 const AppRoutes = () => {
@@ -27,6 +30,9 @@ const AppRoutes = () => {
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/add-faqs" element={<AddFaq />} />
          
       </Routes>
     </BrowserRouter>

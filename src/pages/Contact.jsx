@@ -3,10 +3,11 @@ import { motion } from 'framer-motion'
 import PremiumBackground from '../components/PremiumBackground'
 import HoverRevealImage from '../components/HoverRevealImage'
 import contactImg from '../assets/sovrinHero2.webp'
+import { contactReasons } from '../constants/contactReasons'
 
 const Contact = () => {
   return (
-    <section className='relative py-12 md:py-20 bg-black text-white overflow-hidden'>
+    <section id="contact-section" className='relative py-12 md:py-20 bg-black text-white overflow-hidden'>
       {/* Premium Background */}
       <PremiumBackground />
       
@@ -55,11 +56,13 @@ const Contact = () => {
         <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-8 mt-3'>
           
           {/* Left Side - Premium Spotlight Reveal Effect */}
-          <HoverRevealImage imageSrc={contactImg} altText="Art Gallery" />
+          <div className='h-full'>
+            <HoverRevealImage imageSrc={contactImg} altText="Art Gallery" />
+          </div>
 
           {/* Right Side - Contact Form */}
           <motion.div 
-            className='relative w-full p-8 md:p-10 rounded-3xl flex flex-col gap-6 overflow-hidden'
+            className='relative w-full h-full p-8 md:p-10 rounded-3xl flex flex-col gap-6 overflow-hidden'
             style={{
               background: 'linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%)',
               border: '1px solid rgba(251, 191, 36, 0.2)',
@@ -79,9 +82,6 @@ const Contact = () => {
                 SEND MESSAGE
               </h1>
               <div className='w-20 h-1 bg-linear-to-r from-yellow-400 via-yellow-500 to-transparent rounded-full mb-3' />
-              <p className='font-cormorant text-white/70 text-sm md:text-base'>
-                You can also text us directly to connect and discuss your art requirements
-              </p>
             </div>
 
             <div className='relative z-10 flex flex-col gap-5'>
@@ -109,6 +109,29 @@ const Contact = () => {
                   placeholder='Enter your email' 
                   className='border border-white/20 rounded-xl px-5 py-3.5 w-full focus:border-yellow-500/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-colors duration-200 bg-black/30 text-white placeholder:text-white/40'
                 />
+              </div>
+
+              <div className='flex flex-col gap-2'>
+                <label htmlFor='reason' className='font-cormorant text-white/90 text-base md:text-lg font-semibold flex items-center gap-2'>
+                  <span className='w-1.5 h-1.5 bg-yellow-500 rounded-full'></span>
+                  Reason for Contact
+                </label>
+                <select 
+                  id='reason'
+                  className='border border-white/20 rounded-xl px-5 py-3.5 w-full focus:border-yellow-500/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-colors duration-200 bg-black/30 text-white appearance-none cursor-pointer'
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23eab308'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 1rem center',
+                    backgroundSize: '1.5rem'
+                  }}
+                >
+                  {contactReasons.map((reason, index) => (
+                    <option key={index} value={reason.value} className='bg-black'>
+                      {reason.label}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className='flex flex-col gap-2'>

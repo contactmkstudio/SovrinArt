@@ -50,7 +50,7 @@ const HoverRevealImage = ({ imageSrc, altText = "Art Gallery" }) => {
   return (
     <motion.div
       ref={containerRef}
-      className='relative w-full h-100 md:h-137.5 lg:h-162.5 rounded-3xl overflow-hidden cursor-none'
+      className='relative w-full h-full min-h-100 rounded-3xl overflow-hidden cursor-none'
       style={{ WebkitTapHighlightColor: 'transparent' }}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}

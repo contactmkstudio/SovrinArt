@@ -8,16 +8,23 @@ const LaunchingSoon = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Show the component after 10 seconds
-    const timer = setTimeout(() => {
-      setIsVisible(true)
-    }, 10000)
+    // Check if user has already seen this modal in this session
+    const hasSeenLaunching = sessionStorage.getItem('launchingSoonSeen')
+    
+    if (!hasSeenLaunching) {
+      // Show the component after 10 seconds
+      const timer = setTimeout(() => {
+        setIsVisible(true)
+      }, 10000)
 
-    return () => clearTimeout(timer)
+      return () => clearTimeout(timer)
+    }
   }, [])
 
   const handleClose = () => {
     setIsVisible(false)
+    // Mark as seen in sessionStorage so it doesn't show again in this session
+    sessionStorage.setItem('launchingSoonSeen', 'true')
   }
 
   return (

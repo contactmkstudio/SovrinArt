@@ -7,14 +7,14 @@ const EmailSignupModal = () => {
   const [email, setEmail] = useState('')
 
   useEffect(() => {
-    // Check if user has already seen the modal
-    const hasSeenModal = localStorage.getItem('emailSignupModalSeen')
+    // Check if user has already seen the modal in this session
+    const hasSeenModal = sessionStorage.getItem('emailSignupModalSeen')
     
     if (!hasSeenModal) {
-      // Show modal after 2 seconds
+      // Show modal after 3 seconds
       const timer = setTimeout(() => {
         setIsOpen(true)
-      }, 2000)
+      }, 3000)
 
       return () => clearTimeout(timer)
     }
@@ -22,7 +22,7 @@ const EmailSignupModal = () => {
 
   const handleClose = () => {
     setIsOpen(false)
-    localStorage.setItem('emailSignupModalSeen', 'true')
+    sessionStorage.setItem('emailSignupModalSeen', 'true')
   }
 
   const handleSubmit = (e) => {
@@ -30,7 +30,7 @@ const EmailSignupModal = () => {
     // Handle email submission here
     console.log('Email submitted:', email)
     setIsOpen(false)
-    localStorage.setItem('emailSignupModalSeen', 'true')
+    sessionStorage.setItem('emailSignupModalSeen', 'true')
     // You can add API call here to save email
   }
 
