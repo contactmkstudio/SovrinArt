@@ -10,19 +10,17 @@ const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [faqs, setFaqs] = useState([])
 
+  console.log(faqs);
+  
+
   // fetches faqs api and sets faqs state
   const fetchFaqs = async () => {    
-    console.log("called");
-       
     try {
       const response = await faqApi.getAllFaqs();
-      console.log({response});
-      setFaqs(response)
-      return response
+      Array.isArray(response) ? setFaqs(response) : setFaqs([]);
     } catch (error) {
       console.error('Error fetching FAQs:', error)
       setFaqs([]) 
-      return []
     } 
   } 
 
@@ -32,7 +30,6 @@ const Faq = () => {
   },[])
 
  
-  
   const toggleFaq = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -75,7 +72,7 @@ const Faq = () => {
             FAQ ACCORDION ITEMS
             ============================================ */}
         <div className='w-full max-w-3xl mt-10 space-y-4'>
-          {faqs.map((faq, index) => (
+          {faqs?.map((faq, index) => (
             <motion.div
               key={index}
               className='border border-white/20 rounded-lg overflow-hidden'

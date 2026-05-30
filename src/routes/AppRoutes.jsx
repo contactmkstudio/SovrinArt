@@ -10,6 +10,7 @@ import Register from '../pages/Register'
 import TermsAndConditions from '../pages/TermsAndConditions'
 import AdminDashboard from '../adminpanel/pages/AdminDashboard'
 import AddFaq from '../adminpanel/pages/AddFaq'
+import AddNavigationLinks from '../adminpanel/pages/AddNavigationLinks'
 
 
 const AppRoutes = () => {
@@ -33,6 +34,7 @@ const AppRoutes = () => {
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-faqs" element={<AddFaq />} />
+            <Route path="/admin/add-navigation-links" element={<AddNavigationLinks />} />
          
       </Routes>
     </BrowserRouter>

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { 
   HiOutlineQuestionMarkCircle
 } from 'react-icons/hi2'
+import { HiOutlineLink } from 'react-icons/hi'
 
 const AdminSidebar = () => {
   const location = useLocation()
@@ -10,7 +11,9 @@ const AdminSidebar = () => {
 
   const menuItems = [
     { name: 'Add FAQs', path: '/admin/add-faqs', icon: HiOutlineQuestionMarkCircle },
+    { name: 'Add Navigation Link', path: '/admin/add-navigation-links', icon: HiOutlineLink },
   ]
+  
 
   return (
     <div
@@ -37,7 +40,7 @@ const AdminSidebar = () => {
       {/* Menu Items */}
       <nav className='p-4'>
         <ul className='space-y-2'>
-          {menuItems.map((item, index) => {
+          {menuItems?.map((item, index) => {
             const Icon = item.icon
             const isActive = location.pathname === item.path
             

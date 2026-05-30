@@ -1,11 +1,30 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 import PremiumBackground from '../components/PremiumBackground'
 import HoverRevealImage from '../components/HoverRevealImage'
 import contactImg from '../assets/sovrinHero2.webp'
 import { contactReasons } from '../constants/contactReasons'
+import { sendEmail } from '../api/apiService'
 
 const Contact = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async(data) => {
+    console.log({dataaaaaa:data});
+    
+    // Handle contact form submission here
+    try{
+      const response = await sendEmail(data);
+      if(response?.status === 200) {
+        alert("Message sent successfully!")
+      }
+    } catch (error) {
+      console.log('Error in sending email:', error);
+    }
+    console.log('Contact form data:', data);
+  };
+
   return (
     <section id="contact-section" className='relative py-12 md:py-20 bg-black text-white overflow-hidden'>
       {/* Premium Background */}
@@ -84,7 +103,7 @@ const Contact = () => {
               <div className='w-20 h-1 bg-linear-to-r from-yellow-400 via-yellow-500 to-transparent rounded-full mb-3' />
             </div>
 
-            <div className='relative z-10 flex flex-col gap-5'>
+            <form className='relative z-10 flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='name' className='font-cormorant text-white/90 text-base md:text-lg font-semibold flex items-center gap-2'>
                   <span className='w-1.5 h-1.5 bg-yellow-500 rounded-full'></span>
@@ -93,9 +112,11 @@ const Contact = () => {
                 <input 
                   type="text"
                   id='name'
+                  {...register('name', { required: 'Name is required' })}
                   placeholder='Enter your name' 
                   className='border border-white/20 rounded-xl px-5 py-3.5 w-full focus:border-yellow-500/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-colors duration-200 bg-black/30 text-white placeholder:text-white/40'
                 />
+                {errors.name && <p className='text-yellow-400 text-xs mt-1 font-marvel'>{errors.name.message}</p>}
               </div>
 
               <div className='flex flex-col gap-2'>
@@ -106,9 +127,11 @@ const Contact = () => {
                 <input 
                   type="email"
                   id='email'
+                  {...register('email', { required: 'Email is required' })}
                   placeholder='Enter your email' 
                   className='border border-white/20 rounded-xl px-5 py-3.5 w-full focus:border-yellow-500/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-colors duration-200 bg-black/30 text-white placeholder:text-white/40'
                 />
+                {errors.email && <p className='text-yellow-400 text-xs mt-1 font-marvel'>{errors.email.message}</p>}
               </div>
 
               <div className='flex flex-col gap-2'>
@@ -118,6 +141,7 @@ const Contact = () => {
                 </label>
                 <select 
                   id='reason'
+                  {...register('reason', { required: 'Please select a reason' })}
                   className='border border-white/20 rounded-xl px-5 py-3.5 w-full focus:border-yellow-500/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-colors duration-200 bg-black/30 text-white appearance-none cursor-pointer'
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23eab308'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
@@ -126,12 +150,14 @@ const Contact = () => {
                     backgroundSize: '1.5rem'
                   }}
                 >
+                  <option value="" className='bg-black'>Select a reason</option>
                   {contactReasons.map((reason, index) => (
                     <option key={index} value={reason.value} className='bg-black'>
                       {reason.label}
                     </option>
                   ))}
                 </select>
+                {errors.reason && <p className='text-yellow-400 text-xs mt-1 font-marvel'>{errors.reason.message}</p>}
               </div>
 
               <div className='flex flex-col gap-2'>
@@ -142,17 +168,20 @@ const Contact = () => {
                 <textarea 
                   name="message" 
                   id="message" 
+                  {...register('message', { required: 'Message is required' })}
                   placeholder='Paint your thoughts and requirements here...' 
                   className='border border-white/20 rounded-xl px-5 py-3.5 w-full h-40 resize-none focus:border-yellow-500/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 transition-colors duration-200 bg-black/30 text-white placeholder:text-white/40'
                 ></textarea>
+                {errors.message && <p className='text-yellow-400 text-xs mt-1 font-marvel'>{errors.message.message}</p>}
               </div>
 
-              <button 
+              <button
+                type="submit"
                 className='bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black text-lg font-bold md:text-xl px-8 py-4 w-full rounded-xl font-marvel tracking-wide hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 active:scale-98 transition-all duration-200 mt-2'
               >
                 Send Message
               </button>
-            </div>
+            </form>
           </motion.div>
 
         </div>

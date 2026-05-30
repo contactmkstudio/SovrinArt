@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState , useEffect } from 'react'
 import { RiBrushLine } from "react-icons/ri";
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { HiOutlineHome, HiOutlineInformationCircle, HiOutlineEnvelope, HiOutlinePaintBrush } from "react-icons/hi2";
 import { BiLink } from "react-icons/bi";
 import { MdOutlineGavel, MdOutlinePrivacyTip } from "react-icons/md";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { navigationApi } from '../api/apiService';
+import { set } from 'react-hook-form';
+
 
 
 const Footer = () => {
+
+  const [navigationLinks, setNavigationLinks] = useState([]);
 
   const pages =[
     {name: 'Home', link: '/home', icon: HiOutlineHome},
@@ -15,6 +20,23 @@ const Footer = () => {
     {name: 'Contact', link: '/contact', icon: HiOutlineEnvelope},
     {name: 'Artist', link:'/artist', icon: HiOutlinePaintBrush},
   ]
+
+  const fetchNavigationLinks = async () => {
+     try {
+          const response = await navigationApi.getNavigationLinks()
+          setNavigationLinks(response)
+     } catch (error) {
+          console.error('Error fetching navigation links:', error)  
+          setNavigationLinks([])
+     }
+  }
+
+  useEffect(()=>{
+     fetchNavigationLinks()
+  },[])
+
+
+  
 
   return (
     <section className='bg-black px-5 md:px-8 lg:px-20 py-10 text-white'>
@@ -61,15 +83,15 @@ const Footer = () => {
              <h1 className='text-white font-marvel tracking-widest md:text-2xl'>Quick Links</h1>
            </div>
            <div className='flex gap-4 '>
-             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
+             <a href={navigationLinks[1]?.url} target="_blank" rel="noopener noreferrer" 
                 className='text-white/50 hover:text-[#b8860b] hover:border-[#b8860b] border-2 border-transparent rounded-full p-2 transition-all duration-500 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-1'>
                <FaTwitter size={24} />
              </a>
-             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+             <a href={navigationLinks[2]?.url} target="_blank" rel="noopener noreferrer"
                 className='text-white/50 hover:text-[#b8860b] hover:border-[#b8860b] border-2 border-transparent rounded-full p-2 transition-all duration-500 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-1'>
                <FaFacebookF size={24} />
              </a>
-             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+             <a href={navigationLinks[0]?.url} target="_blank" rel="noopener noreferrer"
                 className='text-white/50 hover:text-[#b8860b] hover:border-[#b8860b] border-2 border-transparent rounded-full p-2 transition-all duration-500 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-1'>
                <FaInstagram size={24} />
              </a>

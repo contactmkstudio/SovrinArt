@@ -1,10 +1,27 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
 import loginImg from '../assets/rest.jpeg'
+import { loginUser } from '../api/apiService'
 
 const Login = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try{
+      const response = await loginUser(data);
+      if (response?.status === 200) {
+        navigate('/home'); 
+      }
+    } catch (error) {
+      console.log('Error in login:', error);
+    }
+    console.log('Login data:', data);
+  };
+
   return (
     <div className='min-h-screen flex items-center justify-center p-4' style={{ background: 'linear-gradient(135deg, #FFF8EC 0%, #DCCCAC 100%)' }}>
       <motion.div 
@@ -78,7 +95,7 @@ const Login = () => {
               </div>
 
               {/* Form */}
-              <form className='space-y-5'>
+              <form className='space-y-5' onSubmit={handleSubmit(onSubmit)}>
                 
                 {/* Email Field */}
                 <div>
@@ -87,6 +104,7 @@ const Login = () => {
                   </label>
                   <input
                     type="email"
+                    {...register('email', { required: 'Email is required' })}
                     placeholder="Enter your email"
                     className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
                     style={{
@@ -97,6 +115,7 @@ const Login = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
+                  {errors.email && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.email.message}</p>}
                 </div>
 
                 {/* Password Field */}
@@ -106,6 +125,7 @@ const Login = () => {
                   </label>
                   <input
                     type="password"
+                    {...register('password', { required: 'Password is required' })}
                     placeholder="Enter your password"
                     className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
                     style={{
@@ -116,6 +136,7 @@ const Login = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
+                  {errors.password && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.password.message}</p>}
                 </div>
 
                 {/* Remember Me & Forgot Password */}

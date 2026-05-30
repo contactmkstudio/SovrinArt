@@ -1,10 +1,35 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import registerImg from '../assets/register.jpeg'
+import { registerUser } from '../api/apiService'
 
 const Register = () => {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log({ data });
+      const response = await registerUser(data);
+      console.log('Registration successful:', response);
+      if (response?.status === 201) {
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+          navigate('/login');
+        }, 1000);
+      }
+    } catch (error) {
+      console.log('Error in registration:', error);
+    }
+  };
+
   return (
     <div className='min-h-screen flex items-center justify-center p-4' style={{ background: 'linear-gradient(135deg, #FFF8EC 0%, #DCCCAC 100%)' }}>
       <motion.div 
@@ -61,6 +86,7 @@ const Register = () => {
           >
             <div className='w-full max-w-md py-8 md:py-0'>
               
+
               {/* Back Button */}
               <Link to="/" className='inline-flex items-center gap-2 mb-6 font-cormorant text-sm font-semibold hover:underline transition-all' style={{ color: '#546B41' }}>
                 <IoArrowBack size={20} />
@@ -68,6 +94,7 @@ const Register = () => {
               </Link>
 
               {/* Heading */}
+
               <div>
                 <h2 className='font-cormorant text-3xl md:text-4xl font-bold mb-2' style={{ color: '#546B41' }}>
                   Create Account
@@ -78,8 +105,7 @@ const Register = () => {
               </div>
 
               {/* Form */}
-              <form className='space-y-5'>
-                
+              <form className='space-y-5' onSubmit={handleSubmit(onSubmit)}>
                 {/* Name Field */}
                 <div>
                   <label className='block font-cormorant text-sm font-semibold mb-2' style={{ color: '#546B41' }}>
@@ -87,6 +113,7 @@ const Register = () => {
                   </label>
                   <input
                     type="text"
+                    {...register('name', { required: 'Full name is required' })}
                     placeholder="Enter your full name"
                     className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
                     style={{
@@ -97,6 +124,7 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
+                  {errors.name && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.name.message}</p>}
                 </div>
 
                 {/* Email Field */}
@@ -106,6 +134,7 @@ const Register = () => {
                   </label>
                   <input
                     type="email"
+                    {...register('email', { required: 'Email is required' })}
                     placeholder="Enter your email"
                     className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
                     style={{
@@ -116,15 +145,38 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
+                  {errors.email && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.email.message}</p>}
                 </div>
 
-                {/* Password Field */}
+                {/* Phone Number Field */}
+                <div>
+                  <label className='block font-cormorant text-sm font-semibold mb-2' style={{ color: '#546B41' }}>
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    {...register('phone', { required: 'Phone number is required' })}
+                    placeholder="Enter your phone number"
+                    className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
+                    style={{
+                      backgroundColor: '#FFF8EC',
+                      borderColor: '#DCCCAC',
+                      color: '#546B41'
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
+                    onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
+                  />
+                  {errors.phone && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.phone.message}</p>}
+                </div>
+
+                  {/* Password Field */}
                 <div>
                   <label className='block font-cormorant text-sm font-semibold mb-2' style={{ color: '#546B41' }}>
                     Password
                   </label>
                   <input
                     type="password"
+                    {...register('password', { required: 'Password is required' })}
                     placeholder="Enter your password"
                     className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
                     style={{
@@ -135,25 +187,7 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
-                </div>
-
-                {/* Confirm Password Field */}
-                <div>
-                  <label className='block font-cormorant text-sm font-semibold mb-2' style={{ color: '#546B41' }}>
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Confirm your password"
-                    className='w-full px-4 py-3 rounded-xl font-marvel border-2 focus:outline-none transition-all duration-300'
-                    style={{
-                      backgroundColor: '#FFF8EC',
-                      borderColor: '#DCCCAC',
-                      color: '#546B41'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
-                    onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
-                  />
+                  {errors.password && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.password.message}</p>}
                 </div>
 
                 {/* Submit Button */}
@@ -167,6 +201,21 @@ const Register = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
+              {/* Success Popup */}
+              {showSuccess && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    className="bg-white rounded-2xl shadow-2xl p-8 flex flex-col items-center"
+                  >
+                    <svg width="60" height="60" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#99AD7A"/><path d="M7 13l3 3 7-7" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    <h2 className="font-cormorant text-2xl font-bold mt-4 mb-2 text-[#546B41]">Registration Successful!</h2>
+                    <p className="font-marvel text-base text-[#99AD7A] mb-2 text-center">You will be redirected to the login page.</p>
+                  </motion.div>
+                </div>
+              )}
                   Create Account
                 </motion.button>
 
