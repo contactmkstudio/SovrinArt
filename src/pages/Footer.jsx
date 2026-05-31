@@ -15,8 +15,7 @@ const Footer = () => {
   const pages =[
     {name: 'Home', link: '/home', icon: HiOutlineHome},
     {name: 'About', link: '/about', icon: HiOutlineInformationCircle},
-    {name: 'Contact', link: '/contact', icon: HiOutlineEnvelope},
-    {name: 'Artist', link:'/artist', icon: HiOutlinePaintBrush},
+    {name: 'Contact', link: '#contact-section', icon: HiOutlineEnvelope},
   ]
 
 
@@ -98,10 +97,10 @@ const Footer = () => {
                 </a>
               </li>
               <li className='text-white/50 hover:text-white transition-colors duration-300 ease-in-out cursor-pointer'>
-                <a href="/terms-of-service" className='flex items-center gap-2'>
+                <a href="/terms-and-conditions" className='flex items-center gap-2'>
                   <IoDocumentTextOutline size={16} />
                   <h2 className='font-marvel tracking-wide'>
-                    Terms of Service
+                    Terms and Conditions
                   </h2>
                 </a>
               </li>

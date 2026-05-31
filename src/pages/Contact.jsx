@@ -11,7 +11,6 @@ const Contact = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async(data) => {
-    console.log({dataaaaaa:data});
     
     // Handle contact form submission here
     try{

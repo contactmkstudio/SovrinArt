@@ -3,26 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { HiOutlineShoppingBag, HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2'
 import AddToCart from './AddToCart'
-import AboutPopup from './AboutPopup'
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isAboutOpen, setIsAboutOpen] = useState(false)
 
-   const pages = [
+  const pages = [
     {name: 'Home', link: '/home', type: 'route'},
-    {name: 'About', link: '/about', type: 'popup'},
+    {name: 'About', link: '/about', type: 'route'},
     {name: 'Terms & Conditions', link: '/terms-and-conditions', type: 'route'},
     {name: 'Login' , link:'/login', type: 'route'},
   ]
-
-  const handleClick = (e, page) => {
-    if (page.type === 'popup') {
-      e.preventDefault()
-      setIsAboutOpen(true)
-    }
-  }
 
   // Container animation
   const containerVariants = {
@@ -93,25 +84,12 @@ const Navbar = () => {
               className='group'
               variants={itemVariants}
             >
-                {page.type === 'popup' ? (
-                  <a 
-                    href={page.link} 
-                    className='relative cursor-pointer'
-                    onClick={(e) => handleClick(e, page)}
-                  >
-                    <h1 className='font-megrim tracking-[5px] text-xl font-bold text-black'>
-                    {page.name}
-                    </h1> 
-                    <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-500 ease-in-out group-hover:w-full'></span>
-                  </a>
-                ) : (
-                  <Link to={page.link} className='relative'>
-                    <h1 className='font-megrim tracking-[5px] text-xl font-bold text-black'>
-                    {page.name}
-                    </h1> 
-                    <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-500 ease-in-out group-hover:w-full'></span>
-                  </Link>
-                )}
+                <Link to={page.link} className='relative'>
+                  <h1 className='font-megrim tracking-[5px] text-xl font-bold text-black'>
+                  {page.name}
+                  </h1> 
+                  <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-500 ease-in-out group-hover:w-full'></span>
+                </Link>
             </motion.li>
             ))}
         </motion.ul>
@@ -153,26 +131,13 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    {page.type === 'popup' ? (
-                      <a
-                        href={page.link}
-                        onClick={(e) => {
-                          handleClick(e, page)
-                          setIsMobileMenuOpen(false)
-                        }}
-                        className='block py-2 px-4 font-megrim text-lg font-bold text-black hover:bg-gray-100 rounded transition-colors cursor-pointer'
-                      >
-                        {page.name}
-                      </a>
-                    ) : (
-                      <Link
-                        to={page.link}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className='block py-2 px-4 font-megrim text-lg font-bold text-black hover:bg-gray-100 rounded transition-colors'
-                      >
-                        {page.name}
-                      </Link>
-                    )}
+                    <Link
+                      to={page.link}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className='block py-2 px-4 font-megrim text-lg font-bold text-black hover:bg-gray-100 rounded transition-colors'
+                    >
+                      {page.name}
+                    </Link>
                   </motion.li>
                 ))}
               </ul>
@@ -184,8 +149,7 @@ const Navbar = () => {
       {/* Cart Sidebar */}
       <AddToCart isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
       
-      {/* About Popup */}
-      <AboutPopup isOpen={isAboutOpen} setIsOpen={setIsAboutOpen} />
+      {/* About Popup removed */}
     </div>
   )
 }

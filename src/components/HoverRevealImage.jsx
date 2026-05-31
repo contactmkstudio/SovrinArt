@@ -153,8 +153,11 @@ const HoverRevealImage = ({ imageSrc, altText = "Art Gallery" }) => {
           >
             Explore the Art
           </motion.h3>
-          <p className='font-cormorant text-white/70 text-lg md:text-xl'>
+          <p className='font-cormorant text-white/70 text-lg md:text-xl hidden md:block'>
             Move your cursor to reveal
+          </p>
+          <p className='font-cormorant text-white/70 text-lg md:text-xl md:hidden'>
+            Tap the art to reveal
           </p>
         </div>
       </motion.div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
-  HiOutlineQuestionMarkCircle
+  HiOutlineQuestionMarkCircle,
+  HiOutlineTrash
 } from 'react-icons/hi2'
-import { HiOutlineLink } from 'react-icons/hi'
 
 const AdminSidebar = () => {
   const location = useLocation()
@@ -11,7 +11,7 @@ const AdminSidebar = () => {
 
   const menuItems = [
     { name: 'Add FAQs', path: '/admin/add-faqs', icon: HiOutlineQuestionMarkCircle },
-    { name: 'Add Navigation Link', path: '/admin/add-navigation-links', icon: HiOutlineLink },
+    { name: 'Delete FAQ', path: '/admin/delete-faq', icon: HiOutlineTrash },
   ]
   
 

@@ -125,3 +125,13 @@ export const sendEmail = async(data) => {
     throw error;
   }
 }
+
+export const deleteFaq = async(id) => {
+    try{
+       const response = await apiClient.delete(`core/${id}/delete-faq/`)
+       return response.data
+    } catch(error){
+       console.log("error in deleting FAQ");
+       throw error;
+    }
+}

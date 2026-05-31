@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import AboutPopup from './AboutPopup'
+
 
 const HeroItems = () => {
-  const [isAboutOpen, setIsAboutOpen] = useState(false)
+  
   const navigate = useNavigate()
 
    const pages = [
@@ -26,7 +26,7 @@ const HeroItems = () => {
         })
       }
     } else if (page.name === 'About') {
-      setIsAboutOpen(true)
+      navigate(page.link)
     } else {
       navigate(page.link)
     }
@@ -82,8 +82,7 @@ const HeroItems = () => {
             ))}
         </motion.ul>
         
-        {/* About Popup */}
-        <AboutPopup isOpen={isAboutOpen} setIsOpen={setIsAboutOpen} />
+       
       </div>
   )
 }
