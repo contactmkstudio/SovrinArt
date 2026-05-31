@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-// const API_BASE_URL = 'http://192.168.0.106:8000/api/'
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = 'http://192.168.0.106:8000/api/'
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -92,26 +92,7 @@ export const faqApi = {
 }
 
 
-// navigation links api
-export const navigationApi = {
-     getNavigationLinks: async () => {
-          try{
-               const response = await apiClient.get('core/navigationlinks/')
-               return response.data
-          }catch(error) {
-                throw error
-          }
-     },
 
-     addNavigationLinks: async (data) => {
-          try{
-             const response = await apiClient.post("core/navigationlinks/", data)
-             return response.data
-          }catch(error) {
-                throw error
-          }
-     }
-}
 
 export const registerUser = async(data) => {
   try{
