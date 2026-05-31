@@ -10,7 +10,7 @@ import Register from '../pages/Register'
 import TermsAndConditions from '../pages/TermsAndConditions'
 import AdminDashboard from '../adminpanel/pages/AdminDashboard'
 import AddFaq from '../adminpanel/pages/AddFaq'
-import AddNavigationLinks from '../adminpanel/pages/AddNavigationLinks'
+
 
 
 const AppRoutes = () => {
