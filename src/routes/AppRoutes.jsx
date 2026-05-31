@@ -34,7 +34,6 @@ const AppRoutes = () => {
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-faqs" element={<AddFaq />} />
-            <Route path="/admin/add-navigation-links" element={<AddNavigationLinks />} />
          
       </Routes>
     </BrowserRouter>
