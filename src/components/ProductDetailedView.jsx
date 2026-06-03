@@ -14,7 +14,7 @@ const ProductDetailedView = ({ product }) => {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isLoadingCart, setIsLoadingCart] = useState(false)
   const [toast, setToast] = useState(null)
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
   
   
  
@@ -33,12 +33,20 @@ const ProductDetailedView = ({ product }) => {
 
   // Handle Add to Cart
   const handleAddToCart = async () => {
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      setToast({
+        message: 'Please login first to add items to cart',
+        type: 'error'
+      })
+      return
+    }
+
     try {
       setIsLoadingCart(true)
       const cartData = {
         product_id: product?.id,
-        user_email: user?.email,
-  
+        user_email: user?.email
       }
       const response = await addToCart(cartData)
       setToast({

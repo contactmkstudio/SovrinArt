@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext'
 import { getCartItems } from '../api/apiService'
 
 const AddToCart = ({ isOpen, setIsOpen }) => {
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
   const navigate = useNavigate()
   const [cartItems, setCartItems] = useState([])
   const [loading, setLoading] = useState(false)
@@ -294,6 +294,14 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
 
                 {/* Checkout Button */}
                 <motion.button
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      alert('Please login to proceed to checkout')
+                      navigate('/login')
+                      return
+                    }
+                    // TODO: Add checkout functionality
+                  }}
                   className='w-full py-3 font-cormorant text-lg font-bold'
                   style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}
                   whileHover={{ scale: 1.02 }}
