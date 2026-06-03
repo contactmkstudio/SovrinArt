@@ -10,7 +10,6 @@ const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [faqs, setFaqs] = useState([])
 
-  console.log(faqs);
   
 
   // fetches faqs api and sets faqs state

@@ -18,7 +18,6 @@ const ProductCard = () => {
         // Show only first 8 products
         setDisplayProducts(products.slice(0, 8))
       } catch (error) {
-        console.log('Error fetching products:', error)
         setDisplayProducts([])
       } finally {
         setLoading(false)

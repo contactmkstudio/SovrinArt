@@ -7,6 +7,7 @@ import Toast from './Toast'
 import { orderInclusions, orderInclusionsNote } from '../constants/orderInclusionsData'
 import { addToCart } from '../api/apiService'
 import { useAuth } from '../context/AuthContext'
+import { useCurrency } from '../context/CurrencyContext'
 
 const ProductDetailedView = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0)
@@ -15,6 +16,7 @@ const ProductDetailedView = ({ product }) => {
   const [isLoadingCart, setIsLoadingCart] = useState(false)
   const [toast, setToast] = useState(null)
   const { user, isAuthenticated } = useAuth()
+  const { currency } = useCurrency()
   
   
  
@@ -149,10 +151,11 @@ const ProductDetailedView = ({ product }) => {
               <p className='font-marvel text-sm mb-1' style={{ color: '#99AD7A' }}>
                 {selectedSize ? `Price (${selectedSize?.size})` : 'Price'}
               </p>
-              <p className='font-cormorant text-4xl font-bold' style={{ color: '#546B41' }}>
-                ₹{parseFloat(currentPriceRs || 0).toLocaleString('en-IN')}
-              </p>
-              {currentPriceUsd && (
+              {currency === 'INR' ? (
+                <p className='font-cormorant text-4xl font-bold' style={{ color: '#546B41' }}>
+                  ₹{parseFloat(currentPriceRs || 0).toLocaleString('en-IN')}
+                </p>
+              ) : (
                 <p className='font-cormorant text-4xl font-bold' style={{ color: '#546B41' }}>
                   ${(parseFloat(currentPriceUsd) || 0).toFixed(2)}
                 </p>

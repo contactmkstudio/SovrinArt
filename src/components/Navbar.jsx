@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { HiOutlineShoppingBag, HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2'
 import AddToCart from './AddToCart'
+import { useCurrency } from '../context/CurrencyContext'
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { currency, setCurrency } = useCurrency()
 
   const pages = [
     {name: 'Home', link: '/home', type: 'route'},
@@ -94,6 +96,28 @@ const Navbar = () => {
             ))}
         </motion.ul>
 
+        {/* Currency Dropdown */}
+        <motion.div 
+          className='hidden md:block absolute right-28'
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            className='px-4 py-2 font-cormorant font-semibold text-black border-2 rounded'
+            style={{
+              borderColor: '#546B41',
+              backgroundColor: '#FFF8EC',
+              color: '#546B41'
+            }}
+          >
+            <option value="INR">India (₹)</option>
+            <option value="USD">USA ($)</option>
+          </select>
+        </motion.div>
+
         {/* Cart Icon */}
         <motion.div 
           className='absolute right-4 md:right-8'
@@ -141,6 +165,25 @@ const Navbar = () => {
                   </motion.li>
                 ))}
               </ul>
+              {/* Mobile Currency Dropdown */}
+              <div className='mt-4 pt-4 border-t border-gray-200'>
+                <label className='block font-cormorant font-semibold text-sm mb-2' style={{ color: '#546B41' }}>
+                  Select Currency
+                </label>
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                  className='w-full px-4 py-2 font-cormorant font-semibold text-black border-2 rounded'
+                  style={{
+                    borderColor: '#546B41',
+                    backgroundColor: '#FFF8EC',
+                    color: '#546B41'
+                  }}
+                >
+                  <option value="INR">India (₹)</option>
+                  <option value="USD">USA ($)</option>
+                </select>
+              </div>
             </nav>
           </motion.div>
         )}

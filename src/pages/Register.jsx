@@ -15,9 +15,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log({ data });
       const response = await registerUser(data);
-      console.log('Registration successful:', response);
       if (response?.status === 201) {
         setShowSuccess(true);
         setTimeout(() => {
@@ -26,7 +24,6 @@ const Register = () => {
         }, 1000);
       }
     } catch (error) {
-      console.log('Error in registration:', error);
     }
   };
 

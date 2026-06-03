@@ -21,7 +21,6 @@ const Login = () => {
         navigate('/home');
       }
     } catch (error) {
-      console.log('Error in login:', error);
     }
   };
 

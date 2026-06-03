@@ -16,7 +16,6 @@ const ViewAll = () => {
         const response = await getProducts()
         setProducts(response.data || response || [])
       } catch (error) {
-        console.log('Error fetching products:', error)
         setProducts([])
       } finally {
         setLoading(false)

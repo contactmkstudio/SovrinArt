@@ -28,7 +28,6 @@ const EmailSignupModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     // Handle email submission here
-    console.log('Email submitted:', email)
     setIsOpen(false)
     sessionStorage.setItem('emailSignupModalSeen', 'true')
     // You can add API call here to save email

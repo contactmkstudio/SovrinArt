@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineXMark, HiOutlineTrash } from 'react-icons/hi2'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useCurrency } from '../context/CurrencyContext'
 import { getCartItems } from '../api/apiService'
 
 const AddToCart = ({ isOpen, setIsOpen }) => {
   const { user, isAuthenticated } = useAuth()
+  const { currency } = useCurrency()
   const navigate = useNavigate()
   const [cartItems, setCartItems] = useState([])
   const [loading, setLoading] = useState(false)
@@ -26,11 +28,7 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
   const fetchCartItems = async () => {
     try {
       setLoading(true)
-      console.log('Fetching cart for email:', user?.email)
       const response = await getCartItems(user?.email)
-      console.log('Cart API response:', response)
-      console.log('Response.data:', response?.data)
-      console.log('Response.data.items:', response?.data?.items)
       
       // Handle different response formats
       const items = Array.isArray(response?.data?.items)
@@ -43,7 +41,6 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
         ? response
         : []
       
-      console.log('Final items:', items, 'Length:', items.length)
       setCartItems(items)
     } catch (error) {
       console.error('Error fetching cart items:', error)
@@ -57,10 +54,11 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
       // Use same extraction logic as rendering
-      const price = item?.product_details?.price_rs || item?.product_details?.price || item?.price || item?.product_price || item?.product?.price_rs || 0
+      const priceRs = item?.product_details?.price_rs || item?.product_details?.price || item?.price || item?.product_price || item?.product?.price_rs || 0
+      const priceUsd = item?.product_details?.price_usd || item?.product?.price_usd || 0
+      const price = currency === 'INR' ? priceRs : priceUsd
       const quantity = item?.quantity || 1
       const itemTotal = parseFloat(price) * parseFloat(quantity)
-      console.log('Calculating price for:', { name: item?.product_details?.name, price, quantity, itemTotal })
       return total + itemTotal
     }, 0)
   }
@@ -192,8 +190,6 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                     const itemImage = item?.product_details?.image || item?.image || item?.product_image || item?.product?.image
                     const itemQuantity = item?.quantity || 1
                     
-                    console.log('Rendering item:', { itemId, itemName, itemPrice, itemImage, itemQuantity })
-                    
                     return (
                       <motion.div
                         key={itemId}
@@ -242,7 +238,10 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                             {itemName || 'Product'}
                           </h3>
                           <p className='font-marvel text-sm' style={{ color: '#99AD7A' }}>
-                            ₹{parseFloat(itemPrice || 0).toLocaleString('en-IN')}
+                            {currency === 'INR' 
+                              ? `₹${parseFloat(itemPrice || 0).toLocaleString('en-IN')}`
+                              : `$${parseFloat(item?.product_details?.price_usd || item?.product?.price_usd || 0).toFixed(2)}`
+                            }
                           </p>
 
                           {/* Quantity Controls */}
@@ -288,7 +287,10 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                     Subtotal:
                   </span>
                   <span className='font-cormorant text-2xl font-bold' style={{ color: '#546B41' }}>
-                    ₹{calculateTotal().toLocaleString('en-IN')}
+                    {currency === 'INR' 
+                      ? `₹${calculateTotal().toLocaleString('en-IN')}`
+                      : `$${calculateTotal().toFixed(2)}`
+                    }
                   </span>
                 </div>
 

@@ -1,31 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 import PremiumBackground from '../components/PremiumBackground'
 import HoverRevealImage from '../components/HoverRevealImage'
+import Toast from '../components/Toast'
 import contactImg from '../assets/sovrinHero2.webp'
 import { contactReasons } from '../constants/contactReasons'
 import { sendEmail } from '../api/apiService'
 
 const Contact = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [toast, setToast] = useState(null)
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async(data) => {
-    
     // Handle contact form submission here
     try{
       const response = await sendEmail(data);
-      if(response?.status === 200) {
-        alert("Message sent successfully!")
+      
+      if(response?.message === 'Email sent successfully'){
+        setToast({
+          message: 'Email sent successfully!',
+          type: 'success'
+        })
+        reset() // Clear form after successful submission
       }
     } catch (error) {
-      console.log('Error in sending email:', error);
+      setToast({
+        message: error?.response?.data?.message || 'Failed to send email. Please try again.',
+        type: 'error'
+      })
     }
-    console.log('Contact form data:', data);
   };
 
   return (
     <section id="contact-section" className='relative py-12 md:py-20 bg-black text-white overflow-hidden'>
+      {/* Toast Notification */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       {/* Premium Background */}
       <PremiumBackground />
       

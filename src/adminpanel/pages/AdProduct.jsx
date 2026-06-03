@@ -103,7 +103,6 @@ const AdProduct = () => {
     setLoading(true)
     try {
       const response = await addProduct(formattedData)
-      console.log({response});
       
       setToastMessage('Product added successfully!')
       setToastType('success')

@@ -1,9 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { useCurrency } from '../context/CurrencyContext'
 
 const ProductCardView = ({ product, id, image, name, price }) => {
   const navigate = useNavigate()
+  const { currency } = useCurrency()
 
   const handleClick = () => {
     // If full product object is passed, use it. Otherwise use individual props
@@ -76,7 +78,12 @@ const ProductCardView = ({ product, id, image, name, price }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          from <span className='font-bold' style={{ color: '#546B41' }}>₹{(product?.price_rs || price || 0).toLocaleString('en-IN')}</span>
+          from <span className='font-bold' style={{ color: '#546B41' }}>
+            {currency === 'INR' 
+              ? `₹${(product?.price_rs || price || 0).toLocaleString('en-IN')}`
+              : `$${(product?.price_usd || 0).toFixed(2)}`
+            }
+          </span>
         </motion.p>
 
         {/* View Details Button - Shows on Hover (Desktop) / Always Visible (Mobile) */}

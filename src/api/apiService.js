@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // Base API configuration
-// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-const API_BASE_URL = 'http://192.168.0.106:8000/api/'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+// const API_BASE_URL = 'http://192.168.0.106:8000/api/'
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -94,7 +94,6 @@ export const registerUser = async(data) => {
     const response = await apiClient.post('accounts/register/', data)
     return response;
   } catch(error){
-    console.log("error in registering the user");
     throw error;
   }
 }
@@ -105,7 +104,6 @@ export const loginUser = async(data) => {
     const response = await apiClient.post('accounts/login/', data)
     return response;
   } catch(error){
-    console.log("error in logging in the user");
     throw error;
   }
 }
@@ -116,7 +114,6 @@ export const sendEmail = async(data) => {
     const response = await apiClient.post('core/send-email/', data)
     return response.data
   } catch(error){
-    console.log("error in sending email");
     throw error;
   }
 }
@@ -126,7 +123,6 @@ export const deleteFaq = async(id) => {
        const response = await apiClient.delete(`core/${id}/delete-faq/`)
        return response.data
     } catch(error){
-       console.log("error in deleting FAQ");
        throw error;
     }
 }
@@ -136,7 +132,6 @@ export const addProduct = async(data) => {
       const response = await apiClient.post('products/add-products/', data)
       return response.data
    } catch(error){
-      console.log("error in adding product");
       throw error;
    }
 }
@@ -146,7 +141,6 @@ export const getProducts = async() => {
       const response = await apiClient.get('products/get-products/')
       return response.data
     } catch(error){
-      console.log("error in getting products");
       throw error;
     }
 }
@@ -156,7 +150,6 @@ export const deleteProduct = async(productId) => {
       const response = await apiClient.delete(`products/delete-product/${productId}/`)
       return response.data
     } catch(error){
-      console.log("error in deleting product");
       throw error;
     }
 }
@@ -166,7 +159,6 @@ export const addToCart = async(cartData) => {
     const response = await apiClient.post('carts/add-to-cart/', cartData)
     return response.data  
   } catch(error){
-    console.log("error in adding to cart");
     throw error;
   }
 }
@@ -175,7 +167,6 @@ export const getCartItems = async(userEmail) => {
     const response = await apiClient.get(`carts/get-cart-item/?email=${userEmail}`)
     return response.data  
   } catch(error){
-    console.log("error in getting cart items");
     throw error;
   }
 }
