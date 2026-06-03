@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { 
   HiOutlineQuestionMarkCircle,
-  HiOutlineTrash
+  HiOutlineTrash,
+  HiOutlinePlus
 } from 'react-icons/hi2'
 
 const AdminSidebar = () => {
@@ -10,6 +11,8 @@ const AdminSidebar = () => {
   const [collapsed, setCollapsed] = useState(false)
 
   const menuItems = [
+    { name: 'Add Product', path: '/admin/add-product', icon: HiOutlinePlus },
+    { name: 'Delete Product', path: '/admin/delete-product', icon: HiOutlineTrash },
     { name: 'Add FAQs', path: '/admin/add-faqs', icon: HiOutlineQuestionMarkCircle },
     { name: 'Delete FAQ', path: '/admin/delete-faq', icon: HiOutlineTrash },
   ]

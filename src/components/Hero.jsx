@@ -4,10 +4,13 @@ import sovrinHero2 from '../assets/sovrinHero2.webp'
 import { motion } from 'framer-motion'
 import HeroItems from './HeroItems'
 import Sidebar from './Sidebar'
-import { HiOutlineUser, HiOutlineBars3 } from "react-icons/hi2"
+import { HiOutlineBars3, HiOutlineShoppingBag } from "react-icons/hi2"
+import AddToCart from './AddToCart'
+import ProfileCard from './ProfileCard'
 
 const Hero = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   // Container animation for fade in + slide up animayion
   const containerVariants = {
@@ -72,14 +75,18 @@ const Hero = () => {
                   </motion.h1>
                 </div>
 
-                {/* Profile Icon - Mobile Only */}
-                <div className='md:hidden p-2'>
-                  <HiOutlineUser size={28} className='text-white'/>
+                {/* Cart & Profile Icons - Mobile Only (desktop shown in HeroItems) */}
+                <div className='md:hidden flex items-center gap-3 p-2'>
+                  <button onClick={() => setIsCartOpen(true)}>
+                    <HiOutlineShoppingBag className='text-white text-2xl' />
+                  </button>
+                  <ProfileCard iconSize='text-2xl' />
                 </div> 
               </div>
               
               {/* {nav-items} */}
                <HeroItems />
+               <AddToCart isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
 
 
           </div>

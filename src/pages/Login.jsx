@@ -5,21 +5,24 @@ import { Link, useNavigate } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
 import loginImg from '../assets/rest.jpeg'
 import { loginUser } from '../api/apiService'
+import { useAuth } from '../context/AuthContext'
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const onSubmit = async (data) => {
     try{
       const response = await loginUser(data);
       if (response?.status === 200) {
-        navigate('/home'); 
+        const { email, username } = response?.data?.data ?? {}
+        login({ email, username })
+        navigate('/home');
       }
     } catch (error) {
       console.log('Error in login:', error);
     }
-    console.log('Login data:', data);
   };
 
   return (

@@ -1,31 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineXMark, HiOutlineTrash } from 'react-icons/hi2'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { getCartItems } from '../api/apiService'
 
 const AddToCart = ({ isOpen, setIsOpen }) => {
-  // Dummy cart items - replace with actual cart state management
-  const [cartItems, setCartItems] = useState([
-    // Example structure:
-    // { id: 1, name: 'Product Name', price: 5000, quantity: 1, image: 'url' }
-  ])
+  const { user } = useAuth()
+  const navigate = useNavigate()
+  const [cartItems, setCartItems] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  // Fetch cart items when cart opens
+  useEffect(() => {
+    if (isOpen) {
+      if (!user?.email) {
+        setCartItems([])
+        setLoading(false)
+      } else {
+        fetchCartItems()
+      }
+    }
+  }, [isOpen, user?.email])
+
+  const fetchCartItems = async () => {
+    try {
+      setLoading(true)
+      console.log('Fetching cart for email:', user?.email)
+      const response = await getCartItems(user?.email)
+      console.log('Cart API response:', response)
+      console.log('Response.data:', response?.data)
+      console.log('Response.data.items:', response?.data?.items)
+      
+      // Handle different response formats
+      const items = Array.isArray(response?.data?.items)
+        ? response.data.items
+        : Array.isArray(response?.data) 
+        ? response.data 
+        : Array.isArray(response?.items)
+        ? response.items
+        : Array.isArray(response)
+        ? response
+        : []
+      
+      console.log('Final items:', items, 'Length:', items.length)
+      setCartItems(items)
+    } catch (error) {
+      console.error('Error fetching cart items:', error)
+      setCartItems([])
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // Calculate total
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0)
+    return cartItems.reduce((total, item) => {
+      // Use same extraction logic as rendering
+      const price = item?.product_details?.price_rs || item?.product_details?.price || item?.price || item?.product_price || item?.product?.price_rs || 0
+      const quantity = item?.quantity || 1
+      const itemTotal = parseFloat(price) * parseFloat(quantity)
+      console.log('Calculating price for:', { name: item?.product_details?.name, price, quantity, itemTotal })
+      return total + itemTotal
+    }, 0)
   }
 
   // Remove item from cart
   const removeItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id))
+    setCartItems(cartItems.filter(item => (item?.id || item?.product_id) !== id))
   }
 
   // Update quantity
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity < 1) return
-    setCartItems(cartItems.map(item => 
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    ))
+    setCartItems(cartItems.map(item => {
+      const itemId = item?.id || item?.product_id
+      return itemId === id ? { ...item, quantity: newQuantity } : item
+    }))
   }
 
   // Sidebar animation variants
@@ -98,7 +149,24 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
 
             {/* Cart Items */}
             <div className='flex-1 overflow-y-auto p-6'>
-              {cartItems.length === 0 ? (
+              {!user?.email ? (
+                <div className='flex flex-col items-center justify-center h-full'>
+                  <p className='font-cormorant text-lg text-gray-500 mb-4'>
+                    Please login to view your cart
+                  </p>
+                  <Link 
+                    to="/login"
+                    className='px-6 py-2 font-cormorant font-semibold'
+                    style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}
+                  >
+                    Go to Login
+                  </Link>
+                </div>
+              ) : loading ? (
+                <div className='flex items-center justify-center h-full'>
+                  <p className='font-cormorant text-lg' style={{ color: '#99AD7A' }}>Loading...</p>
+                </div>
+              ) : cartItems.length === 0 ? (
                 <div className='flex flex-col items-center justify-center h-full'>
                   <p className='font-cormorant text-lg text-gray-500 mb-4'>
                     Your cart is empty
@@ -115,65 +183,104 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                 </div>
               ) : (
                 <div className='space-y-4'>
-                  {cartItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      className='flex gap-4 p-4 rounded-lg'
-                      style={{ backgroundColor: '#FFF8EC' }}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                    >
-                      {/* Product Image */}
-                      <img 
-                        src={item.image} 
-                        alt={item.name}
-                        className='w-20 h-20 object-cover rounded'
-                      />
-
-                      {/* Product Details */}
-                      <div className='flex-1'>
-                        <h3 className='font-cormorant font-bold text-lg' style={{ color: '#546B41' }}>
-                          {item.name}
-                        </h3>
-                        <p className='font-marvel text-sm' style={{ color: '#99AD7A' }}>
-                          ₹{item.price.toLocaleString('en-IN')}
-                        </p>
-
-                        {/* Quantity Controls */}
-                        <div className='flex items-center gap-2 mt-2'>
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className='w-6 h-6 flex items-center justify-center rounded border'
-                            style={{ borderColor: '#546B41', color: '#546B41' }}
-                          >
-                            -
-                          </button>
-                          <span className='font-marvel text-sm w-8 text-center'>{item.quantity}</span>
-                          <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className='w-6 h-6 flex items-center justify-center rounded border'
-                            style={{ borderColor: '#546B41', color: '#546B41' }}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Remove Button */}
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className='p-2 hover:bg-red-100 rounded transition-colors'
+                  {cartItems.map((item) => {
+                    // Handle different API response formats
+                    const itemId = item?.id || item?.product_id
+                    // Check product_details first (from API), then fallback to other formats
+                    const itemName = item?.product_details?.name || item?.name || item?.product_name || item?.product?.name
+                    const itemPrice = item?.product_details?.price_rs || item?.product_details?.price || item?.price || item?.product_price || item?.product?.price_rs
+                    const itemImage = item?.product_details?.image || item?.image || item?.product_image || item?.product?.image
+                    const itemQuantity = item?.quantity || 1
+                    
+                    console.log('Rendering item:', { itemId, itemName, itemPrice, itemImage, itemQuantity })
+                    
+                    return (
+                      <motion.div
+                        key={itemId}
+                        className='flex gap-4 p-4 rounded-lg'
+                        style={{ backgroundColor: '#FFF8EC' }}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
                       >
-                        <HiOutlineTrash className='text-red-500 text-xl' />
-                      </button>
-                    </motion.div>
-                  ))}
+                        {/* Product Image */}
+                        <div 
+                          onClick={() => {
+                            // Navigate to product detail with full product object
+                            navigate(`/products/${itemId}`, { 
+                              state: { 
+                                product: {
+                                  id: itemId,
+                                  name: itemName,
+                                  price_rs: itemPrice,
+                                  price_usd: item?.product_details?.price_usd || item?.product?.price_usd,
+                                  image: itemImage,
+                                  description: item?.product_details?.description || item?.product?.description,
+                                  details_read: item?.product_details?.details_read || item?.product?.details_read,
+                                  sizes_read: item?.product_details?.sizes_read || item?.product?.sizes_read,
+                                  other_images_read: item?.product_details?.other_images_read || item?.product?.other_images_read
+                                }
+                              } 
+                            })
+                            setIsOpen(false)
+                          }}
+                          className='w-20 h-20 bg-gray-200 rounded flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-80 transition-opacity'
+                        >
+                          {itemImage ? (
+                            <img 
+                              src={itemImage} 
+                              alt={itemName || 'Product'}
+                              className='w-full h-full object-cover'
+                            />
+                          ) : (
+                            <span className='text-xs text-gray-400'>No Image</span>
+                          )}
+                        </div>
+
+                        {/* Product Details */}
+                        <div className='flex-1'>
+                          <h3 className='font-cormorant font-bold text-lg' style={{ color: '#546B41' }}>
+                            {itemName || 'Product'}
+                          </h3>
+                          <p className='font-marvel text-sm' style={{ color: '#99AD7A' }}>
+                            ₹{parseFloat(itemPrice || 0).toLocaleString('en-IN')}
+                          </p>
+
+                          {/* Quantity Controls */}
+                          <div className='flex items-center gap-2 mt-2'>
+                            <button
+                              onClick={() => updateQuantity(itemId, itemQuantity - 1)}
+                              className='w-6 h-6 flex items-center justify-center rounded border'
+                              style={{ borderColor: '#546B41', color: '#546B41' }}
+                            >
+                              -
+                            </button>
+                            <span className='font-marvel text-sm w-8 text-center'>{itemQuantity}</span>
+                            <button
+                              onClick={() => updateQuantity(itemId, itemQuantity + 1)}
+                              className='w-6 h-6 flex items-center justify-center rounded border'
+                              style={{ borderColor: '#546B41', color: '#546B41' }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Remove Button */}
+                        <button
+                          onClick={() => removeItem(itemId)}
+                          className='p-2 hover:bg-red-100 rounded transition-colors'
+                        >
+                          <HiOutlineTrash className='text-red-500 text-xl' />
+                        </button>
+                      </motion.div>
+                    )
+                  })}
                 </div>
               )}
             </div>
 
             {/* Footer - Total & Checkout */}
-            {cartItems.length > 0 && (
+            {user?.email && cartItems.length > 0 && (
               <div className='border-t border-gray-300 p-6 space-y-4'>
                 {/* Subtotal */}
                 <div className='flex justify-between items-center'>

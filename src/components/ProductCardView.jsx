@@ -2,11 +2,13 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
-const ProductCardView = ({ id, image, name, price }) => {
+const ProductCardView = ({ product, id, image, name, price }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`/products/${id}`)
+    // If full product object is passed, use it. Otherwise use individual props
+    const productData = product || { id, image, name, price }
+    navigate(`/products/${productData.id}`, { state: { product: productData } })
   }
 
   return (
@@ -28,8 +30,8 @@ const ProductCardView = ({ id, image, name, price }) => {
       {/* Image Container */}
       <div className='relative overflow-hidden aspect-square'>
         <motion.img
-          src={image}
-          alt={name}
+          src={product?.image || image}
+          alt={product?.name || name}
           className='w-full h-full object-cover'
           initial={{ scale: 1.2, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
@@ -62,7 +64,7 @@ const ProductCardView = ({ id, image, name, price }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          {name}
+          {product?.name || name}
         </motion.h3>
 
         {/* Price */}
@@ -74,7 +76,7 @@ const ProductCardView = ({ id, image, name, price }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          from <span className='font-bold' style={{ color: '#546B41' }}>₹{price.toLocaleString('en-IN')}</span>
+          from <span className='font-bold' style={{ color: '#546B41' }}>₹{(product?.price_rs || price || 0).toLocaleString('en-IN')}</span>
         </motion.p>
 
         {/* View Details Button - Shows on Hover (Desktop) / Always Visible (Mobile) */}

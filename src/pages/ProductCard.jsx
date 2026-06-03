@@ -1,14 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import ProductCardView from '../components/ProductCardView'
-import { productsData } from '../constants/productsData'
+import { getProducts } from '../api/apiService'
 
 const ProductCard = () => {
   const navigate = useNavigate()
+  const [displayProducts, setDisplayProducts] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  // Show only first 8 products for horizontal scroll
-  const displayProducts = productsData.slice(0, 8)
+  // Fetch products on mount
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      try {
+        const response = await getProducts()
+        const products = response.data || response || []
+        // Show only first 8 products
+        setDisplayProducts(products.slice(0, 8))
+      } catch (error) {
+        console.log('Error fetching products:', error)
+        setDisplayProducts([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProductsData()
+  }, [])
 
   return (
     <div className='py-16 px-4' style={{ backgroundColor: '#FAFAFA' }}>
@@ -32,18 +49,27 @@ const ProductCard = () => {
 
         {/* Horizontal Scrollable Products */}
         <div className='relative mb-8'>
-          <div className='flex gap-8 overflow-x-auto pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory'>
-            {displayProducts.map((product) => (
-              <div key={product.id} className='shrink-0 w-64 md:w-80 snap-start'>
-                <ProductCardView
-                  id={product.id}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                />
-              </div>
-            ))}
-          </div>
+          {loading ? (
+            <div className='flex gap-8 overflow-x-auto pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory'>
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className='shrink-0 w-64 md:w-80 bg-gray-300 rounded-lg animate-pulse h-80'></div>
+              ))}
+            </div>
+          ) : displayProducts.length === 0 ? (
+            <div className='text-center py-12'>
+              <p className='text-gray-500 text-lg'>No products available</p>
+            </div>
+          ) : (
+            <div className='flex gap-8 overflow-x-auto pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory'>
+              {displayProducts.map((product) => (
+                <div key={product.id} className='shrink-0 w-64 md:w-80 snap-start'>
+                  <ProductCardView
+                    product={product}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* View All Button - Centered Below Cards */}

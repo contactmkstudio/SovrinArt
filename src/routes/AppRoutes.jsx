@@ -10,8 +10,10 @@ import Register from '../pages/Register'
 import TermsAndConditions from '../pages/TermsAndConditions'
 import AdminDashboard from '../adminpanel/pages/AdminDashboard'
 import AddFaq from '../adminpanel/pages/AddFaq'
-import About from '../pages/About'
+import AdProduct from '../adminpanel/pages/AdProduct'
+import DeleteProduct from '../adminpanel/pages/DeleteProduct'
 import DeleteFaq from '../adminpanel/pages/DeleteFaq'
+import About from '../pages/About'
 
 
 
@@ -36,8 +38,10 @@ const AppRoutes = () => {
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-faqs" element={<AddFaq />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/admin/add-product" element={<AdProduct />} />
+            <Route path="/admin/delete-product" element={<DeleteProduct />} />
             <Route path='/admin/delete-faq' element={<DeleteFaq />} />
+            <Route path="/about" element={<About />} />
          
       </Routes>
     </BrowserRouter>

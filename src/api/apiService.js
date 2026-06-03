@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-// const API_BASE_URL = 'http://192.168.0.106:8000/api/'
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = 'http://192.168.0.106:8000/api/'
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -16,11 +16,6 @@ const apiClient = axios.create({
 // Request interceptor (for adding auth tokens, etc.)
 apiClient.interceptors.request.use(
   (config) => {
-    // Add auth token if exists
-    const token = localStorage.getItem('authToken')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
     return config
   },
   (error) => {
@@ -134,4 +129,53 @@ export const deleteFaq = async(id) => {
        console.log("error in deleting FAQ");
        throw error;
     }
+}
+
+export const addProduct = async(data) => {
+   try{
+      const response = await apiClient.post('products/add-products/', data)
+      return response.data
+   } catch(error){
+      console.log("error in adding product");
+      throw error;
+   }
+}
+
+export const getProducts = async() => {
+    try{
+      const response = await apiClient.get('products/get-products/')
+      return response.data
+    } catch(error){
+      console.log("error in getting products");
+      throw error;
+    }
+}
+
+export const deleteProduct = async(productId) => {
+    try{
+      const response = await apiClient.delete(`products/delete-product/${productId}/`)
+      return response.data
+    } catch(error){
+      console.log("error in deleting product");
+      throw error;
+    }
+}
+
+export const addToCart = async(cartData) => {
+  try{
+    const response = await apiClient.post('carts/add-to-cart/', cartData)
+    return response.data  
+  } catch(error){
+    console.log("error in adding to cart");
+    throw error;
+  }
+}
+export const getCartItems = async(userEmail) => {
+  try{
+    const response = await apiClient.get(`carts/get-cart-item/?email=${userEmail}`)
+    return response.data  
+  } catch(error){
+    console.log("error in getting cart items");
+    throw error;
+  }
 }
