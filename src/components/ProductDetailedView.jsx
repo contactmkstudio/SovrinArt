@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { HiOutlineHeart, HiHeart } from 'react-icons/hi2'
+import { useNavigate } from 'react-router-dom'
+import { HiOutlineHeart, HiHeart, HiOutlinePlus, HiOutlineMinus } from 'react-icons/hi2'
 import Navbar from './Navbar'
 import NewArtLaunch from './NewArtLaunch'
 import Toast from './Toast'
@@ -12,13 +13,25 @@ import { useCurrency } from '../context/CurrencyContext'
 const ProductDetailedView = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState(null)
+  const [quantity, setQuantity] = useState(1)
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isLoadingCart, setIsLoadingCart] = useState(false)
   const [toast, setToast] = useState(null)
   const { user, isAuthenticated } = useAuth()
   const { currency } = useCurrency()
-  
-  
+  const navigate = useNavigate()
+
+  const handleCheckout = () => {
+    navigate('/order-summary', {
+      state: {
+        product,
+        selectedSize,
+        quantity,
+        price_rs: currentPriceRs,
+        price_usd: currentPriceUsd,
+      },
+    })
+  }
  
 
   // Ensure product has valid images array
@@ -193,10 +206,60 @@ const ProductDetailedView = ({ product }) => {
               </div>
             )}
 
+            {/* Quantity Selector */}
+            <div className='mb-8'>
+              <p className='font-cormorant text-lg font-bold mb-3' style={{ color: '#546B41' }}>
+                Quantity
+              </p>
+              <div className='flex items-center gap-1'>
+                <motion.button
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  disabled={quantity <= 1}
+                  className='w-11 h-11 flex items-center justify-center border-2 transition-all duration-300 disabled:opacity-40'
+                  style={{
+                    backgroundColor: '#FFF8EC',
+                    borderColor: '#DCCCAC',
+                    color: '#546B41',
+                  }}
+                  whileHover={{ scale: quantity > 1 ? 1.05 : 1 }}
+                  whileTap={{ scale: quantity > 1 ? 0.95 : 1 }}
+                >
+                  <HiOutlineMinus size={18} />
+                </motion.button>
+
+                <div
+                  className='w-14 h-11 flex items-center justify-center font-cormorant text-xl font-bold border-y-2'
+                  style={{
+                    backgroundColor: '#FFF8EC',
+                    borderColor: '#DCCCAC',
+                    color: '#546B41',
+                  }}
+                >
+                  {quantity}
+                </div>
+
+                <motion.button
+                  onClick={() => setQuantity((q) => Math.min(10, q + 1))}
+                  disabled={quantity >= 10}
+                  className='w-11 h-11 flex items-center justify-center border-2 transition-all duration-300 disabled:opacity-40'
+                  style={{
+                    backgroundColor: '#FFF8EC',
+                    borderColor: '#DCCCAC',
+                    color: '#546B41',
+                  }}
+                  whileHover={{ scale: quantity < 10 ? 1.05 : 1 }}
+                  whileTap={{ scale: quantity < 10 ? 0.95 : 1 }}
+                >
+                  <HiOutlinePlus size={18} />
+                </motion.button>
+              </div>
+            </div>
+
             {/* Buttons */}
             <div className='space-y-3'>
               {/* Buy Now Button */}
               <motion.button
+                onClick={handleCheckout}
                 className='w-full py-4 font-cormorant text-lg font-bold transition-all duration-300'
                 style={{
                   backgroundColor: '#546B41',
@@ -205,7 +268,7 @@ const ProductDetailedView = ({ product }) => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Buy Now
+                Proceed To CheckOut
               </motion.button>
 
               <div className='flex gap-3'>
