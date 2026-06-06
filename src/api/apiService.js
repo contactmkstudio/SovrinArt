@@ -191,7 +191,8 @@ export const verifyPayment = async(paymentData) => {
 
 export const createPaypalOrder = async(orderData) => {
   try{
-    const response = await apiClient.post('paypal/create-order/', orderData)
+    const response = await apiClient.post('paypal/create/', orderData)
+    console.log('Create PayPal Order Response:', response.data)
     return response.data
   } catch(error){
     throw error;
@@ -200,7 +201,8 @@ export const createPaypalOrder = async(orderData) => {
 
 export const capturePaypalOrder = async(captureData) => {
   try{
-    const response = await apiClient.post('paypal/capture-order/', captureData)
+    const response = await apiClient.post('paypal/capture/', captureData)
+    console.log('Capture Response:', response.data)
     return response.data
   } catch(error){
     throw error;

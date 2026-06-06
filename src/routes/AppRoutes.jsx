@@ -16,6 +16,8 @@ import DeleteFaq from '../adminpanel/pages/DeleteFaq'
 import About from '../pages/About'
 import OrderSummary from '../pages/OrderSummary'
 import Orders from '../pages/Orders'
+import PayPalReturn from '../pages/PayPalReturn'
+import PayPalCancel from '../pages/PayPalCancel'
 
 
 const AppRoutes = () => {
@@ -45,6 +47,8 @@ const AppRoutes = () => {
             <Route path="/about" element={<About />} />
             <Route path="/order-summary" element={<OrderSummary />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/paypal/return" element={<PayPalReturn />} />
+            <Route path="/paypal/cancel" element={<PayPalCancel />} />
          
       </Routes>
     </BrowserRouter>
