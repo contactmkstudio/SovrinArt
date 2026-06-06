@@ -112,7 +112,7 @@ const AdProduct = () => {
         window.location.reload()
       }, 2000)
     } catch (error) {
-      setToastMessage('Error adding product: ' + (error?.response?.data?.message || error.message))
+      setToastMessage('Error adding product: ' + (error?.response?.data?.message || error?.message))
       setToastType('error')
       setLoading(false)
     }

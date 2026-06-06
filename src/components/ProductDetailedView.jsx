@@ -22,13 +22,20 @@ const ProductDetailedView = ({ product }) => {
   const navigate = useNavigate()
 
   const handleCheckout = () => {
+    if (!isAuthenticated) {
+      navigate('/login')
+      return
+    }
+    const effectiveSize = selectedSize
+      || sizes.find(s => s?.size?.toLowerCase() === 'm')
+      || { size: 'm' }
     navigate('/order-summary', {
       state: {
         product,
-        selectedSize,
+        selectedSize: effectiveSize,
         quantity,
-        price_rs: currentPriceRs,
-        price_usd: currentPriceUsd,
+        price_rs: effectiveSize?.price_rs || currentPriceRs,
+        price_usd: effectiveSize?.price_usd || currentPriceUsd,
       },
     })
   }

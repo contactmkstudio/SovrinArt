@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useCurrency } from '../context/CurrencyContext'
 import { getCartItems } from '../api/apiService'
+import Loader from './Loader'
 
 const AddToCart = ({ isOpen, setIsOpen }) => {
   const { user, isAuthenticated } = useAuth()
@@ -162,7 +163,7 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                 </div>
               ) : loading ? (
                 <div className='flex items-center justify-center h-full'>
-                  <p className='font-cormorant text-lg' style={{ color: '#99AD7A' }}>Loading...</p>
+                  <Loader />
                 </div>
               ) : cartItems.length === 0 ? (
                 <div className='flex flex-col items-center justify-center h-full'>
@@ -298,11 +299,11 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                 <motion.button
                   onClick={() => {
                     if (!isAuthenticated) {
-                      alert('Please login to proceed to checkout')
                       navigate('/login')
                       return
                     }
-                    // TODO: Add checkout functionality
+                    setIsOpen(false)
+                    navigate('/order-summary', { state: { cartItems, fromCart: true } })
                   }}
                   className='w-full py-3 font-cormorant text-lg font-bold'
                   style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}

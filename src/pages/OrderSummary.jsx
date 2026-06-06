@@ -8,7 +8,8 @@ import NewArtLaunch from '../components/NewArtLaunch'
 import Toast from '../components/Toast'
 import { useCurrency } from '../context/CurrencyContext'
 import { useAuth } from '../context/AuthContext'
-import { createOrder } from '../api/apiService'
+import { initiateRazorpayPayment } from '../payments/razorpayHandler'
+import { initiatePaypalPayment } from '../payments/paypalHandler'
 import { countries } from '../constants/countriesData'
 import OrderSuccessAnimation from '../components/OrderSuccessAnimation'
 
@@ -27,11 +28,13 @@ const OrderSummary = () => {
   const { currency } = useCurrency()
   const { user } = useAuth()
 
-  const { product, selectedSize, quantity = 1, price_rs, price_usd } = state || {}
+  const { product, selectedSize, quantity = 1, price_rs, price_usd, cartItems = [], fromCart = false } = state || {}
 
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [toast, setToast] = useState(null)
   const [orderSuccess, setOrderSuccess] = useState(false)
+  const [orderDetails, setOrderDetails] = useState({ orderId: null, paymentStatus: null })
+  const [paymentMethod, setPaymentMethod] = useState('razorpay')
 
   const {
     register,
@@ -56,7 +59,7 @@ const OrderSummary = () => {
   const selectedCountry = watch('country')
   const currentCountry = countries.find((c) => c.name === selectedCountry) || countries[0]
 
-  if (!product) {
+  if (!product && !(fromCart && cartItems.length > 0)) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-6" style={{ backgroundColor: '#FAFAFA' }}>
         <HiOutlineShieldCheck size={56} style={{ color: '#DCCCAC' }} />
@@ -75,34 +78,71 @@ const OrderSummary = () => {
   }
 
   const onSubmit = async (data) => {
-    console.log("helloos");
-    
+    const orderPayload = {
+      user_email: user?.email,
+      currency: currency,
+      items: fromCart
+        ? cartItems.map(item => ({
+            product_name: item?.product_details?.name || item?.name || item?.product_name,
+            size: item?.size || 'm',
+            quantity: item?.quantity || 1,
+            price: currency === 'INR'
+              ? parseFloat(item?.product_details?.price_rs || item?.product_details?.price || item?.price || 0).toFixed(2)
+              : parseFloat(item?.product_details?.price_usd || 0).toFixed(2),
+          }))
+        : [
+            {
+              product_name: product?.name,
+              size: selectedSize?.size || 'm',
+              quantity: quantity,
+              price: currency === 'INR'
+                ? parseFloat(price_rs || 0).toFixed(2)
+                : parseFloat(price_usd || 0).toFixed(2),
+            },
+          ],
+    }
+
+    const onSuccess = ({ orderId, paymentStatus }) => {
+      setOrderDetails({ orderId, paymentStatus })
+      setOrderSuccess(true)
+      setIsPlacingOrder(false)
+    }
+
+    const onError = (message) => {
+      setToast({ message, type: 'error' })
+      setIsPlacingOrder(false)
+    }
+
     try {
       setIsPlacingOrder(true)
-      const orderPayload = {
-        user_email: user?.email,
-        currency: currency,
-        items: [
-          {
-            product_name: product?.name,
-            size: selectedSize?.size || '',
-            quantity: quantity,
-            price: currency === 'INR'
-              ? parseFloat(price_rs || 0).toFixed(2)
-              : parseFloat(price_usd || 0).toFixed(2),
+
+      if (paymentMethod === 'razorpay') {
+        await initiateRazorpayPayment({
+          orderPayload,
+          prefill: {
+            name: data.fullName,
+            contact: `${data.phoneCode}${data.phone}`,
+            email: user?.email || '',
           },
-        ],
+          productName: fromCart ? 'Cart Order' : product?.name,
+          onSuccess,
+          onError,
+          onDismiss: () => {
+            setIsPlacingOrder(false)
+            setToast({ message: 'Payment cancelled.', type: 'error' })
+          },
+        })
+      } else {
+        await initiatePaypalPayment({ orderPayload, onSuccess, onError })
       }
-      console.log('Order Payload:', orderPayload)
-    //   await createOrder(orderPayload)
-      setOrderSuccess(true)
+
+      setIsPlacingOrder(false)
     } catch (error) {
+      setIsPlacingOrder(false)
       setToast({
-        message: error?.response?.data?.message || 'Failed to place order. Please try again.',
+        message: error?.message || error?.response?.data?.message || 'Failed to place order. Please try again.',
         type: 'error',
       })
-    } finally {
-      setIsPlacingOrder(false)
     }
   }
 
@@ -111,10 +151,24 @@ const OrderSummary = () => {
       ? `₹${parseFloat(price_rs || 0).toLocaleString('en-IN')}`
       : `$${(parseFloat(price_usd) || 0).toFixed(2)}`
 
-  const displayTotalPrice =
-    currency === 'INR'
+  const cartTotal = fromCart
+    ? cartItems.reduce((sum, item) => {
+        const price = currency === 'INR'
+          ? parseFloat(item?.product_details?.price_rs || item?.product_details?.price || item?.price || 0)
+          : parseFloat(item?.product_details?.price_usd || 0)
+        return sum + price * (item?.quantity || 1)
+      }, 0)
+    : null
+
+  const displayTotalPrice = fromCart
+    ? currency === 'INR'
+      ? `₹${cartTotal.toLocaleString('en-IN')}`
+      : `$${cartTotal.toFixed(2)}`
+    : currency === 'INR'
       ? `₹${(parseFloat(price_rs || 0) * quantity).toLocaleString('en-IN')}`
       : `$${((parseFloat(price_usd) || 0) * quantity).toFixed(2)}`
+
+  const totalItemCount = fromCart ? cartItems.reduce((sum, item) => sum + (item?.quantity || 1), 0) : quantity
 
   const image = product?.image || '/placeholder-image.jpg'
 
@@ -170,6 +224,8 @@ const OrderSummary = () => {
       <OrderSuccessAnimation
         isVisible={orderSuccess}
         onClose={() => setOrderSuccess(false)}
+        orderId={orderDetails.orderId}
+        paymentStatus={orderDetails.paymentStatus}
       />
       {toast && (
         <Toast
@@ -277,73 +333,106 @@ const OrderSummary = () => {
 
               {/* Product Info */}
               <div className="p-6">
-                <div className="flex gap-6">
-                  {/* Image */}
-                  <div
-                    className="shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-xl overflow-hidden"
-                    style={{ backgroundColor: '#FFF8EC' }}
-                  >
-                    <img
-                      src={image}
-                      alt={product?.name}
-                      className="w-full h-full object-cover"
-                    />
+                {fromCart ? (
+                  <div className="space-y-4">
+                    {cartItems.map((item, i) => {
+                      const itemName = item?.product_details?.name || item?.name || item?.product_name
+                      const itemImage = item?.product_details?.image || item?.image || item?.product_image
+                      const itemPrice = currency === 'INR'
+                        ? parseFloat(item?.product_details?.price_rs || item?.product_details?.price || item?.price || 0)
+                        : parseFloat(item?.product_details?.price_usd || 0)
+                      const itemQty = item?.quantity || 1
+                      const itemSize = item?.size || 'm'
+                      return (
+                        <div key={i} className="flex gap-4 pb-4 last:pb-0 border-b last:border-b-0" style={{ borderColor: '#F0EBE3' }}>
+                          <div className="shrink-0 w-20 h-20 rounded-xl overflow-hidden" style={{ backgroundColor: '#FFF8EC' }}>
+                            {itemImage
+                              ? <img src={itemImage} alt={itemName} className="w-full h-full object-cover" />
+                              : <div className="w-full h-full" />}
+                          </div>
+                          <div className="flex flex-col justify-between flex-1 min-w-0">
+                            <p className="font-cormorant text-lg font-bold truncate" style={{ color: '#546B41' }}>{itemName}</p>
+                            <div className="flex items-center gap-3 mt-1">
+                              <span className="font-cormorant font-bold text-xs px-3 py-1 rounded-full" style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}>Size: {itemSize}</span>
+                              <span className="font-cormorant font-bold text-xs px-3 py-1 rounded-full" style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}>Qty: {itemQty}</span>
+                            </div>
+                            <p className="font-cormorant font-semibold text-base mt-1" style={{ color: '#99AD7A' }}>
+                              {currency === 'INR' ? `₹${(itemPrice * itemQty).toLocaleString('en-IN')}` : `$${(itemPrice * itemQty).toFixed(2)}`}
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
-
-                  {/* Details */}
-                  <div className="flex flex-col justify-between flex-1 min-w-0">
-                    <div>
-                      <h3
-                        className="font-cormorant text-2xl sm:text-3xl font-bold leading-tight truncate"
-                        style={{ color: '#546B41' }}
-                      >
-                        {product?.name}
-                      </h3>
-                      {product?.description && (
-                        <p
-                          className="font-marvel text-sm mt-2 line-clamp-2"
-                          style={{ color: '#99AD7A' }}
-                        >
-                          {product.description}
-                        </p>
-                      )}
+                ) : (
+                  <div className="flex gap-6">
+                    {/* Image */}
+                    <div
+                      className="shrink-0 w-32 h-32 sm:w-40 sm:h-40 rounded-xl overflow-hidden"
+                      style={{ backgroundColor: '#FFF8EC' }}
+                    >
+                      <img
+                        src={image}
+                        alt={product?.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
-                    {/* Size Badge */}
-                    {selectedSize && (
-                      <div className="flex items-center gap-2 mt-3">
+                    {/* Details */}
+                    <div className="flex flex-col justify-between flex-1 min-w-0">
+                      <div>
+                        <h3
+                          className="font-cormorant text-2xl sm:text-3xl font-bold leading-tight truncate"
+                          style={{ color: '#546B41' }}
+                        >
+                          {product?.name}
+                        </h3>
+                        {product?.description && (
+                          <p
+                            className="font-marvel text-sm mt-2 line-clamp-2"
+                            style={{ color: '#99AD7A' }}
+                          >
+                            {product.description}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Size Badge */}
+                      {selectedSize && (
+                        <div className="flex items-center gap-2 mt-3">
+                          <span
+                            className="font-marvel text-xs uppercase tracking-wider"
+                            style={{ color: '#99AD7A' }}
+                          >
+                            Size
+                          </span>
+                          <span
+                            className="font-cormorant font-bold text-sm px-4 py-1.5 rounded-full"
+                            style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}
+                          >
+                            {selectedSize?.size}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Quantity Badge */}
+                      <div className="flex items-center gap-2 mt-2">
                         <span
                           className="font-marvel text-xs uppercase tracking-wider"
                           style={{ color: '#99AD7A' }}
                         >
-                          Size
+                          Qty
                         </span>
                         <span
                           className="font-cormorant font-bold text-sm px-4 py-1.5 rounded-full"
                           style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}
                         >
-                          {selectedSize?.size}
+                          {quantity}
                         </span>
                       </div>
-                    )}
-
-                    {/* Quantity Badge */}
-                    <div className="flex items-center gap-2 mt-2">
-                      <span
-                        className="font-marvel text-xs uppercase tracking-wider"
-                        style={{ color: '#99AD7A' }}
-                      >
-                        Qty
-                      </span>
-                      <span
-                        className="font-cormorant font-bold text-sm px-4 py-1.5 rounded-full"
-                        style={{ backgroundColor: '#546B41', color: '#FFF8EC' }}
-                      >
-                        {quantity}
-                      </span>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
 
@@ -618,10 +707,10 @@ const OrderSummary = () => {
                   {/* Subtotal */}
                   <div className="flex justify-between items-center">
                     <span className="font-marvel text-sm" style={{ color: '#7A8A6A' }}>
-                      Price ({quantity} {quantity > 1 ? 'items' : 'item'})
+                      Price ({totalItemCount} {totalItemCount > 1 ? 'items' : 'item'})
                     </span>
                     <span className="font-cormorant text-lg font-semibold" style={{ color: '#546B41' }}>
-                      {quantity > 1 ? `${displayPrice} × ${quantity}` : displayPrice}
+                      {fromCart ? displayTotalPrice : quantity > 1 ? `${displayPrice} × ${quantity}` : displayPrice}
                     </span>
                   </div>
 
@@ -647,6 +736,77 @@ const OrderSummary = () => {
                       {displayTotalPrice}
                     </span>
                   </div>
+                </div>
+              </div>
+
+              {/* Payment Method Selector */}
+              <div
+                className="rounded-2xl overflow-hidden shadow-sm"
+                style={{ backgroundColor: '#FFFFFF' }}
+              >
+                <div className="px-6 py-4 border-b" style={{ borderColor: '#F0EBE3' }}>
+                  <h2 className="font-cormorant text-xl font-bold" style={{ color: '#546B41' }}>Payment Method</h2>
+                </div>
+                <div className="p-4 space-y-3">
+                  {/* Razorpay */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('razorpay')}
+                    className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border-2 transition-all duration-200"
+                    style={{
+                      borderColor: paymentMethod === 'razorpay' ? '#546B41' : '#DCCCAC',
+                      backgroundColor: paymentMethod === 'razorpay' ? '#F2F6EE' : '#FAFAFA',
+                    }}
+                  >
+                    <div
+                      className="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0"
+                      style={{ borderColor: paymentMethod === 'razorpay' ? '#546B41' : '#DCCCAC' }}
+                    >
+                      {paymentMethod === 'razorpay' && (
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#546B41' }} />
+                      )}
+                    </div>
+                    <img
+                      src="https://razorpay.com/favicon.ico"
+                      alt="Razorpay"
+                      className="w-5 h-5 rounded"
+                      onError={(e) => { e.target.style.display = 'none' }}
+                    />
+                    <div className="text-left">
+                      <p className="font-cormorant font-bold text-base" style={{ color: '#546B41' }}>Razorpay</p>
+                      <p className="font-marvel text-xs" style={{ color: '#99AD7A' }}>Cards, UPI, Netbanking & Wallets</p>
+                    </div>
+                  </button>
+
+                  {/* PayPal */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('paypal')}
+                    className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border-2 transition-all duration-200"
+                    style={{
+                      borderColor: paymentMethod === 'paypal' ? '#003087' : '#DCCCAC',
+                      backgroundColor: paymentMethod === 'paypal' ? '#EEF3FB' : '#FAFAFA',
+                    }}
+                  >
+                    <div
+                      className="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0"
+                      style={{ borderColor: paymentMethod === 'paypal' ? '#003087' : '#DCCCAC' }}
+                    >
+                      {paymentMethod === 'paypal' && (
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: '#003087' }} />
+                      )}
+                    </div>
+                    <img
+                      src="https://www.paypalobjects.com/webstatic/icon/favicon.ico"
+                      alt="PayPal"
+                      className="w-5 h-5 rounded"
+                      onError={(e) => { e.target.style.display = 'none' }}
+                    />
+                    <div className="text-left">
+                      <p className="font-cormorant font-bold text-base" style={{ color: '#003087' }}>PayPal</p>
+                      <p className="font-marvel text-xs" style={{ color: '#5B8ED6' }}>PayPal balance & linked cards</p>
+                    </div>
+                  </button>
                 </div>
               </div>
 
@@ -679,26 +839,51 @@ const OrderSummary = () => {
               </div>
 
               {/* Product thumbnail in sidebar */}
-              <div
-                className="rounded-2xl overflow-hidden mt-4"
-                style={{ backgroundColor: '#FFF8EC' }}
-              >
-                <img
-                  src={image}
-                  alt={product?.name}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="px-4 py-3">
-                  <p className="font-cormorant text-sm font-bold truncate" style={{ color: '#546B41' }}>
-                    {product?.name}
-                  </p>
-                  {selectedSize && (
-                    <p className="font-marvel text-xs" style={{ color: '#99AD7A' }}>
-                      Size: {selectedSize?.size}
+              {fromCart ? (
+                <div className="rounded-2xl overflow-hidden mt-4" style={{ backgroundColor: '#FFF8EC' }}>
+                  <div className="px-4 py-3 border-b" style={{ borderColor: '#F0EBE3' }}>
+                    <p className="font-cormorant text-sm font-bold" style={{ color: '#546B41' }}>
+                      {cartItems.length} {cartItems.length > 1 ? 'items' : 'item'} in cart
                     </p>
+                  </div>
+                  {cartItems.slice(0, 3).map((item, i) => {
+                    const itemImage = item?.product_details?.image || item?.image || item?.product_image
+                    const itemName = item?.product_details?.name || item?.name || item?.product_name
+                    return (
+                      <div key={i} className="flex items-center gap-3 px-4 py-2 border-b last:border-b-0" style={{ borderColor: '#F0EBE3' }}>
+                        <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0" style={{ backgroundColor: '#DCCCAC' }}>
+                          {itemImage && <img src={itemImage} alt={itemName} className="w-full h-full object-cover" />}
+                        </div>
+                        <p className="font-marvel text-xs truncate" style={{ color: '#546B41' }}>{itemName}</p>
+                      </div>
+                    )
+                  })}
+                  {cartItems.length > 3 && (
+                    <p className="font-marvel text-xs text-center py-2" style={{ color: '#99AD7A' }}>+{cartItems.length - 3} more</p>
                   )}
                 </div>
-              </div>
+              ) : (
+                <div
+                  className="rounded-2xl overflow-hidden mt-4"
+                  style={{ backgroundColor: '#FFF8EC' }}
+                >
+                  <img
+                    src={image}
+                    alt={product?.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="px-4 py-3">
+                    <p className="font-cormorant text-sm font-bold truncate" style={{ color: '#546B41' }}>
+                      {product?.name}
+                    </p>
+                    {selectedSize && (
+                      <p className="font-marvel text-xs" style={{ color: '#99AD7A' }}>
+                        Size: {selectedSize?.size}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

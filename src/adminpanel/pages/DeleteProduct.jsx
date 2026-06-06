@@ -21,7 +21,7 @@ const DeleteProduct = () => {
       const response = await getProducts()
       setProducts(response.data || response || [])
     } catch (error) {
-      setToastMessage('Error fetching products: ' + (error?.response?.data?.message || error.message))
+      setToastMessage('Error fetching products: ' + (error?.response?.data?.message || error?.message))
       setToastType('error')
     } finally {
       setLoading(false)
@@ -37,7 +37,7 @@ const DeleteProduct = () => {
         // Refresh products list
         fetchProducts()
       } catch (error) {
-        setToastMessage('Error deleting product: ' + (error?.response?.data?.message || error.message))
+        setToastMessage('Error deleting product: ' + (error?.response?.data?.message || error?.message))
         setToastType('error')
       }
     }

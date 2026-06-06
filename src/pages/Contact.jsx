@@ -4,17 +4,19 @@ import { motion } from 'framer-motion'
 import PremiumBackground from '../components/PremiumBackground'
 import HoverRevealImage from '../components/HoverRevealImage'
 import Toast from '../components/Toast'
+import Loader from '../components/Loader'
 import contactImg from '../assets/sovrinHero2.webp'
 import { contactReasons } from '../constants/contactReasons'
 import { sendEmail } from '../api/apiService'
 
 const Contact = () => {
   const [toast, setToast] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async(data) => {
-    // Handle contact form submission here
     try{
+      setIsLoading(true)
       const response = await sendEmail(data);
       
       if(response?.message === 'Email sent successfully'){
@@ -22,13 +24,15 @@ const Contact = () => {
           message: 'Email sent successfully!',
           type: 'success'
         })
-        reset() // Clear form after successful submission
+        reset()
       }
     } catch (error) {
       setToast({
         message: error?.response?.data?.message || 'Failed to send email. Please try again.',
         type: 'error'
       })
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -193,9 +197,10 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className='bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black text-lg font-bold md:text-xl px-8 py-4 w-full rounded-xl font-marvel tracking-wide hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 active:scale-98 transition-all duration-200 mt-2'
+                disabled={isLoading}
+                className='bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black text-lg font-bold md:text-xl px-8 py-4 w-full rounded-xl font-marvel tracking-wide hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 active:scale-98 transition-all duration-200 mt-2 disabled:opacity-60 flex items-center justify-center gap-2'
               >
-                Send Message
+                {isLoading ? <Loader inline /> : 'Send Message'}
               </button>
             </form>
           </motion.div>

@@ -81,7 +81,7 @@ const FloatingSparkle = ({ delay, x, y }) => (
   </motion.div>
 )
 
-const OrderSuccessAnimation = ({ isVisible, onClose }) => {
+const OrderSuccessAnimation = ({ isVisible, onClose, orderId, paymentStatus }) => {
   const navigate = useNavigate()
   const [showContent, setShowContent] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
@@ -265,7 +265,7 @@ const OrderSuccessAnimation = ({ isVisible, onClose }) => {
                     </motion.p>
 
                     <motion.p
-                      className="font-marvel text-sm mb-8"
+                      className="font-marvel text-sm mb-6"
                       style={{ color: '#BCBCBC' }}
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -273,6 +273,33 @@ const OrderSuccessAnimation = ({ isVisible, onClose }) => {
                     >
                       Your order has been confirmed and will be shipped soon.
                     </motion.p>
+
+                    {/* Order info badge */}
+                    {orderId && (
+                      <motion.div
+                        className="w-full rounded-2xl px-5 py-4 mb-8 flex items-center justify-between"
+                        style={{ backgroundColor: '#F5F3EF', border: '1px solid #E8E0D0' }}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6, duration: 0.5 }}
+                      >
+                        <div className="text-left">
+                          <p className="font-marvel text-xs" style={{ color: '#BCBCBC' }}>Order ID</p>
+                          <p className="font-cormorant text-lg font-bold" style={{ color: '#546B41' }}>#{orderId}</p>
+                        </div>
+                        {paymentStatus && (
+                          <div
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+                            style={{ backgroundColor: '#E8F5E9' }}
+                          >
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#546B41' }} />
+                            <span className="font-marvel text-xs font-semibold uppercase tracking-wide" style={{ color: '#546B41' }}>
+                              {paymentStatus}
+                            </span>
+                          </div>
+                        )}
+                      </motion.div>
+                    )}
 
                     {/* Animated package icon */}
                     <motion.div

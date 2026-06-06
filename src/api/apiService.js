@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // Base API configuration
-// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-const API_BASE_URL = 'http://192.168.0.106:8000/api/'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+// const API_BASE_URL = 'http://192.168.0.106:8000/api/'
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -29,7 +29,7 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       // Server responded with error status
-      console.error('API Error:', error.response.data)
+      console.error('API Error:', error.response?.data)
       
       // Handle specific status codes
       if (error.response.status === 401) {
@@ -42,7 +42,7 @@ apiClient.interceptors.response.use(
       console.error('Network Error:', error.request)
     } else {
       // Something else happened
-      console.error('Error:', error.message)
+      console.error('Error:', error?.message)
     }
     return Promise.reject(error)
   }
@@ -173,9 +173,45 @@ export const getCartItems = async(userEmail) => {
 
 export const createOrder = async(orderData) => {
   try{
-    const response = await apiClient.post('orders/create-order/', orderData)
+    const response = await apiClient.post('create-order/create/', orderData)
     return response.data  
   } catch(error){
     throw error;
   } 
+}
+
+export const verifyPayment = async(paymentData) => {
+  try{
+    const response = await apiClient.post('/verify-payment/verify/', paymentData)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const createPaypalOrder = async(orderData) => {
+  try{
+    const response = await apiClient.post('paypal/create-order/', orderData)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const capturePaypalOrder = async(captureData) => {
+  try{
+    const response = await apiClient.post('paypal/capture-order/', captureData)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const getUserOrders = async(userEmail) => {
+  try{
+    const response = await apiClient.get(`get-orders/orders/?user_email=${userEmail}`)
+    return response.data
+  } catch(error){
+    throw error;
+  }
 }

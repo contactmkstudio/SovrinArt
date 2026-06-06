@@ -4,6 +4,7 @@ import ProductCardView from '../components/ProductCardView'
 import { getProducts } from '../api/apiService'
 import Navbar from '../components/Navbar'
 import NewArtLaunch from '../components/NewArtLaunch'
+import Loader from '../components/Loader'
 
 const ViewAll = () => {
   const [products, setProducts] = useState([])
@@ -52,9 +53,7 @@ const ViewAll = () => {
         {/* Products Grid */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8'>
           {loading ? (
-            [...Array(6)].map((_, i) => (
-              <div key={i} className='bg-gray-300 rounded-lg animate-pulse h-80'></div>
-            ))
+            <div className='col-span-full'><Loader /></div>
           ) : products.length === 0 ? (
             <div className='col-span-full text-center py-16'>
               <p className='text-gray-500 text-lg'>No products available</p>

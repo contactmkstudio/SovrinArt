@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Loader from '../components/Loader'
 
 /**
  * ProtectedRoute – wraps any route that requires authentication.
@@ -22,7 +23,7 @@ const ProtectedRoute = ({ children, redirectTo = '/login' }) => {
 
   // Wait for auth state to restore from localStorage before deciding
   if (loading) {
-    return null // or a spinner component
+    return <Loader fullScreen />
   }
 
   if (!isAuthenticated) {

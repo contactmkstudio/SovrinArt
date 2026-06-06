@@ -12,7 +12,7 @@ const HeroItems = () => {
   const [isCartOpen, setIsCartOpen] = useState(false)
 
    const pages = [
-    {name: 'Home', link: '/home'},
+    {name: 'Orders', link: '/orders'},
     {name: 'About', link: '/about'},
     {name: 'Contact', link: '#contact-section'},
     {name: 'Login' , link:'/login'},

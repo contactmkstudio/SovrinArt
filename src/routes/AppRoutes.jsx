@@ -15,6 +15,7 @@ import DeleteProduct from '../adminpanel/pages/DeleteProduct'
 import DeleteFaq from '../adminpanel/pages/DeleteFaq'
 import About from '../pages/About'
 import OrderSummary from '../pages/OrderSummary'
+import Orders from '../pages/Orders'
 
 
 const AppRoutes = () => {
@@ -43,6 +44,7 @@ const AppRoutes = () => {
             <Route path='/admin/delete-faq' element={<DeleteFaq />} />
             <Route path="/about" element={<About />} />
             <Route path="/order-summary" element={<OrderSummary />} />
+            <Route path="/orders" element={<Orders />} />
          
       </Routes>
     </BrowserRouter>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import ProductCardView from '../components/ProductCardView'
 import { getProducts } from '../api/apiService'
+import Loader from '../components/Loader'
 
 const ProductCard = () => {
   const navigate = useNavigate()
@@ -49,11 +50,7 @@ const ProductCard = () => {
         {/* Horizontal Scrollable Products */}
         <div className='relative mb-8'>
           {loading ? (
-            <div className='flex gap-8 overflow-x-auto pb-4 scrollbar-hide scroll-smooth snap-x snap-mandatory'>
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className='shrink-0 w-64 md:w-80 bg-gray-300 rounded-lg animate-pulse h-80'></div>
-              ))}
-            </div>
+            <Loader />
           ) : displayProducts.length === 0 ? (
             <div className='text-center py-12'>
               <p className='text-gray-500 text-lg'>No products available</p>
