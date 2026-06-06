@@ -78,6 +78,15 @@ const OrderSummary = () => {
   }
 
   const onSubmit = async (data) => {
+    // Currency validation
+    if (paymentMethod === 'razorpay' && currency !== 'INR') {
+      setToast({ message: 'Razorpay supports INR only. Please switch currency to INR.', type: 'error' })
+      return
+    }
+    if (paymentMethod === 'paypal' && currency !== 'USD') {
+      setToast({ message: 'PayPal supports USD only. Please switch currency to USD.', type: 'error' })
+      return
+    }
     const orderPayload = {
       user_email: user?.email,
       currency: currency,
@@ -774,7 +783,7 @@ const OrderSummary = () => {
                     />
                     <div className="text-left">
                       <p className="font-cormorant font-bold text-base" style={{ color: '#546B41' }}>Razorpay</p>
-                      <p className="font-marvel text-xs" style={{ color: '#99AD7A' }}>Cards, UPI, Netbanking & Wallets</p>
+                      <p className="font-marvel text-xs" style={{ color: '#99AD7A' }}>Cards, UPI, Netbanking & Wallets · <span className="font-semibold">INR only</span></p>
                     </div>
                   </button>
 
@@ -804,7 +813,7 @@ const OrderSummary = () => {
                     />
                     <div className="text-left">
                       <p className="font-cormorant font-bold text-base" style={{ color: '#003087' }}>PayPal</p>
-                      <p className="font-marvel text-xs" style={{ color: '#5B8ED6' }}>PayPal balance & linked cards</p>
+                      <p className="font-marvel text-xs" style={{ color: '#5B8ED6' }}>PayPal balance & linked cards · <span className="font-semibold">USD only</span></p>
                     </div>
                   </button>
                 </div>
