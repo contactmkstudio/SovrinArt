@@ -8,7 +8,9 @@ const NewArtLaunch = () => {
     try {
       const response = await getAnnouncement()
       if (response?.data?.is_active) {
-        setAnnouncement(response?.data || { text: 'New Art Launch Soon' })
+        setAnnouncement(response?.data )
+      }else{
+        setAnnouncement({ text: 'New Art Launch Soon', is_active: true })
       }
     } catch {
       // silently fail — fallback to nothing
