@@ -2,26 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { getAnnouncement } from '../api/apiService'
 
 const NewArtLaunch = () => {
-  const [announcement, setAnnouncement] = useState(null)
+  const [announcement, setAnnouncement] = useState({ text: 'New Art Launch Soon', is_active: true })
 
   const fetchAnnouncement = async () => {
     try {
       const response = await getAnnouncement()
       if (response?.data?.is_active) {
-        setAnnouncement(response?.data )
-      }else{
-        setAnnouncement({ text: 'New Art Launch Soon', is_active: true })
+        setAnnouncement(response.data)
       }
+      // if not active, keep the hardcoded default
     } catch {
-      // silently fail — fallback to nothing
+      // silently fail — show nothing
     }
   }
 
   useEffect(() => {
     fetchAnnouncement()
   }, [])
-
-  if (!announcement) return null
 
   return (
     <section className='bg-black text-white p-1 text-center font-cormorant'>
