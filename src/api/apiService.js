@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-// const API_BASE_URL = 'http://192.168.0.106:8000/api/'
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = 'http://192.168.0.106:8000/api/'
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -145,6 +145,15 @@ export const getProducts = async() => {
     }
 }
 
+export const getProductById = async(id) => {
+    try{
+      const response = await apiClient.get(`products/get-product/${id}/`)
+      return response.data
+    } catch(error){
+      throw error;
+    }
+}
+
 export const deleteProduct = async(productId) => {
     try{
       const response = await apiClient.delete(`products/delete-product/${productId}/`)
@@ -192,7 +201,6 @@ export const verifyPayment = async(paymentData) => {
 export const createPaypalOrder = async(orderData) => {
   try{
     const response = await apiClient.post('paypal/create/', orderData)
-    console.log('Create PayPal Order Response:', response.data)
     return response.data
   } catch(error){
     throw error;
@@ -202,7 +210,6 @@ export const createPaypalOrder = async(orderData) => {
 export const capturePaypalOrder = async(captureData) => {
   try{
     const response = await apiClient.post('paypal/capture/', captureData)
-    console.log('Capture Response:', response.data)
     return response.data
   } catch(error){
     throw error;

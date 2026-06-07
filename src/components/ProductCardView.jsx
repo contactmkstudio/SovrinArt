@@ -8,9 +8,8 @@ const ProductCardView = ({ product, id, image, name, price }) => {
   const { currency } = useCurrency()
 
   const handleClick = () => {
-    // If full product object is passed, use it. Otherwise use individual props
-    const productData = product || { id, image, name, price }
-    navigate(`/products/${productData.id}`, { state: { product: productData } })
+    const productId = product?.id || id
+    navigate(`/products/${productId}`)
   }
 
   return (

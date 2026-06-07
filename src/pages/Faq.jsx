@@ -39,10 +39,7 @@ const Faq = () => {
       {/* Premium Animated Background Component */}
       <PremiumBackground />
 
-      {/* ============================================
-          FAQ CONTENT SECTION
-          Main content layer positioned above background
-          ============================================ */}
+  
       <div className='relative z-10 flex flex-col justify-center items-center text-white px-5 py-10 md:p-10' style={{ WebkitTapHighlightColor: 'transparent' }}>
         
         {/* Page Title - Fades in when scrolled into view */}
@@ -87,7 +84,7 @@ const Faq = () => {
                 className='w-full flex justify-between items-center p-4 md:p-6 text-left hover:bg-yellow-500/5 focus:outline-none focus-visible:outline-none active:outline-none transition-colors duration-300'
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
-                <h3 className='font-cormorant text-sm md:text-base tracking-wide pr-4'>
+                <h3 className='font-cormorant text-base md:text-xl tracking-wide pr-4'>
                   {faq.question}
                 </h3>
 
@@ -111,7 +108,7 @@ const Faq = () => {
                     className='overflow-hidden'
                   >
                     <div className='px-4 md:px-6 pb-4 md:pb-6 pt-2'>
-                      <p className='text-white/70 text-sm md:text-base font-marvel tracking-wide leading-relaxed'>
+                      <p className='text-white/70 text-base md:text-lg font-marvel tracking-wide leading-relaxed'>
                         {faq.answer}
                       </p>
                     </div>

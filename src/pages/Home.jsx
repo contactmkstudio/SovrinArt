@@ -14,7 +14,6 @@ const Home = () => {
         <Hero />  
         <LaunchingSoon />
         <EmailSignupModal />
-
     </div>
   )
 }

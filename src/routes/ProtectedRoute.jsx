@@ -3,20 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Loader from '../components/Loader'
 
-/**
- * ProtectedRoute – wraps any route that requires authentication.
- *
- * Usage (in AppRoutes.jsx when ready):
- *   <Route path="/dashboard" element={
- *     <ProtectedRoute>
- *       <Dashboard />
- *     </ProtectedRoute>
- *   } />
- *
- * Props:
- *   children     – the component to render when authenticated
- *   redirectTo   – where to send unauthenticated users (default: /login)
- */
+
 const ProtectedRoute = ({ children, redirectTo = '/login' }) => {
   const { isAuthenticated, loading } = useAuth()
   const location = useLocation()

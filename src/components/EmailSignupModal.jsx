@@ -113,7 +113,7 @@ const EmailSignupModal = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  Exclusive Offer!
+                  Exclusive Offers!
                 </motion.h2>
 
                 {/* Description */}

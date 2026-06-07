@@ -225,10 +225,10 @@ const TermsAndConditions = () => {
             TERMS & CONDITIONS
           </h1>
           <div className='w-32 h-1 mx-auto mb-8' style={{ backgroundColor: '#DCCCAC' }}></div>
-          <p className='font-marvel text-base md:text-lg leading-relaxed mb-4' style={{ color: '#99AD7A' }}>
+          <p className='font-marvel text-base md:text-lg leading-relaxed mb-4 font-medium' style={{ color: '#3d5030' }}>
             Welcome to SOVRINART.
           </p>
-          <p className='font-marvel text-sm md:text-base leading-relaxed max-w-4xl mx-auto' style={{ color: '#99AD7A' }}>
+          <p className='font-marvel text-sm md:text-base leading-relaxed max-w-4xl mx-auto font-medium' style={{ color: '#3d5030' }}>
             These Terms & Conditions govern all purchases, commissions, artwork collections, services, and interactions made through SOVRINART. By accessing this website, placing an order, purchasing artwork, submitting references, or commissioning a custom piece, you acknowledge that you have read, understood, and agreed to the policies outlined below.
           </p>
         </motion.div>
@@ -242,13 +242,13 @@ const TermsAndConditions = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className='font-marvel text-sm md:text-base leading-relaxed mb-4' style={{ color: '#99AD7A' }}>
+          <p className='font-marvel text-sm md:text-base leading-relaxed mb-4 font-medium' style={{ color: '#3d5030' }}>
             These terms are intended to protect both the Artist and the Client by clearly defining ownership rights, permitted usage, copyright responsibilities, payment policies, delivery conditions, and general policies related to all artwork created or sold by SOVRINART.
           </p>
-          <p className='font-marvel text-sm md:text-base leading-relaxed mb-4' style={{ color: '#99AD7A' }}>
+          <p className='font-marvel text-sm md:text-base leading-relaxed mb-4 font-medium' style={{ color: '#3d5030' }}>
             All artwork, whether custom commissioned or part of a ready-made collection, is created as original artistic work and remains protected under applicable copyright and intellectual property laws. Purchasing artwork does not transfer copyright ownership unless explicitly stated in a separate written agreement.
           </p>
-          <p className='font-marvel text-sm md:text-base leading-relaxed' style={{ color: '#99AD7A' }}>
+          <p className='font-marvel text-sm md:text-base leading-relaxed font-medium' style={{ color: '#3d5030' }}>
             Clients are solely responsible for ensuring that any references, concepts, photographs, vehicles, logos, characters, or other materials provided for commissions are legally authorized for use and do not infringe upon any third-party copyrights, trademarks, or intellectual property rights. SOVRINART shall not be held liable for disputes arising from client-provided materials.
           </p>
         </motion.div>
@@ -270,7 +270,7 @@ const TermsAndConditions = () => {
               <div className='w-16 h-0.5 mb-6' style={{ backgroundColor: '#546B41' }}></div>
               
               {section.content?.map((text, idx) => (
-                <p key={idx} className='font-marvel text-sm md:text-base leading-relaxed mb-3' style={{ color: '#99AD7A' }}>
+                <p key={idx} className='font-marvel text-sm md:text-base leading-relaxed mb-3 font-medium' style={{ color: '#3d5030' }}>
                   {text}
                 </p>
               ))}
@@ -278,7 +278,7 @@ const TermsAndConditions = () => {
               {section.list && (
                 <ul className='ml-6 mb-4 space-y-1'>
                   {section.list.map((item, idx) => (
-                    <li key={idx} className='font-marvel text-sm md:text-base' style={{ color: '#99AD7A' }}>
+                    <li key={idx} className='font-marvel text-sm md:text-base font-medium' style={{ color: '#3d5030' }}>
                       • {item}
                     </li>
                   ))}
@@ -286,7 +286,7 @@ const TermsAndConditions = () => {
               )}
               
               {section.content2?.map((text, idx) => (
-                <p key={idx} className='font-marvel text-sm md:text-base leading-relaxed mb-3' style={{ color: '#99AD7A' }}>
+                <p key={idx} className='font-marvel text-sm md:text-base leading-relaxed mb-3 font-medium' style={{ color: '#3d5030' }}>
                   {text}
                 </p>
               ))}
@@ -294,7 +294,7 @@ const TermsAndConditions = () => {
               {section.list2 && (
                 <ul className='ml-6 mb-4 space-y-1'>
                   {section.list2.map((item, idx) => (
-                    <li key={idx} className='font-marvel text-sm md:text-base' style={{ color: '#99AD7A' }}>
+                    <li key={idx} className='font-marvel text-sm md:text-base font-medium' style={{ color: '#3d5030' }}>
                       • {item}
                     </li>
                   ))}
@@ -302,7 +302,7 @@ const TermsAndConditions = () => {
               )}
               
               {section.footer && (
-                <p className='font-marvel text-sm md:text-base leading-relaxed mt-4 pt-4 border-t' style={{ color: '#99AD7A', borderColor: '#DCCCAC' }}>
+                <p className='font-marvel text-sm md:text-base leading-relaxed mt-4 pt-4 border-t font-medium' style={{ color: '#3d5030', borderColor: '#DCCCAC' }}>
                   {section.footer}
                 </p>
               )}
@@ -316,21 +316,21 @@ const TermsAndConditions = () => {
                         {subsection.title}
                       </h3>
                       {subsection.content?.map((text, idx) => (
-                        <p key={idx} className='font-marvel text-sm md:text-base leading-relaxed mb-3' style={{ color: '#99AD7A' }}>
+                        <p key={idx} className='font-marvel text-sm md:text-base leading-relaxed mb-3 font-medium' style={{ color: '#3d5030' }}>
                           {text}
                         </p>
                       ))}
                       {subsection.list && (
                         <ul className='ml-6 mb-4 space-y-1'>
                           {subsection.list.map((item, idx) => (
-                            <li key={idx} className='font-marvel text-sm md:text-base' style={{ color: '#99AD7A' }}>
+                            <li key={idx} className='font-marvel text-sm md:text-base font-medium' style={{ color: '#3d5030' }}>
                               • {item}
                             </li>
                           ))}
                         </ul>
                       )}
                       {subsection.footer && (
-                        <p className='font-marvel text-sm md:text-base leading-relaxed italic' style={{ color: '#99AD7A' }}>
+                        <p className='font-marvel text-sm md:text-base leading-relaxed italic font-medium' style={{ color: '#3d5030' }}>
                           {subsection.footer}
                         </p>
                       )}

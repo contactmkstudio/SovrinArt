@@ -202,22 +202,7 @@ const AddToCart = ({ isOpen, setIsOpen }) => {
                         {/* Product Image */}
                         <div 
                           onClick={() => {
-                            // Navigate to product detail with full product object
-                            navigate(`/products/${itemId}`, { 
-                              state: { 
-                                product: {
-                                  id: itemId,
-                                  name: itemName,
-                                  price_rs: itemPrice,
-                                  price_usd: item?.product_details?.price_usd || item?.product?.price_usd,
-                                  image: itemImage,
-                                  description: item?.product_details?.description || item?.product?.description,
-                                  details_read: item?.product_details?.details_read || item?.product?.details_read,
-                                  sizes_read: item?.product_details?.sizes_read || item?.product?.sizes_read,
-                                  other_images_read: item?.product_details?.other_images_read || item?.product?.other_images_read
-                                }
-                              } 
-                            })
+                            navigate(`/products/${itemId}`)
                             setIsOpen(false)
                           }}
                           className='w-20 h-20 bg-gray-200 rounded flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-80 transition-opacity'

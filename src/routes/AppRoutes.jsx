@@ -14,6 +14,7 @@ import AdProduct from '../adminpanel/pages/AdProduct'
 import DeleteProduct from '../adminpanel/pages/DeleteProduct'
 import DeleteFaq from '../adminpanel/pages/DeleteFaq'
 import About from '../pages/About'
+import PrivacyPolicy from '../pages/PrivacyPolicy'
 import OrderSummary from '../pages/OrderSummary'
 import Orders from '../pages/Orders'
 import PayPalReturn from '../pages/PayPalReturn'
@@ -49,6 +50,7 @@ const AppRoutes = () => {
             <Route path="/orders" element={<Orders />} />
             <Route path="/paypal/return" element={<PayPalReturn />} />
             <Route path="/paypal/cancel" element={<PayPalCancel />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
          
       </Routes>
     </BrowserRouter>
