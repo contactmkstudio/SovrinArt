@@ -15,6 +15,7 @@ export const initiatePaypalPayment = async ({
   orderPayload,
   onSuccess,
   onError,
+  onCapturing,
 }) => {
   const returnUrl = `${window.location.origin}/paypal/return`
   const cancelUrl = `${window.location.origin}/paypal/cancel`
@@ -56,6 +57,7 @@ export const initiatePaypalPayment = async ({
     if (type === 'PAYPAL_APPROVED' && !handled) {
       handled = true
       cleanup()
+      if (onCapturing) onCapturing(true)
       try {
         const captureResponse = await capturePaypalOrder({
           paypal_order_id: paypalOrderId,

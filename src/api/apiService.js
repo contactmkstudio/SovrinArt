@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-// const API_BASE_URL = 'http://192.168.0.106:8000/api/'
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+const API_BASE_URL = 'http://192.168.0.106:8000/api/'
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -219,6 +219,33 @@ export const capturePaypalOrder = async(captureData) => {
 export const getUserOrders = async(userEmail) => {
   try{
     const response = await apiClient.get(`get-orders/orders/?user_email=${userEmail}`)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const getDashboardStats = async() => {
+  try{
+    const response = await apiClient.get('core/dashboard-stats/')
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const getAnnouncement = async() => {
+  try{
+    const response = await apiClient.get('core/announcement/')
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const postAnnouncement = async(data) => {
+  try{
+    const response = await apiClient.post('core/announcement/', data)
     return response.data
   } catch(error){
     throw error;

@@ -11,10 +11,12 @@ import { registerUser } from '../api/apiService'
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true)
       const response = await registerUser(data);
       if (response?.status === 201) {
         setShowSuccess(true);
@@ -24,6 +26,8 @@ const Register = () => {
         }, 1000);
       }
     } catch (error) {
+    } finally {
+      setIsLoading(false)
     }
   };
 
@@ -190,13 +194,11 @@ const Register = () => {
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
+                  disabled={isLoading}
                   className='w-full py-3 rounded-xl font-cormorant text-lg font-bold transition-all duration-300 hover:shadow-lg'
-                  style={{
-                    backgroundColor: '#546B41',
-                    color: '#FFF8EC'
-                  }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  style={{ backgroundColor: isLoading ? '#99AD7A' : '#546B41', color: '#FFF8EC', cursor: isLoading ? 'not-allowed' : 'pointer' }}
+                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
                 >
               {/* Success Popup */}
               {showSuccess && (
@@ -213,7 +215,7 @@ const Register = () => {
                   </motion.div>
                 </div>
               )}
-                  Create Account
+                  {isLoading ? 'Creating Account...' : 'Create Account'}
                 </motion.button>
 
               </form>

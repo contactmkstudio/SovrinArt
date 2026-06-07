@@ -27,19 +27,6 @@ const AdminDashboard = () => {
 
             {/* Dashboard Stats */}
             <DashboardStats />
-
-            {/* Recent Activity Section */}
-            <div
-              className='mt-8 p-6 rounded-2xl border-2'
-              style={{ backgroundColor: '#FFF8EC', borderColor: '#DCCCAC' }}
-            >
-              <h2 className='font-cormorant text-2xl font-bold mb-4' style={{ color: '#546B41' }}>
-                Recent Activity
-              </h2>
-              <p className='font-marvel text-sm' style={{ color: '#99AD7A' }}>
-                No recent activity to display.
-              </p>
-            </div>
           </div>
         </div>
       </div>

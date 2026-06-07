@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { 
   HiOutlineQuestionMarkCircle,
   HiOutlineTrash,
-  HiOutlinePlus
+  HiOutlinePlus,
+  HiOutlineMegaphone
 } from 'react-icons/hi2'
 
 const AdminSidebar = () => {
@@ -15,6 +16,7 @@ const AdminSidebar = () => {
     { name: 'Delete Product', path: '/admin/delete-product', icon: HiOutlineTrash },
     { name: 'Add FAQs', path: '/admin/add-faqs', icon: HiOutlineQuestionMarkCircle },
     { name: 'Delete FAQ', path: '/admin/delete-faq', icon: HiOutlineTrash },
+    { name: 'Announcement', path: '/admin/announcement', icon: HiOutlineMegaphone },
   ]
   
 

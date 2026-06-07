@@ -1,31 +1,43 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { IoArrowBack } from 'react-icons/io5'
 import loginImg from '../assets/rest.jpeg'
 import { loginUser } from '../api/apiService'
 import { useAuth } from '../context/AuthContext'
+import Toast from '../components/Toast'
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+  const [toast, setToast] = React.useState(null)
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  const from = location.state?.from?.pathname || '/home'
 
   const onSubmit = async (data) => {
     try{
+      setIsLoading(true)
       const response = await loginUser(data);
       if (response?.status === 200) {
         const { email, username } = response?.data?.data ?? {}
         login({ email, username })
-        navigate('/home');
+        navigate(from, { replace: true });
       }
     } catch (error) {
+      const message = error?.response?.data?.error || error?.response?.data?.message || 'Login failed. Please try again.'
+      setToast({ message, type: 'error' })
+    } finally {
+      setIsLoading(false)
     }
   };
 
   return (
     <div className='min-h-screen flex items-center justify-center p-4' style={{ background: 'linear-gradient(135deg, #FFF8EC 0%, #DCCCAC 100%)' }}>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <motion.div 
         className='w-full max-w-6xl rounded-3xl overflow-hidden shadow-2xl'
         initial={{ opacity: 0, y: 30 }}
@@ -160,15 +172,13 @@ const Login = () => {
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
+                  disabled={isLoading}
                   className='w-full py-3 rounded-xl font-cormorant text-lg font-bold transition-all duration-300 hover:shadow-lg'
-                  style={{
-                    backgroundColor: '#546B41',
-                    color: '#FFF8EC'
-                  }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  style={{ backgroundColor: isLoading ? '#99AD7A' : '#546B41', color: '#FFF8EC', cursor: isLoading ? 'not-allowed' : 'pointer' }}
+                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
                 >
-                  Sign In
+                  {isLoading ? 'Signing In...' : 'Sign In'}
                 </motion.button>
 
               </form>

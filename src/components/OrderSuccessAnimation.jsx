@@ -100,14 +100,17 @@ const OrderSuccessAnimation = ({ isVisible, onClose, orderId, paymentStatus }) =
     }
   }, [isVisible])
 
-  const handleContinueShopping = () => {
+  const handleClose = () => {
     onClose?.()
-    navigate('/products')
+    navigate('/orders', { replace: true })
+  }
+
+  const handleContinueShopping = () => {
+    navigate('/products', { replace: true })
   }
 
   const handleGoHome = () => {
-    onClose?.()
-    navigate('/')
+    navigate('/', { replace: true })
   }
 
   return (
@@ -123,11 +126,12 @@ const OrderSuccessAnimation = ({ isVisible, onClose, orderId, paymentStatus }) =
         >
           {/* Backdrop */}
           <motion.div
-            className="absolute inset-0"
+            className="absolute inset-0 cursor-pointer"
             style={{ backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => handleClose()}
           />
 
           {/* Confetti */}
@@ -321,40 +325,24 @@ const OrderSuccessAnimation = ({ isVisible, onClose, orderId, paymentStatus }) =
                       </motion.div>
                     </motion.div>
 
-                    {/* Buttons */}
+                    {/* Delivery tracking message */}
                     <motion.div
-                      className="w-full space-y-3"
-                      initial={{ opacity: 0, y: 20 }}
+                      className="w-full rounded-2xl px-5 py-4 text-center"
+                      style={{ backgroundColor: '#F5F3EF', border: '1px solid #E8E0D0' }}
+                      initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8, duration: 0.5 }}
+                      transition={{ delay: 0.9, duration: 0.5 }}
                     >
-                      <motion.button
-                        onClick={handleContinueShopping}
-                        className="w-full py-3.5 rounded-xl font-cormorant text-lg font-bold tracking-wide transition-all duration-300"
-                        style={{
-                          backgroundColor: '#546B41',
-                          color: '#FFF8EC',
-                          boxShadow: '0 4px 15px rgba(84, 107, 65, 0.3)',
-                        }}
-                        whileHover={{ scale: 1.03, boxShadow: '0 6px 20px rgba(84, 107, 65, 0.4)' }}
-                        whileTap={{ scale: 0.97 }}
+                      <p className="font-marvel text-sm mb-1" style={{ color: '#99AD7A' }}>
+                        For delivery tracking, please mail us at
+                      </p>
+                      <a
+                        href="mailto:contact.mkstudio@protonmail.com"
+                        className="font-cormorant text-base font-bold tracking-wide"
+                        style={{ color: '#546B41' }}
                       >
-                        Continue Shopping
-                      </motion.button>
-
-                      <motion.button
-                        onClick={handleGoHome}
-                        className="w-full py-3 rounded-xl font-cormorant text-base font-semibold border-2 transition-all duration-300"
-                        style={{
-                          borderColor: '#DCCCAC',
-                          color: '#546B41',
-                          backgroundColor: 'transparent',
-                        }}
-                        whileHover={{ scale: 1.03, backgroundColor: '#FFF8EC' }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        Go to Home
-                      </motion.button>
+                        contact.mkstudio@protonmail.com
+                      </a>
                     </motion.div>
                   </>
                 )}

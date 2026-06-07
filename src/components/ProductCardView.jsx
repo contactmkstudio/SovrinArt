@@ -15,6 +15,7 @@ const ProductCardView = ({ product, id, image, name, price }) => {
   return (
     <motion.div
       onClick={handleClick}
+      onContextMenu={import.meta.env.PROD ? (e) => e.preventDefault() : undefined}
       className='group cursor-pointer overflow-hidden'
       style={{ backgroundColor: '#FFF8EC' }}
       initial={{ opacity: 0, y: 50, scale: 0.9, rotateX: -15 }}

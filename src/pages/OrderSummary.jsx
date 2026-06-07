@@ -6,6 +6,7 @@ import { HiOutlineMapPin, HiOutlineUser, HiOutlinePhone, HiOutlineHome, HiOutlin
 import Navbar from '../components/Navbar'
 import NewArtLaunch from '../components/NewArtLaunch'
 import Toast from '../components/Toast'
+import Loader from '../components/Loader'
 import { useCurrency } from '../context/CurrencyContext'
 import { useAuth } from '../context/AuthContext'
 import { initiateRazorpayPayment } from '../payments/razorpayHandler'
@@ -31,6 +32,7 @@ const OrderSummary = () => {
   const { product, selectedSize, quantity = 1, price_rs, price_usd, cartItems = [], fromCart = false } = state || {}
 
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
+  const [isCapturing, setIsCapturing] = useState(false)
   const [toast, setToast] = useState(null)
   const [orderSuccess, setOrderSuccess] = useState(false)
   const [orderDetails, setOrderDetails] = useState({ orderId: null, paymentStatus: null })
@@ -59,7 +61,7 @@ const OrderSummary = () => {
   const selectedCountry = watch('country')
   const currentCountry = countries.find((c) => c.name === selectedCountry) || countries[0]
 
-  if (!product && !(fromCart && cartItems.length > 0)) {
+  if (!product && !(fromCart && cartItems.length > 0) && !orderSuccess) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-6" style={{ backgroundColor: '#FAFAFA' }}>
         <HiOutlineShieldCheck size={56} style={{ color: '#DCCCAC' }} />
@@ -112,12 +114,14 @@ const OrderSummary = () => {
     }
 
     const onSuccess = ({ orderId, paymentStatus }) => {
+      setIsCapturing(false)
       setOrderDetails({ orderId, paymentStatus })
       setOrderSuccess(true)
       setIsPlacingOrder(false)
     }
 
     const onError = (message) => {
+      setIsCapturing(false)
       setToast({ message, type: 'error' })
       setIsPlacingOrder(false)
     }
@@ -142,7 +146,12 @@ const OrderSummary = () => {
           },
         })
       } else {
-        await initiatePaypalPayment({ orderPayload, onSuccess, onError })
+        await initiatePaypalPayment({
+          orderPayload,
+          onSuccess,
+          onError,
+          onCapturing: (val) => setIsCapturing(val),
+        })
       }
 
       setIsPlacingOrder(false)
@@ -230,6 +239,14 @@ const OrderSummary = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5F3EF' }}>
+      {/* PayPal capture loader overlay */}
+      {isCapturing && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-4" style={{ backgroundColor: 'rgba(255,248,236,0.92)', backdropFilter: 'blur(4px)' }}>
+          <Loader />
+          <p className="font-cormorant text-xl font-semibold" style={{ color: '#546B41' }}>Confirming your payment…</p>
+          <p className="font-marvel text-sm" style={{ color: '#99AD7A' }}>Please wait, do not close this page.</p>
+        </div>
+      )}
       <OrderSuccessAnimation
         isVisible={orderSuccess}
         onClose={() => setOrderSuccess(false)}

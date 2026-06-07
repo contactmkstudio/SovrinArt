@@ -13,12 +13,14 @@ import AddFaq from '../adminpanel/pages/AddFaq'
 import AdProduct from '../adminpanel/pages/AdProduct'
 import DeleteProduct from '../adminpanel/pages/DeleteProduct'
 import DeleteFaq from '../adminpanel/pages/DeleteFaq'
+import AddAnnouncement from '../adminpanel/pages/AddAnnouncement'
 import About from '../pages/About'
 import PrivacyPolicy from '../pages/PrivacyPolicy'
 import OrderSummary from '../pages/OrderSummary'
 import Orders from '../pages/Orders'
 import PayPalReturn from '../pages/PayPalReturn'
 import PayPalCancel from '../pages/PayPalCancel'
+import ProtectedRoute from './ProtectedRoute'
 
 
 const AppRoutes = () => {
@@ -45,9 +47,10 @@ const AppRoutes = () => {
             <Route path="/admin/add-product" element={<AdProduct />} />
             <Route path="/admin/delete-product" element={<DeleteProduct />} />
             <Route path='/admin/delete-faq' element={<DeleteFaq />} />
+            <Route path='/admin/announcement' element={<AddAnnouncement />} />
             <Route path="/about" element={<About />} />
-            <Route path="/order-summary" element={<OrderSummary />} />
-            <Route path="/orders" element={<Orders />} />
+            <Route path="/order-summary" element={<ProtectedRoute><OrderSummary /></ProtectedRoute>} />
+            <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
             <Route path="/paypal/return" element={<PayPalReturn />} />
             <Route path="/paypal/cancel" element={<PayPalCancel />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
