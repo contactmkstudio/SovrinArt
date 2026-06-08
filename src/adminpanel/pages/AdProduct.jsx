@@ -10,6 +10,7 @@ const AdProduct = () => {
     defaultValues: {
       name: '',
       description: '',
+      category: '',
       priceRs: '',
       priceUsd: '',
       mainImage: null,
@@ -79,6 +80,7 @@ const AdProduct = () => {
     const formattedData = {
       name: data.name,
       description: data.description,
+      category: data.category,
       price_rs: parseFloat(data.priceRs),
       price_usd: parseFloat(data.priceUsd),
       image: mainImagePreview,
@@ -168,6 +170,18 @@ const AdProduct = () => {
                 placeholder='Enter product name'
               />
               {errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>}
+            </div>
+
+            {/* Category */}
+            <div>
+              <label className='block font-semibold text-gray-700 mb-2'>Category *</label>
+              <input
+                type='text'
+                {...register('category', { required: 'Category is required' })}
+                className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500'
+                placeholder='Enter product category'
+              />
+              {errors.category && <p className='text-red-500 text-sm mt-1'>{errors.category.message}</p>}
             </div>
 
             {/* Price RS */}
