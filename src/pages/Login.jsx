@@ -153,22 +153,6 @@ const Login = () => {
                   {errors.password && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.password.message}</p>}
                 </div>
 
-                {/* Remember Me & Forgot Password */}
-                <div className='flex items-center justify-between'>
-                  <label className='flex items-center cursor-pointer'>
-                    <input 
-                      type="checkbox" 
-                      className='mr-2 w-4 h-4 rounded accent-[#546B41]'
-                    />
-                    <span className='font-marvel text-sm' style={{ color: '#546B41' }}>
-                      Remember me
-                    </span>
-                  </label>
-                  <a href="#" className='font-marvel text-sm hover:underline transition-all' style={{ color: '#99AD7A' }}>
-                    Forgot Password?
-                  </a>
-                </div>
-
                 {/* Submit Button */}
                 <motion.button
                   type="submit"

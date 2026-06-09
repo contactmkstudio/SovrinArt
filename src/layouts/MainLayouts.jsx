@@ -5,6 +5,7 @@ import Contact from '../pages/Contact'
 import ProductCard from '../pages/ProductCard'
 import GridDisplay from '../components/GridDisplay'
 import AutoSlider from '../components/AutoSlider'
+import CategoryCard from '../components/CategoryCard'
 
 
 const MainLayouts = ({children}) => {
@@ -14,6 +15,7 @@ const MainLayouts = ({children}) => {
         {children}
       </main>
       <ProductCard />
+      <CategoryCard category="automobile" heading="Automobile Art" />
       <GridDisplay />
       <AutoSlider />
       <Contact/>

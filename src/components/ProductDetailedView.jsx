@@ -6,7 +6,7 @@ import Navbar from './Navbar'
 import NewArtLaunch from './NewArtLaunch'
 import Toast from './Toast'
 import { orderInclusions, orderInclusionsNote } from '../constants/orderInclusionsData'
-import { addToCart } from '../api/apiService'
+import { addToCart, addToFavourites } from '../api/apiService'
 import { useAuth } from '../context/AuthContext'
 import { useCurrency } from '../context/CurrencyContext'
 
@@ -15,6 +15,7 @@ const ProductDetailedView = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(null)
   const [quantity, setQuantity] = useState(1)
   const [isWishlisted, setIsWishlisted] = useState(false)
+  const [isLoadingFav, setIsLoadingFav] = useState(false)
   const [isLoadingCart, setIsLoadingCart] = useState(false)
   const [toast, setToast] = useState(null)
   const { user, isAuthenticated } = useAuth()
@@ -82,6 +83,23 @@ const ProductDetailedView = ({ product }) => {
       })
     } finally {
       setIsLoadingCart(false)
+    }
+  }
+
+  const handleAddToFavourites = async () => {
+    if (!isAuthenticated) {
+      setToast({ message: 'Please login first to add to favourites', type: 'error' })
+      return
+    }
+    try {
+      setIsLoadingFav(true)
+      await addToFavourites({ user_email: user?.email, product_id: product?.id })
+      setIsWishlisted(true)
+      setToast({ message: 'Added to favourites!', type: 'success' })
+    } catch (error) {
+      setToast({ message: error?.response?.data?.message || 'Failed to add to favourites', type: 'error' })
+    } finally {
+      setIsLoadingFav(false)
     }
   }
 
@@ -297,15 +315,16 @@ const ProductDetailedView = ({ product }) => {
 
                 {/* Wishlist Button */}
                 <motion.button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className='py-4 px-6 border-2 transition-all duration-300'
+                  onClick={handleAddToFavourites}
+                  disabled={isLoadingFav}
+                  className='py-4 px-6 border-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
                   style={{
                     backgroundColor: isWishlisted ? '#546B41' : '#FFF8EC',
                     borderColor: '#546B41',
                     color: isWishlisted ? '#FFF8EC' : '#546B41'
                   }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: isLoadingFav ? 1 : 1.05 }}
+                  whileTap={{ scale: isLoadingFav ? 1 : 0.95 }}
                 >
                   {isWishlisted ? (
                     <HiHeart size={28} />

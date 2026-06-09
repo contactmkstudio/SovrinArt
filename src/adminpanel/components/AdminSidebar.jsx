@@ -4,7 +4,8 @@ import {
   HiOutlineQuestionMarkCircle,
   HiOutlineTrash,
   HiOutlinePlus,
-  HiOutlineMegaphone
+  HiOutlineMegaphone,
+  HiOutlinePhoto
 } from 'react-icons/hi2'
 
 const AdminSidebar = () => {
@@ -17,6 +18,7 @@ const AdminSidebar = () => {
     { name: 'Add FAQs', path: '/admin/add-faqs', icon: HiOutlineQuestionMarkCircle },
     { name: 'Delete FAQ', path: '/admin/delete-faq', icon: HiOutlineTrash },
     { name: 'Announcement', path: '/admin/announcement', icon: HiOutlineMegaphone },
+    { name: 'Add Grid Images', path: '/admin/add-grid-images', icon: HiOutlinePhoto },
   ]
   
 

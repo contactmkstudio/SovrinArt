@@ -7,17 +7,20 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import registerImg from '../assets/register.jpeg'
 import { registerUser } from '../api/apiService'
+import Toast from '../components/Toast'
 
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [toast, setToast] = useState(null);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       setIsLoading(true)
       const response = await registerUser(data);
+      console.log({response})
       if (response?.status === 201) {
         setShowSuccess(true);
         setTimeout(() => {
@@ -26,13 +29,25 @@ const Register = () => {
         }, 1000);
       }
     } catch (error) {
+      const data = error?.response?.data
+      const firstField = data && Object.values(data)[0]
+      const message = (Array.isArray(firstField) ? firstField[0] : firstField) || 'Registration failed. Please try again.'
+      setToast({ message, type: 'error' })
     } finally {
       setIsLoading(false)
     }
   };
 
+  const onSubmitWithValidation = (data) => handleSubmit(onSubmit)(data)
+
+  const onInvalid = (errs) => {
+    const first = Object.values(errs)[0]
+    if (first?.message) setToast({ message: first.message, type: 'error' })
+  }
+
   return (
     <div className='min-h-screen flex items-center justify-center p-4' style={{ background: 'linear-gradient(135deg, #FFF8EC 0%, #DCCCAC 100%)' }}>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <motion.div 
         className='w-full max-w-6xl rounded-3xl overflow-hidden shadow-2xl'
         initial={{ opacity: 0, y: 30 }}
@@ -106,7 +121,7 @@ const Register = () => {
               </div>
 
               {/* Form */}
-              <form className='space-y-5' onSubmit={handleSubmit(onSubmit)}>
+              <form className='space-y-5' onSubmit={handleSubmit(onSubmit, onInvalid)}>
                 {/* Name Field */}
                 <div>
                   <label className='block font-cormorant text-sm font-semibold mb-2' style={{ color: '#546B41' }}>
@@ -125,7 +140,6 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
-                  {errors.name && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.name.message}</p>}
                 </div>
 
                 {/* Email Field */}
@@ -146,7 +160,6 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
-                  {errors.email && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.email.message}</p>}
                 </div>
 
                 {/* Phone Number Field */}
@@ -167,7 +180,6 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
-                  {errors.phone && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.phone.message}</p>}
                 </div>
 
                   {/* Password Field */}
@@ -188,7 +200,6 @@ const Register = () => {
                     onFocus={(e) => e.target.style.borderColor = '#99AD7A'}
                     onBlur={(e) => e.target.style.borderColor = '#DCCCAC'}
                   />
-                  {errors.password && <p className='text-red-600 text-xs mt-1 font-marvel'>{errors.password.message}</p>}
                 </div>
 
                 {/* Submit Button */}

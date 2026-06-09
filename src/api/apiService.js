@@ -154,6 +154,15 @@ export const getProductById = async(id) => {
     }
 }
 
+export const getProductsByCategory = async(category) => {
+    try{
+      const response = await apiClient.get(`products/get-products-by-category/${category}/`)
+      return response.data
+    } catch(error){
+      throw error;
+    }
+}
+
 export const deleteProduct = async(productId) => {
     try{
       const response = await apiClient.delete(`products/delete-product/${productId}/`)
@@ -246,6 +255,42 @@ export const getAnnouncement = async() => {
 export const postAnnouncement = async(data) => {
   try{
     const response = await apiClient.post('core/announcement/', data)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const addBannerImages = async(data) => {
+  try{
+    const response = await apiClient.post('core/banner-images/', data)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const addToFavourites = async(data) => {
+  try{
+    const response = await apiClient.post('carts/add-to-favourites/', data)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const getFavourites = async(email) => {
+  try{
+    const response = await apiClient.get(`carts/get-favourites/?email=${email}`)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
+export const getBannerImages = async() => {
+  try{
+    const response = await apiClient.get('core/banner-images/')
     return response.data
   } catch(error){
     throw error;

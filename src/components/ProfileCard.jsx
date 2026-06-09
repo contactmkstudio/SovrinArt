@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { HiOutlineUser, HiArrowRightOnRectangle } from 'react-icons/hi2'
+import { HiOutlineUser, HiArrowRightOnRectangle, HiOutlineHeart } from 'react-icons/hi2'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -79,6 +79,17 @@ const ProfileCard = ({ iconSize = 'text-2xl' }) => {
                     {user?.email || '—'}
                   </p>
                 </div>
+
+                <div className='h-px bg-gray-200 mx-4' />
+
+                {/* Favourites */}
+                <button
+                  onClick={() => { navigate('/favourites'); setIsOpen(false) }}
+                  className='flex items-center gap-2 w-full px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors duration-200'
+                >
+                  <HiOutlineHeart className='text-lg' />
+                  Favourites
+                </button>
 
                 <div className='h-px bg-gray-200 mx-4' />
 

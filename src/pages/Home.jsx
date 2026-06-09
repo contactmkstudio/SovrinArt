@@ -13,7 +13,7 @@ const Home = () => {
         <NewArtLaunch />
         <Hero />  
         <LaunchingSoon />
-        <EmailSignupModal />
+      <EmailSignupModal />
     </div>
   )
 }

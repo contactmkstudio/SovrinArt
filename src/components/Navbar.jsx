@@ -118,6 +118,28 @@ const Navbar = () => {
           </select>
         </motion.div>
 
+        {/* Mobile Currency Dropdown - always visible on mobile */}
+        <motion.div
+          className='md:hidden absolute right-14'
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            className='px-2 py-1 font-cormorant font-semibold text-sm border-2 rounded'
+            style={{
+              borderColor: '#546B41',
+              backgroundColor: '#FFF8EC',
+              color: '#546B41'
+            }}
+          >
+            <option value="INR">₹ INR</option>
+            <option value="USD">$ USD</option>
+          </select>
+        </motion.div>
+
         {/* Cart Icon */}
         <motion.div 
           className='absolute right-4 md:right-8'
@@ -165,25 +187,7 @@ const Navbar = () => {
                   </motion.li>
                 ))}
               </ul>
-              {/* Mobile Currency Dropdown */}
-              <div className='mt-4 pt-4 border-t border-gray-200'>
-                <label className='block font-cormorant font-semibold text-sm mb-2' style={{ color: '#546B41' }}>
-                  Select Currency
-                </label>
-                <select
-                  value={currency}
-                  onChange={(e) => setCurrency(e.target.value)}
-                  className='w-full px-4 py-2 font-cormorant font-semibold text-black border-2 rounded'
-                  style={{
-                    borderColor: '#546B41',
-                    backgroundColor: '#FFF8EC',
-                    color: '#546B41'
-                  }}
-                >
-                  <option value="INR">India (₹)</option>
-                  <option value="USD">USA ($)</option>
-                </select>
-              </div>
+
             </nav>
           </motion.div>
         )}

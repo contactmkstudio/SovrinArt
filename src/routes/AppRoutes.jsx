@@ -21,6 +21,9 @@ import Orders from '../pages/Orders'
 import PayPalReturn from '../pages/PayPalReturn'
 import PayPalCancel from '../pages/PayPalCancel'
 import ProtectedRoute from './ProtectedRoute'
+import CategoryPage from '../pages/CategoryPage'
+import AddGridImages from '../adminpanel/pages/AddGridImages'
+import Favourites from '../pages/Favourites'
 
 
 const AppRoutes = () => {
@@ -54,6 +57,9 @@ const AppRoutes = () => {
             <Route path="/paypal/return" element={<PayPalReturn />} />
             <Route path="/paypal/cancel" element={<PayPalCancel />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/category/:category" element={<CategoryPage />} />
+            <Route path="/admin/add-grid-images" element={<AddGridImages />} />
+            <Route path="/favourites" element={<Favourites />} />
          
       </Routes>
     </BrowserRouter>
