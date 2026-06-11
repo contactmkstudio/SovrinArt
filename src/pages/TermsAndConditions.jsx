@@ -10,7 +10,7 @@ const TermsAndConditions = () => {
       id: 'copyright',
       title: 'COPYRIGHT OWNERSHIP',
       content: [
-        'All artwork created and sold by SOVRINART remains the sole intellectual property of the Artist unless otherwise agreed in writing.',
+        'All artwork created and sold by Mkkatelier remains the sole intellectual property of the Artist unless otherwise agreed in writing.',
         'The Artist retains all rights including:'
       ],
       list: [
@@ -36,7 +36,7 @@ const TermsAndConditions = () => {
         'have obtained proper authorization,',
         'or possess the legal right to use the submitted content.'
       ],
-      footer: 'SOVRINART does not independently verify ownership or licensing of client-provided references and shall not be held liable for copyright infringement claims, trademark disputes, or legal actions related to such materials.'
+      footer: 'Mkkatelier does not independently verify ownership or licensing of client-provided references and shall not be held liable for copyright infringement claims, trademark disputes, or legal actions related to such materials.'
     },
     {
       id: 'personal-usage',
@@ -44,14 +44,14 @@ const TermsAndConditions = () => {
       content: ['Clients and collectors may:'],
       list: [
         'display purchased artwork for personal use,',
-        'repost artwork online with visible credit to SOVRINART,',
+        'repost artwork online with visible credit to Mkkatelier,',
         'share artwork for non-commercial purposes only.'
       ]
     },
     {
       id: 'restricted-usage',
       title: 'RESTRICTED & PROHIBITED USAGE',
-      content: ['Without prior written permission from SOVRINART, buyers and clients may not:'],
+      content: ['Without prior written permission from Mkkatelier, buyers and clients may not:'],
       list: [
         'reproduce or duplicate artwork,',
         'commercially distribute artwork,',
@@ -69,14 +69,14 @@ const TermsAndConditions = () => {
       id: 'commission',
       title: 'COMMISSION ACCEPTANCE',
       content: [
-        'SOVRINART reserves the right to refuse, cancel, or decline any commission request at its discretion, including requests involving copyright concerns, inappropriate subject matter, abusive conduct, or violation of these Terms & Conditions.'
+        'Mkkatelier reserves the right to refuse, cancel, or decline any commission request at its discretion, including requests involving copyright concerns, inappropriate subject matter, abusive conduct, or violation of these Terms & Conditions.'
       ]
     },
     {
       id: 'payment',
       title: 'PAYMENT POLICY',
       content: [
-        'All commissions, original artworks, and ready-made collections purchased through SOVRINART require full payment in advance before production, reservation, or shipment begins.',
+        'All commissions, original artworks, and ready-made collections purchased through Mkkatelier require full payment in advance before production, reservation, or shipment begins.',
         'No final artwork, high-resolution files, or shipped artwork will be delivered until payment has been completed in full.',
         'Failure to complete payment may result in cancellation of the order or commission.'
       ]
@@ -86,7 +86,7 @@ const TermsAndConditions = () => {
       title: 'REFUND, DAMAGE & CANCELLATION POLICY',
       content: [
         'Due to the handmade and custom nature of the artwork, cancellations, returns, or refunds are generally not accepted once an order has been confirmed.',
-        'However, customer satisfaction remains important to SOVRINART, and refunds or replacements may be considered in specific situations involving verified transit damage or major delivery-related defects.',
+        'However, customer satisfaction remains important to Mkkatelier, and refunds or replacements may be considered in specific situations involving verified transit damage or major delivery-related defects.',
         'To help us review and resolve such cases fairly, clients are kindly requested to record a clear unboxing video at the time of opening the package. The video must:'
       ],
       list: [
@@ -96,15 +96,15 @@ const TermsAndConditions = () => {
         'and visibly capture any damage or issue upon opening.'
       ],
       content2: [
-        'This process helps protect both the Client and SOVRINART during shipping-related claims and ensures transparency for all parties involved.',
+        'This process helps protect both the Client and Mkkatelier during shipping-related claims and ensures transparency for all parties involved.',
         'Unboxing proof may be submitted through:'
       ],
       list2: [
         'email,',
         'WhatsApp,',
-        'or any official social media platform through which the client is connected with SOVRINART.'
+        'or any official social media platform through which the client is connected with Mkkatelier.'
       ],
-      footer: 'Refunds, replacements, or resolutions will be reviewed on a case-by-case basis and remain subject to approval after verification of the provided evidence. SOVRINART reserves the right to decline refund requests where sufficient proof of damage or defect cannot be provided.'
+      footer: 'Refunds, replacements, or resolutions will be reviewed on a case-by-case basis and remain subject to approval after verification of the provided evidence. Mkkatelier reserves the right to decline refund requests where sufficient proof of damage or defect cannot be provided.'
     },
     {
       id: 'revisions',
@@ -122,14 +122,14 @@ const TermsAndConditions = () => {
       title: 'DELIVERY & SHIPPING',
       content: [
         'Estimated completion timelines are provided as approximations only and may vary depending on workload, project complexity, revisions, shipping delays, customs procedures, or unforeseen circumstances.',
-        'SOVRINART is not responsible for delays caused by shipping providers, customs processing, import taxes, local regulations, or force majeure events beyond reasonable control.',
+        'Mkkatelier is not responsible for delays caused by shipping providers, customs processing, import taxes, local regulations, or force majeure events beyond reasonable control.',
         'Any customs duties, VAT charges, import taxes, or regional fees remain the responsibility of the Client.'
       ]
     },
     {
       id: 'digital',
       title: 'DIGITAL FILES & SOCIAL MEDIA',
-      content: ['SOVRINART reserves the right to display commissioned or sold artwork within:'],
+      content: ['Mkkatelier reserves the right to display commissioned or sold artwork within:'],
       list: [
         'portfolio websites,',
         'social media platforms,',
@@ -143,7 +143,7 @@ const TermsAndConditions = () => {
     {
       id: 'liability',
       title: 'LIMITATION OF LIABILITY',
-      content: ['SOVRINART shall not be held liable for:'],
+      content: ['Mkkatelier shall not be held liable for:'],
       list: [
         'indirect or incidental damages,',
         'misuse of artwork,',
@@ -152,13 +152,13 @@ const TermsAndConditions = () => {
         'copyright disputes related to client-provided references,',
         'or losses resulting from delayed shipping or customs processes.'
       ],
-      footer: 'The maximum liability of SOVRINART shall never exceed the original amount paid by the Client for the specific artwork or commission.'
+      footer: 'The maximum liability of Mkkatelier shall never exceed the original amount paid by the Client for the specific artwork or commission.'
     },
     {
       id: 'collector',
       title: 'COLLECTOR EXPERIENCE, DOCUMENTATION & SUSTAINABILITY',
       content: [
-        'Each order from SOVRINART is carefully prepared to create a thoughtful and premium collector experience.',
+        'Each order from Mkkatelier is carefully prepared to create a thoughtful and premium collector experience.',
         'Depending on the artwork and order type, clients may receive:'
       ],
       list: [
@@ -170,7 +170,7 @@ const TermsAndConditions = () => {
         'exclusive discount codes for future purchases,',
         'and occasional exclusive artwork collectibles or bonus items.'
       ],
-      footer: 'These additions are intended to enhance the overall experience of owning original artwork from SOVRINART and may vary between orders.',
+      footer: 'These additions are intended to enhance the overall experience of owning original artwork from Mkkatelier and may vary between orders.',
       subsections: [
         {
           title: 'Certificates & Receipts',
@@ -184,7 +184,7 @@ const TermsAndConditions = () => {
           title: 'Artwork Care & Responsibility',
           content: [
             'Clients are kindly advised to carefully follow all artwork care and maintenance instructions provided with their order to help preserve the quality, longevity, and condition of the artwork.',
-            'SOVRINART is not responsible for damage occurring after successful delivery, including but not limited to:'
+            'Mkkatelier is not responsible for damage occurring after successful delivery, including but not limited to:'
           ],
           list: [
             'accidental damage,',
@@ -198,9 +198,9 @@ const TermsAndConditions = () => {
         {
           title: 'Sustainability & Environmental Responsibility',
           content: [
-            'SOVRINART values sustainability and encourages responsible ownership and preservation of artwork whenever possible.',
+            'Mkkatelier values sustainability and encourages responsible ownership and preservation of artwork whenever possible.',
             'Collectors are kindly encouraged not to discard artwork unnecessarily. Instead, artworks may be preserved, archived, repurposed, or gifted to others whenever appropriate.',
-            'As part of ongoing sustainability efforts, SOVRINART is also working toward introducing environmentally conscious packaging and collectible materials, including thank you cards and printed materials embedded with plantable seeds that can later be grown instead of discarded as waste.',
+            'As part of ongoing sustainability efforts, Mkkatelier is also working toward introducing environmentally conscious packaging and collectible materials, including thank you cards and printed materials embedded with plantable seeds that can later be grown instead of discarded as waste.',
             'These sustainability initiatives are currently in development and may be introduced progressively in future orders.'
           ]
         }
@@ -226,10 +226,10 @@ const TermsAndConditions = () => {
           </h1>
           <div className='w-32 h-1 mx-auto mb-8' style={{ backgroundColor: '#DCCCAC' }}></div>
           <p className='font-marvel text-base md:text-lg leading-relaxed mb-4 font-medium' style={{ color: '#3d5030' }}>
-            Welcome to SOVRINART.
+            Welcome to Mkkatelier.
           </p>
           <p className='font-marvel text-sm md:text-base leading-relaxed max-w-4xl mx-auto font-medium' style={{ color: '#3d5030' }}>
-            These Terms & Conditions govern all purchases, commissions, artwork collections, services, and interactions made through SOVRINART. By accessing this website, placing an order, purchasing artwork, submitting references, or commissioning a custom piece, you acknowledge that you have read, understood, and agreed to the policies outlined below.
+            These Terms & Conditions govern all purchases, commissions, artwork collections, services, and interactions made through Mkkatelier. By accessing this website, placing an order, purchasing artwork, submitting references, or commissioning a custom piece, you acknowledge that you have read, understood, and agreed to the policies outlined below.
           </p>
         </motion.div>
 
@@ -243,13 +243,13 @@ const TermsAndConditions = () => {
           transition={{ duration: 0.6 }}
         >
           <p className='font-marvel text-sm md:text-base leading-relaxed mb-4 font-medium' style={{ color: '#3d5030' }}>
-            These terms are intended to protect both the Artist and the Client by clearly defining ownership rights, permitted usage, copyright responsibilities, payment policies, delivery conditions, and general policies related to all artwork created or sold by SOVRINART.
+            These terms are intended to protect both the Artist and the Client by clearly defining ownership rights, permitted usage, copyright responsibilities, payment policies, delivery conditions, and general policies related to all artwork created or sold by Mkkatelier.
           </p>
           <p className='font-marvel text-sm md:text-base leading-relaxed mb-4 font-medium' style={{ color: '#3d5030' }}>
             All artwork, whether custom commissioned or part of a ready-made collection, is created as original artistic work and remains protected under applicable copyright and intellectual property laws. Purchasing artwork does not transfer copyright ownership unless explicitly stated in a separate written agreement.
           </p>
           <p className='font-marvel text-sm md:text-base leading-relaxed font-medium' style={{ color: '#3d5030' }}>
-            Clients are solely responsible for ensuring that any references, concepts, photographs, vehicles, logos, characters, or other materials provided for commissions are legally authorized for use and do not infringe upon any third-party copyrights, trademarks, or intellectual property rights. SOVRINART shall not be held liable for disputes arising from client-provided materials.
+            Clients are solely responsible for ensuring that any references, concepts, photographs, vehicles, logos, characters, or other materials provided for commissions are legally authorized for use and do not infringe upon any third-party copyrights, trademarks, or intellectual property rights. Mkkatelier shall not be held liable for disputes arising from client-provided materials.
           </p>
         </motion.div>
 

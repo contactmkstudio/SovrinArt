@@ -5,7 +5,7 @@ import { HiOutlineHeart, HiHeart, HiOutlinePlus, HiOutlineMinus } from 'react-ic
 import Navbar from './Navbar'
 import NewArtLaunch from './NewArtLaunch'
 import Toast from './Toast'
-import { orderInclusions, orderInclusionsNote } from '../constants/orderInclusionsData'
+import { orderInclusions } from '../constants/orderInclusionsData'
 import { addToCart, addToFavourites } from '../api/apiService'
 import { useAuth } from '../context/AuthContext'
 import { useCurrency } from '../context/CurrencyContext'
@@ -116,7 +116,7 @@ const ProductDetailedView = ({ product }) => {
       {/* {new launch component} */}
       <NewArtLaunch />
 
-      {/* Navbar with Sovrinart Header */}
+      {/* Navbar with Mkkatelier Header */}
       <Navbar />
 
       <div className='max-w-7xl mx-auto px-4 pb-20 pt-8'>
@@ -361,9 +361,6 @@ const ProductDetailedView = ({ product }) => {
                   <li key={index}>• {item}</li>
                 ))}
               </ul>
-              <p className='mt-3 font-marvel text-xs italic' style={{ color: '#546B41' }}>
-                {orderInclusionsNote}
-              </p>
             </div>
           </div>
         </div>

@@ -41,7 +41,7 @@ const Navbar = () => {
 
   return (
     <div className='bg-white border-b border-gray-200'>
-      {/* Header with Sovrinart Text */}
+      {/* Header with Mkkatelier Text */}
       <div className='py-6 px-4 pb-2'>
         <div className='flex flex-col items-center'>
           <motion.h1 
@@ -51,7 +51,7 @@ const Navbar = () => {
             animate={{ opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 1.5, ease: "easeOut" }}
           >
-            Sovrinart
+            Mkkatelier
           </motion.h1>
           <div className='w-32 h-px bg-linear-to-r from-transparent via-[#546B41] to-transparent'></div>
         </div>
@@ -87,7 +87,7 @@ const Navbar = () => {
               variants={itemVariants}
             >
                 <Link to={page.link} className='relative'>
-                  <h1 className='font-megrim tracking-[5px] text-xl font-bold text-black'>
+                  <h1 className='font-cormorant tracking-[5px] text-xl font-bold text-black'>
                   {page.name}
                   </h1> 
                   <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-500 ease-in-out group-hover:w-full'></span>

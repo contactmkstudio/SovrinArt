@@ -1,6 +1,6 @@
 # Admin Panel
 
-This folder contains all admin-related pages and components for the Sovrinart admin dashboard.
+This folder contains all admin-related pages and components for the Mkkatelier admin dashboard.
 
 ## Structure
 

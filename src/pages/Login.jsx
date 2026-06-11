@@ -55,7 +55,7 @@ const Login = () => {
           >
             <img 
               src={loginImg} 
-              alt="Sovrinart Gallery" 
+              alt="Mkkatelier Gallery" 
               className='w-full h-full object-cover'
             />
             {/* Overlay with gradient */}
@@ -69,7 +69,7 @@ const Login = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Sovrinart
+                Mkkatelier
               </motion.h1>
               <motion.p 
                 className='font-cormorant text-lg md:text-xl text-white/90'

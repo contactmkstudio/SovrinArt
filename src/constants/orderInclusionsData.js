@@ -2,12 +2,11 @@ export const orderInclusions = [
   'Original Handmade Artwork',
   'Secure Protective Packaging',
   'Personalized Thank You Note',
-  'Certificate of Authenticity*',
-  'Certificate of Ownership*',
+  'Certificate of Authenticity',
+  'Certificate of Ownership',
   'Official Receipt / Invoice (Provided via Email)',
   'Artwork Care Instructions',
-  'Future Discount Code*',
-  'Exclusive Collectibles & Mini Artwork*'
+  'Future Discount Code',
+  'Exclusive Collectibles & Mini Artwork Included with selected, eligible, or randomly chosen orders only.'
 ]
 
-export const orderInclusionsNote = '*Included with selected, eligible, or randomly chosen orders only.'

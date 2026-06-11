@@ -27,7 +27,7 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                JARIWALA MITALI
+                MKKATELIER
               </motion.h3>
               <motion.p 
                 className='font-marvel text-white/90 text-sm'
@@ -35,7 +35,7 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                Artist of the Page
+                About Us
               </motion.p>
             </div>
           </motion.div>
@@ -49,24 +49,24 @@ const About = () => {
           >
             <div className='mb-6'>
               <h2 className='font-cormorant text-3xl md:text-4xl font-bold mb-3' style={{ color: '#546B41' }}>
-                About The Artist
+                Avant Garde Art For Private Estates.
               </h2>
               <div className='w-20 h-1 mb-4' style={{ backgroundColor: '#546B41' }}></div>
             </div>
 
-            <div className='space-y-4 font-marvel text-sm md:text-base' style={{ color: '#99AD7A' }}>
+            <div className='space-y-4 font-marvel text-md md:text-lg' style={{ color: '#728553' }}>
               <p className='leading-relaxed'>
-                Welcome to SOVRINART, where every brushstroke tells a story and every canvas breathes life. 
-                Jariwala Mitali is a passionate artist dedicated to creating original, handcrafted artwork that 
+                Welcome to Mkkatelier, where every brushstroke tells a story and every canvas breathes life. 
+                MKKATELIER is a passionate artist dedicated to creating original, handcrafted artwork that 
                 speaks to the soul.
               </p>
               <p className='leading-relaxed'>
-                With years of experience in various artistic mediums, Mitali specializes in creating unique pieces 
+                With years of experience in various artistic mediums, MKKATELIER specializes in creating unique pieces 
                 that blend traditional techniques with contemporary vision. Each artwork is meticulously crafted 
                 with attention to detail, ensuring that every piece is truly one-of-a-kind.
               </p>
               <p className='leading-relaxed'>
-                The philosophy behind SOVRINART is simple: art should be accessible, meaningful, and timeless. 
+                The philosophy behind Mkkatelier is simple: art should be accessible, meaningful, and timeless. 
                 Whether it's a custom commission or a ready-made piece, every creation carries the artist's 
                 signature style and dedication to excellence.
               </p>

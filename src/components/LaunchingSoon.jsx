@@ -175,7 +175,7 @@ const LaunchingSoon = () => {
                 </motion.div>
               </div>
 
-              {/* Sovrinart Logo */}
+              {/* Mkkatelier Logo */}
               <motion.div
                 className='flex justify-center mb-8'
               >
@@ -185,7 +185,7 @@ const LaunchingSoon = () => {
                   animate={{ opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
                 >
-                  Sovrinart
+                  Mkkatelier
                 </motion.h1>
               </motion.div>
 

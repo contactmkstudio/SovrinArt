@@ -1,22 +1,22 @@
 # TERMS & CONDITIONS
 
-Welcome to SOVRINART.
+Welcome to Mkkatelier.
 
-These Terms & Conditions govern all purchases, commissions, artwork collections, services, and interactions made through SOVRINART. By accessing this website, placing an order, purchasing artwork, submitting references, or commissioning a custom piece, you acknowledge that you have read, understood, and agreed to the policies outlined below.
+These Terms & Conditions govern all purchases, commissions, artwork collections, services, and interactions made through Mkkatelier. By accessing this website, placing an order, purchasing artwork, submitting references, or commissioning a custom piece, you acknowledge that you have read, understood, and agreed to the policies outlined below.
 
-These terms are intended to protect both the Artist and the Client by clearly defining ownership rights, permitted usage, copyright responsibilities, payment policies, delivery conditions, and general policies related to all artwork created or sold by SOVRINART.
+These terms are intended to protect both the Artist and the Client by clearly defining ownership rights, permitted usage, copyright responsibilities, payment policies, delivery conditions, and general policies related to all artwork created or sold by Mkkatelier.
 
 All artwork, whether custom commissioned or part of a ready-made collection, is created as original artistic work and remains protected under applicable copyright and intellectual property laws. Purchasing artwork does not transfer copyright ownership unless explicitly stated in a separate written agreement.
 
-Clients are solely responsible for ensuring that any references, concepts, photographs, vehicles, logos, characters, or other materials provided for commissions are legally authorized for use and do not infringe upon any third-party copyrights, trademarks, or intellectual property rights. SOVRINART shall not be held liable for disputes arising from client-provided materials.
+Clients are solely responsible for ensuring that any references, concepts, photographs, vehicles, logos, characters, or other materials provided for commissions are legally authorized for use and do not infringe upon any third-party copyrights, trademarks, or intellectual property rights. Mkkatelier shall not be held liable for disputes arising from client-provided materials.
 
-By continuing to use this website or purchasing artwork from SOVRINART, you agree to comply with all policies stated below.
+By continuing to use this website or purchasing artwork from Mkkatelier, you agree to comply with all policies stated below.
 
 ---
 
 ## COPYRIGHT OWNERSHIP
 
-All artwork created and sold by SOVRINART remains the sole intellectual property of the Artist unless otherwise agreed in writing.
+All artwork created and sold by Mkkatelier remains the sole intellectual property of the Artist unless otherwise agreed in writing.
 
 The Artist retains all rights including:
 - copyright ownership,
@@ -40,7 +40,7 @@ By providing references, the Client confirms that they:
 - have obtained proper authorization,
 - or possess the legal right to use the submitted content.
 
-SOVRINART does not independently verify ownership or licensing of client-provided references and shall not be held liable for copyright infringement claims, trademark disputes, or legal actions related to such materials.
+Mkkatelier does not independently verify ownership or licensing of client-provided references and shall not be held liable for copyright infringement claims, trademark disputes, or legal actions related to such materials.
 
 ---
 
@@ -48,14 +48,14 @@ SOVRINART does not independently verify ownership or licensing of client-provide
 
 Clients and collectors may:
 - display purchased artwork for personal use,
-- repost artwork online with visible credit to SOVRINART,
+- repost artwork online with visible credit to Mkkatelier,
 - share artwork for non-commercial purposes only.
 
 ---
 
 ## RESTRICTED & PROHIBITED USAGE
 
-Without prior written permission from SOVRINART, buyers and clients may not:
+Without prior written permission from Mkkatelier, buyers and clients may not:
 - reproduce or duplicate artwork,
 - commercially distribute artwork,
 - sell prints or merchandise,
@@ -72,13 +72,13 @@ Unauthorized usage may result in refusal of future services and potential legal 
 
 ## COMMISSION ACCEPTANCE
 
-SOVRINART reserves the right to refuse, cancel, or decline any commission request at its discretion, including requests involving copyright concerns, inappropriate subject matter, abusive conduct, or violation of these Terms & Conditions.
+Mkkatelier reserves the right to refuse, cancel, or decline any commission request at its discretion, including requests involving copyright concerns, inappropriate subject matter, abusive conduct, or violation of these Terms & Conditions.
 
 ---
 
 ## PAYMENT POLICY
 
-All commissions, original artworks, and ready-made collections purchased through SOVRINART require full payment in advance before production, reservation, or shipment begins.
+All commissions, original artworks, and ready-made collections purchased through Mkkatelier require full payment in advance before production, reservation, or shipment begins.
 
 No final artwork, high-resolution files, or shipped artwork will be delivered until payment has been completed in full.
 
@@ -90,7 +90,7 @@ Failure to complete payment may result in cancellation of the order or commissio
 
 Due to the handmade and custom nature of the artwork, cancellations, returns, or refunds are generally not accepted once an order has been confirmed.
 
-However, customer satisfaction remains important to SOVRINART, and refunds or replacements may be considered in specific situations involving verified transit damage or major delivery-related defects.
+However, customer satisfaction remains important to Mkkatelier, and refunds or replacements may be considered in specific situations involving verified transit damage or major delivery-related defects.
 
 To help us review and resolve such cases fairly, clients are kindly requested to record a clear unboxing video at the time of opening the package. The video must:
 - begin before the package is opened,
@@ -98,16 +98,16 @@ To help us review and resolve such cases fairly, clients are kindly requested to
 - remain continuous without cuts, pauses, or edits,
 - and visibly capture any damage or issue upon opening.
 
-This process helps protect both the Client and SOVRINART during shipping-related claims and ensures transparency for all parties involved.
+This process helps protect both the Client and Mkkatelier during shipping-related claims and ensures transparency for all parties involved.
 
 Unboxing proof may be submitted through:
 - email,
 - WhatsApp,
-- or any official social media platform through which the client is connected with SOVRINART.
+- or any official social media platform through which the client is connected with Mkkatelier.
 
 Refunds, replacements, or resolutions will be reviewed on a case-by-case basis and remain subject to approval after verification of the provided evidence.
 
-SOVRINART reserves the right to decline refund requests where sufficient proof of damage or defect cannot be provided.
+Mkkatelier reserves the right to decline refund requests where sufficient proof of damage or defect cannot be provided.
 
 ---
 
@@ -129,7 +129,7 @@ Clients are therefore encouraged to carefully review the sketch draft before con
 
 Estimated completion timelines are provided as approximations only and may vary depending on workload, project complexity, revisions, shipping delays, customs procedures, or unforeseen circumstances.
 
-SOVRINART is not responsible for delays caused by shipping providers, customs processing, import taxes, local regulations, or force majeure events beyond reasonable control.
+Mkkatelier is not responsible for delays caused by shipping providers, customs processing, import taxes, local regulations, or force majeure events beyond reasonable control.
 
 Any customs duties, VAT charges, import taxes, or regional fees remain the responsibility of the Client.
 
@@ -137,7 +137,7 @@ Any customs duties, VAT charges, import taxes, or regional fees remain the respo
 
 ## DIGITAL FILES & SOCIAL MEDIA
 
-SOVRINART reserves the right to display commissioned or sold artwork within:
+Mkkatelier reserves the right to display commissioned or sold artwork within:
 - portfolio websites,
 - social media platforms,
 - promotional content,
@@ -151,7 +151,7 @@ unless a prior written confidentiality agreement has been made with the Client.
 
 ## LIMITATION OF LIABILITY
 
-SOVRINART shall not be held liable for:
+Mkkatelier shall not be held liable for:
 - indirect or incidental damages,
 - misuse of artwork,
 - third-party printing errors,
@@ -159,13 +159,13 @@ SOVRINART shall not be held liable for:
 - copyright disputes related to client-provided references,
 - or losses resulting from delayed shipping or customs processes.
 
-The maximum liability of SOVRINART shall never exceed the original amount paid by the Client for the specific artwork or commission.
+The maximum liability of Mkkatelier shall never exceed the original amount paid by the Client for the specific artwork or commission.
 
 ---
 
 ## COLLECTOR EXPERIENCE, DOCUMENTATION & SUSTAINABILITY
 
-Each order from SOVRINART is carefully prepared to create a thoughtful and premium collector experience.
+Each order from Mkkatelier is carefully prepared to create a thoughtful and premium collector experience.
 
 Depending on the artwork and order type, clients may receive:
 - a personalized thank you note,
@@ -176,7 +176,7 @@ Depending on the artwork and order type, clients may receive:
 - exclusive discount codes for future purchases,
 - and occasional exclusive artwork collectibles or bonus items.
 
-These additions are intended to enhance the overall experience of owning original artwork from SOVRINART and may vary between orders.
+These additions are intended to enhance the overall experience of owning original artwork from Mkkatelier and may vary between orders.
 
 ---
 
@@ -194,7 +194,7 @@ The responsibility for preserving all certificates, receipts, and accompanying d
 
 Clients are kindly advised to carefully follow all artwork care and maintenance instructions provided with their order to help preserve the quality, longevity, and condition of the artwork.
 
-SOVRINART is not responsible for damage occurring after successful delivery, including but not limited to:
+Mkkatelier is not responsible for damage occurring after successful delivery, including but not limited to:
 - accidental damage,
 - improper storage,
 - exposure to moisture, sunlight, heat, or environmental conditions,
@@ -207,11 +207,11 @@ Proper care helps ensure the best possible long-term experience for the collecto
 
 ### SUSTAINABILITY & ENVIRONMENTAL RESPONSIBILITY
 
-SOVRINART values sustainability and encourages responsible ownership and preservation of artwork whenever possible.
+Mkkatelier values sustainability and encourages responsible ownership and preservation of artwork whenever possible.
 
 Collectors are kindly encouraged not to discard artwork unnecessarily. Instead, artworks may be preserved, archived, repurposed, or gifted to others whenever appropriate.
 
-As part of ongoing sustainability efforts, SOVRINART is also working toward introducing environmentally conscious packaging and collectible materials, including thank you cards and printed materials embedded with plantable seeds that can later be grown instead of discarded as waste.
+As part of ongoing sustainability efforts, Mkkatelier is also working toward introducing environmentally conscious packaging and collectible materials, including thank you cards and printed materials embedded with plantable seeds that can later be grown instead of discarded as waste.
 
 These sustainability initiatives are currently in development and may be introduced progressively in future orders.
 

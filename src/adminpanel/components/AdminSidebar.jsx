@@ -35,7 +35,7 @@ const AdminSidebar = () => {
       <div className='p-6 border-b-2' style={{ borderColor: '#DCCCAC' }}>
         {!collapsed ? (
           <h1 className='font-hurricane text-3xl font-bold' style={{ color: '#546B41' }}>
-            Sovrinart
+            Mkkatelier
           </h1>
         ) : (
           <h1 className='font-hurricane text-2xl font-bold text-center' style={{ color: '#546B41' }}>

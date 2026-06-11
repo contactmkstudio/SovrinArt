@@ -133,7 +133,7 @@ const Sidebar = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) => {
               {/* Logo/Brand */}
               <div className='px-6 mb-10'>
                 <h1 className='font-hurricane text-5xl text-yellow-400'>
-                  Sovrinart
+                  Mkkatelier
                 </h1>
                 <p className='font-cormorant text-sm text-white/70 mt-2'>
                   Where art meets emotion
@@ -176,7 +176,7 @@ const Sidebar = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }) => {
               {/* Footer */}
               <div className='absolute bottom-6 left-6 right-6'>
                 <p className='font-marvel text-xs text-white/50 text-center'>
-                  © 2026 Sovrinart Gallery
+                  © 2026 Mkkatelier Gallery
                 </p>
               </div>
             </motion.div>

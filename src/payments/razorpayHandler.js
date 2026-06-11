@@ -47,7 +47,7 @@ export const initiateRazorpayPayment = async ({
     key: resolvedKeyId,
     amount: Math.round(parseFloat(totalPrice) * 100),
     currency,
-    name: 'SovrinArt',
+    name: 'Mkkatelier',
     description: productName || 'Order',
     order_id: resolvedOrderId,
     handler: async (paymentResult) => {

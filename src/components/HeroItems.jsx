@@ -77,7 +77,7 @@ const HeroItems = () => {
                   className='relative cursor-pointer'
                   onClick={(e) => handleClick(e, page)}
                 >
-                    <h1 className='hidden md:block font-megrim tracking-[5px] text-xl font-bold text-white'>
+                    <h1 className='hidden md:block font-cormorant tracking-[5px] text-xl font-bold text-white'>
                     {page.name}
                     </h1> 
                     <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-500 ease-in-out group-hover:w-full'></span>

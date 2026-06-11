@@ -21,7 +21,7 @@ const NewArtLaunch = () => {
   }, [])
 
   return (
-    <section className='bg-black text-white p-1 text-center font-cormorant'>
+    <section className='bg-black text-white p-3 text-center font-cormorant'>
       <h1><span className='text-sm mr-2'>★</span> {announcement?.text || 'New Art Launch Soon'} <span className='text-sm ml-2'>★</span></h1>
     </section>
   )

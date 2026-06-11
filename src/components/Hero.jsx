@@ -36,7 +36,7 @@ const Hero = () => {
   };
 
   // Typewriter effect for letters
-  const sentence = "JARIWALA MITALI";
+  const sentence = "MKKATELIER";
   const letterVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 }
@@ -63,7 +63,7 @@ const Hero = () => {
                   <HiOutlineBars3 className='text-white text-3xl' />
                 </button>
 
-                {/* Sovrinart Text */}
+                {/* Mkkatelier Text */}
                 <div className='grow flex justify-center'>
                   <motion.h1 
                     className='font-hurricane text-xl tracking-widest md:text-4xl text-center font-bold text-white'
@@ -71,7 +71,7 @@ const Hero = () => {
                     animate={{ opacity: 1, filter: "blur(0px)" }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                   >
-                    Sovrinart
+                    Mkkatelier
                   </motion.h1>
                 </div>
 
@@ -123,10 +123,10 @@ const Hero = () => {
               </motion.h1>
 
               <motion.h1 
-                className='text-white text-sm md:text-2xl text-center font-marvel tracking-widest'
+                className='text-white text-sm md:text-2xl text-center font-marvel tracking-widest max-w-4xl'
                 variants={itemVariants}
               >
-                Where Colors Speak Louder Than Words.
+                Distinctive artworks for collectors who seek more than decoration, crafted with character, craftsmanship, and timeless design.
               </motion.h1>
 
               <motion.button 
@@ -148,6 +148,7 @@ const Hero = () => {
               >
                 <h1 className='font-marvel group-hover:font-hurricane tracking-[2px] md:tracking-[6px] font-bold md:font-extrabold transition-all duration-300'>CONTACT</h1>
               </motion.button>
+              
           </motion.div>
        </div>
 

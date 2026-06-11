@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react'
 import { RiBrushLine } from "react-icons/ri";
-import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { HiOutlineHome, HiOutlineInformationCircle, HiOutlineEnvelope, HiOutlinePaintBrush } from "react-icons/hi2";
 import { BiLink } from "react-icons/bi";
 import { MdOutlineGavel, MdOutlinePrivacyTip } from "react-icons/md";
@@ -31,9 +31,11 @@ const Footer = () => {
          <div className='flex flex-col space-y-2 mt-5'>
             <div className='flex items-center gap-1'>
               <RiBrushLine className='text-[#b8860b] md:text-2xl'/>
-              <h1 className='font-marvel md:text-2xl tracking-widest'>SovrinArt</h1>
+              <h1 className='font-marvel md:text-2xl tracking-widest'>Mkkatelier</h1>
             </div>
-            <h1 className='font-marvel text-white/50 max-w-sm tracking-wide'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem ex nulla facere neque, sit iusto in.</h1>
+            <h1 className='font-marvel text-white/50 max-w-sm tracking-wide'>
+              Distincitive artworks for collectors who seek more than decoration , crafted with character , craftmanship and timeless design.
+            </h1>
          </div>
 
          {/* {pages div}  */}
@@ -68,7 +70,7 @@ const Footer = () => {
            <div className='flex gap-4 '>
              <a href={""} target="_blank" rel="noopener noreferrer" 
                 className='text-white/50 hover:text-[#b8860b] hover:border-[#b8860b] border-2 border-transparent rounded-full p-2 transition-all duration-500 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-1'>
-               <FaTwitter size={24} />
+               <FaWhatsapp size={24} />
              </a>
              <a href={""} target="_blank" rel="noopener noreferrer"
                 className='text-white/50 hover:text-[#b8860b] hover:border-[#b8860b] border-2 border-transparent rounded-full p-2 transition-all duration-500 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-1'>
@@ -114,7 +116,7 @@ const Footer = () => {
        {/* {all rights reserved} */}
        <div className='text-center mt-5'>
          <p className='font-marvel text-white/50 text-sm'>
-           © {new Date().getFullYear()} SovrinArt. All rights reserved.
+           © {new Date().getFullYear()} Mkkatelier. All rights reserved.
          </p>
        </div>
     </section>
