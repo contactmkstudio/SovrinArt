@@ -81,10 +81,10 @@ const OrderSummary = () => {
 
   const onSubmit = async (data) => {
     // Currency validation
-    if (paymentMethod === 'razorpay' && currency !== 'INR') {
-      setToast({ message: 'Razorpay supports INR only. Please switch currency to INR.', type: 'error' })
-      return
-    }
+    // if (paymentMethod === 'razorpay' && currency !== 'INR') {
+    //   setToast({ message: 'Razorpay supports INR only. Please switch currency to INR.', type: 'error' })
+    //   return
+    // }
     if (paymentMethod === 'paypal' && currency !== 'USD') {
       setToast({ message: 'PayPal supports USD only. Please switch currency to USD.', type: 'error' })
       return
