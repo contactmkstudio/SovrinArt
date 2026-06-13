@@ -118,6 +118,15 @@ export const sendEmail = async(data) => {
   }
 }
 
+export const emailSubscribe = async(data) => {
+  try{
+    const response = await apiClient.post('core/email-subscription/', data)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
 export const deleteFaq = async(id) => {
     try{
        const response = await apiClient.delete(`core/${id}/delete-faq/`)

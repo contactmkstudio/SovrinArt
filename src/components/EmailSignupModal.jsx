@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiOutlineXMark, HiOutlineEnvelope } from 'react-icons/hi2'
+import { emailSubscribe } from '../api/apiService'
 
 const EmailSignupModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -21,16 +22,22 @@ const EmailSignupModal = () => {
   }, [])
 
   const handleClose = () => {
-    setIsOpen(false)
+    // setIsOpen(false)
     sessionStorage.setItem('emailSignupModalSeen', 'true')
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle email submission here
-    setIsOpen(false)
+    console.log({e: e.target.value})
+    e.preventDefault();
+    try{
+      const response = emailSubscribe({ email })
+      console.log('Subscription successful:', response)
+    } catch(error){
+      console.error('Subscription failed:', error)
+    }finally{
+       setIsOpen(false)
+    }
     sessionStorage.setItem('emailSignupModalSeen', 'true')
-    // You can add API call here to save email
   }
 
   // Overlay animation

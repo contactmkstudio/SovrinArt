@@ -98,12 +98,12 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
           >
-              <motion.h1 
+              {/* <motion.h1 
                 className='text-white font-megrim text-md font-bold  max-w-full text-center'
                 variants={itemVariants}
               >
                 ARTIST OF THE PAGE
-              </motion.h1>
+              </motion.h1> */}
               
               <motion.h1 
                 className='text-white font-cormorant text-2xl md:text-4xl lg:text-6xl font-bold md:font-extrabold tracking-[2px] max-w-full text-center'
