@@ -22,7 +22,7 @@ const EmailSignupModal = () => {
   }, [])
 
   const handleClose = () => {
-    // setIsOpen(false)
+    setIsOpen(false)
     sessionStorage.setItem('emailSignupModalSeen', 'true')
   }
 

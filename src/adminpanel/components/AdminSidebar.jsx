@@ -21,7 +21,6 @@ const AdminSidebar = () => {
     { name: 'Add Grid Images', path: '/admin/add-grid-images', icon: HiOutlinePhoto },
   ]
   
-
   return (
     <div
       className='h-screen sticky top-0 border-r-2 transition-all duration-300'

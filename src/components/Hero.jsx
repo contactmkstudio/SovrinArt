@@ -75,7 +75,7 @@ const Hero = () => {
                   </motion.h1>
                 </div>
 
-                {/* Cart & Profile Icons - Mobile Only (desktop shown in HeroItems) */}
+                {/* Cart & Profile  - Mobile Only (desktop shown in HeroItems) */}
                 <div className='md:hidden flex items-center gap-3 p-2'>
                   <button onClick={() => setIsCartOpen(true)}>
                     <HiOutlineShoppingBag className='text-white text-2xl' />
