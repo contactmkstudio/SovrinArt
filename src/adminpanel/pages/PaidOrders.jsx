@@ -33,7 +33,7 @@ const PaidOrders = () => {
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
         <thead>
           <tr style={{ background: '#f9f9f9', textAlign: 'left' }}>
-            {['Order ID', 'Date', 'Total', 'Currency', 'Items', 'Status', 'Gateway'].map(h => (
+            {['Order ID', 'Date', 'Total', 'Currency', 'Items', 'Status', 'Gateway' , "User"].map(h => (
               <th key={h} style={{ padding: '10px 12px', borderBottom: '1px solid #eee', fontWeight: 500 }}>{h}</th>
             ))}
           </tr>
@@ -73,9 +73,10 @@ const PaidOrders = () => {
               </td>
               <td style={{ padding: '10px 12px', color: '#888', fontSize: 12 }}>
                 {order.payment_gateway
-                  ? order.payment_gateway.charAt(0).toUpperCase() + order.payment_gateway.slice(1)
+                  ? order?.payment_gateway.charAt(0).toUpperCase() + order?.payment_gateway.slice(1)
                   : '—'}
               </td>
+              <td style={{ padding: '10px 12px' }}>{order?.email || '—'}</td>
             </tr>
           ))}
         </tbody>
