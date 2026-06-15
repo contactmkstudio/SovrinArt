@@ -27,9 +27,7 @@ const ProductDetailedView = ({ product }) => {
       navigate('/login')
       return
     }
-    const effectiveSize = selectedSize
-      || sizes.find(s => s?.size?.toLowerCase() === 'm')
-      || { size: 'm' }
+    const effectiveSize = selectedSize;
     navigate('/order-summary', {
       state: {
         product,
@@ -201,7 +199,7 @@ const ProductDetailedView = ({ product }) => {
             </div>
 
             {/* Size Selection */}
-            {sizes?.length > 0 && (
+            {/* {sizes?.length > 0 && (
               <div className='mb-8'>
                 <p className='font-cormorant text-lg font-bold mb-3' style={{ color: '#546B41' }}>
                   Select Size
@@ -229,7 +227,7 @@ const ProductDetailedView = ({ product }) => {
                   })}
                 </div>
               </div>
-            )}
+            )} */}
 
             {/* Quantity Selector */}
             <div className='mb-8'>

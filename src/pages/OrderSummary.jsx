@@ -642,10 +642,9 @@ const OrderSummary = () => {
                       name="pincode"
                       placeholder="6-digit pincode"
                       error={errors.pincode}
-                      maxLength={6}
+                      maxLength={10}
                       registerProps={register('pincode', {
                         required: 'Pincode is required',
-                        pattern: { value: /^\d{6}$/, message: 'Enter a valid 6-digit pincode' },
                       })}
                     />
                   </div>

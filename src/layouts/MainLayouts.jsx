@@ -16,6 +16,8 @@ const MainLayouts = ({children}) => {
       </main>
       <ProductCard />
       <CategoryCard category="automobile" heading="Automobile Art" />
+      <CategoryCard category="digitaldownload" heading="Digital Download Art" />
+
       <GridDisplay />
       <AutoSlider />
       <Contact/>

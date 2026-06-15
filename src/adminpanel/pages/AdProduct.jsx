@@ -237,7 +237,7 @@ const AdProduct = () => {
           </div>
 
           {/* Sizes - Dynamic Fields */}
-          <div className='border-t pt-8'>
+          {/* <div className='border-t pt-8'>
             <h2 className='font-semibold text-lg text-gray-800 mb-4'>Sizes (Optional)</h2>
             <div className='space-y-4'>
               {sizeFields.map((field, index) => (
@@ -284,7 +284,7 @@ const AdProduct = () => {
             >
               <HiOutlinePlus /> Add Size
             </button>
-          </div>
+          </div> */}
 
           {/* Details - Dynamic Fields */}
           <div className='border-t pt-8'>

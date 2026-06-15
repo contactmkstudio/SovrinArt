@@ -24,6 +24,7 @@ import ProtectedRoute from './ProtectedRoute'
 import CategoryPage from '../pages/CategoryPage'
 import AddGridImages from '../adminpanel/pages/AddGridImages'
 import Favourites from '../pages/Favourites'
+import PaidOrders from '../adminpanel/pages/PaidOrders'
 
 
 const AppRoutes = () => {
@@ -59,6 +60,8 @@ const AppRoutes = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/admin/add-grid-images" element={<AddGridImages />} />
+            <Route path="/admin/paid-orders" element={<PaidOrders />} />
+
             <Route path="/favourites" element={<Favourites />} />
          
       </Routes>

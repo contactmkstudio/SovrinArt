@@ -19,6 +19,8 @@ const AdminSidebar = () => {
     { name: 'Delete FAQ', path: '/admin/delete-faq', icon: HiOutlineTrash },
     { name: 'Announcement', path: '/admin/announcement', icon: HiOutlineMegaphone },
     { name: 'Add Grid Images', path: '/admin/add-grid-images', icon: HiOutlinePhoto },
+    { name: 'Paid Orders', path: '/admin/paid-orders', icon: HiOutlinePhoto },
+
   ]
   
   return (

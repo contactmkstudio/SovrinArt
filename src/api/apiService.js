@@ -243,6 +243,15 @@ export const getUserOrders = async(userEmail) => {
   }
 }
 
+export const getOrderDetails = async() => {
+  try{
+    const response = await apiClient.get(`get-orders/paid-orders/`)
+    return response.data
+  } catch(error){
+    throw error;
+  }
+}
+
 export const getDashboardStats = async() => {
   try{
     const response = await apiClient.get('core/dashboard-stats/')

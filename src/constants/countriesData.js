@@ -26,7 +26,6 @@ export const countries = [
   { name: 'Bangladesh', flag: '🇧🇩', code: '+880' },
   { name: 'Sri Lanka', flag: '🇱🇰', code: '+94' },
   { name: 'Nepal', flag: '🇳🇵', code: '+977' },
-  { name: 'Pakistan', flag: '🇵🇰', code: '+92' },
   { name: 'China', flag: '🇨🇳', code: '+86' },
   { name: 'Russia', flag: '🇷🇺', code: '+7' },
 ]
