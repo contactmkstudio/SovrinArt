@@ -200,7 +200,7 @@ const AdProduct = () => {
             <div>
               <label className='block font-semibold text-gray-700 mb-2'>Price ($ USD) *</label>
               <input
-                type='number'
+                type=''
                 {...register('priceUsd', { required: 'Price in USD is required' })}
                 className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500'
                 placeholder='Enter price in USD'
