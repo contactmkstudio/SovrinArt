@@ -70,11 +70,11 @@ const AdProduct = () => {
     const hasCompleteSizes = data.sizes.some(size => size.size && size.priceRs && size.priceUsd)
     const hasDetails = data.details.some(detail => detail.detail && detail.detail.trim() !== '')
     
-    if (!hasCompleteSizes && !hasDetails) {
-      setToastMessage('Please add at least one Size or one Detail')
-      setToastType('error')
-      return
-    }
+    // if (!hasCompleteSizes && !hasDetails) {
+    //   setToastMessage('Please add at least one Size or one Detail')
+    //   setToastType('error')
+    //   return
+    // }
     
     // Transform data to backend format
     const formattedData = {
