@@ -21,6 +21,7 @@ const loadRazorpayScript = () =>
  * @param {Function} params.onSuccess    - Called with { orderId, paymentStatus } on verified payment
  * @param {Function} params.onError      - Called with an error message string
  * @param {Function} params.onDismiss    - Called when the user closes the Razorpay modal
+ * @param {Function} params.onVerifying  - Called with true/false during verify-payment API call
  */
 export const initiateRazorpayPayment = async ({
   orderPayload,
@@ -29,6 +30,7 @@ export const initiateRazorpayPayment = async ({
   onSuccess,
   onError,
   onDismiss,
+  onVerifying,
 }) => {
   const orderResponse = await createOrder(orderPayload)
 
@@ -51,6 +53,7 @@ export const initiateRazorpayPayment = async ({
     description: productName || 'Order',
     order_id: resolvedOrderId,
     handler: async (paymentResult) => {
+      if (onVerifying) onVerifying(true)
       try {
         const verifyResponse = await verifyPayment({
           razorpay_order_id: paymentResult.razorpay_order_id,
@@ -58,11 +61,13 @@ export const initiateRazorpayPayment = async ({
           razorpay_signature: paymentResult.razorpay_signature,
           order_id: resolvedOrderDbId,
         })
+        if (onVerifying) onVerifying(false)
         onSuccess({
           orderId: verifyResponse?.data?.order_id,
           paymentStatus: verifyResponse?.data?.status,
         })
       } catch {
+        if (onVerifying) onVerifying(false)
         onError('Payment verification failed. Contact support.')
       }
     },

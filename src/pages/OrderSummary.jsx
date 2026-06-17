@@ -120,10 +120,13 @@ const OrderSummary = () => {
       setIsPlacingOrder(false)
     }
 
+    const WHATSAPP_SUPPORT_URL = 'https://wa.link/ma9cum'
+
     const onError = (message) => {
       setIsCapturing(false)
       setToast({ message, type: 'error' })
       setIsPlacingOrder(false)
+      window.open(WHATSAPP_SUPPORT_URL, '_blank')
     }
 
     try {
@@ -140,9 +143,11 @@ const OrderSummary = () => {
           productName: fromCart ? 'Cart Order' : product?.name,
           onSuccess,
           onError,
+          onVerifying: (val) => setIsCapturing(val),
           onDismiss: () => {
             setIsPlacingOrder(false)
             setToast({ message: 'Payment cancelled.', type: 'error' })
+            window.open('https://wa.link/ma9cum', '_blank')
           },
         })
       } else {
@@ -161,6 +166,7 @@ const OrderSummary = () => {
         message: error?.message || error?.response?.data?.message || 'Failed to place order. Please try again.',
         type: 'error',
       })
+      window.open('https://wa.link/ma9cum', '_blank')
     }
   }
 
@@ -239,11 +245,11 @@ const OrderSummary = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5F3EF' }}>
-      {/* PayPal capture loader overlay */}
+      {/* Payment capture / verify loader overlay */}
       {isCapturing && (
         <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-4" style={{ backgroundColor: 'rgba(255,248,236,0.92)', backdropFilter: 'blur(4px)' }}>
           <Loader />
-          <p className="font-cormorant text-xl font-semibold" style={{ color: '#546B41' }}>Confirming your payment…</p>
+          <p className="font-cormorant text-xl font-semibold" style={{ color: '#546B41' }}>Verifying your payment…</p>
           <p className="font-marvel text-sm" style={{ color: '#99AD7A' }}>Please wait, do not close this page.</p>
         </div>
       )}
