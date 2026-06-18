@@ -68,7 +68,7 @@ const Footer = () => {
              <h1 className='text-white font-marvel tracking-widest md:text-2xl'>Quick Links</h1>
            </div>
            <div className='flex gap-4 '>
-             <a href={""} target="_blank" rel="noopener noreferrer" 
+             <a href={"https://wa.link/ma9cum"} target="_blank" rel="noopener noreferrer" 
                 className='text-white/50 hover:text-[#b8860b] hover:border-[#b8860b] border-2 border-transparent rounded-full p-2 transition-all duration-500 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-1'>
                <FaWhatsapp size={24} />
              </a>
