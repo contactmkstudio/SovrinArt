@@ -56,7 +56,7 @@ const PaidOrders = () => {
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
         <thead>
           <tr style={{ background: '#f9f9f9', textAlign: 'left' }}>
-            {['Order ID', 'Date', 'Total', 'Currency', 'Items', 'Status', 'Gateway' , "User"].map(h => (
+            {['Order ID', 'Date', 'Total', 'Currency', 'Items', 'Status', 'Gateway' , "User", "Email Sent"].map(h => (
               <th key={h} style={{ padding: '10px 12px', borderBottom: '1px solid #eee', fontWeight: 500 }}>{h}</th>
             ))}
           </tr>
