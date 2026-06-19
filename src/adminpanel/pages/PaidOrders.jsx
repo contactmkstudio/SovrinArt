@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getOrderDetails } from '../../api/apiService'
+import AdminSidebar from '../components/AdminSidebar'
+import AdminHeader from '../components/AdminHeader'
 
 const PaidOrders = () => {
   const [orders, setOrders] = useState([])
@@ -29,7 +31,28 @@ const PaidOrders = () => {
   if (error) return <p>{error}</p>
 
   return (
-    <div style={{ overflowX: 'auto' }}>
+    <div className='min-h-screen' style={{ backgroundColor: '#FAFAFA' }}>
+      <div className='flex'>
+        {/* Sidebar */}
+        <AdminSidebar />
+        
+        {/* Main Content */}
+        <div className='flex-1'>
+          <AdminHeader />
+          
+          <div className='p-6 md:p-8'>
+            {/* Page Title */}
+            <div>
+              <h1 className='font-cormorant text-3xl md:text-4xl font-bold mb-2' style={{ color: '#546B41' }}>
+                Paid Orders
+              </h1>
+              <p className='font-marvel text-sm md:text-base mb-8' style={{ color: '#99AD7A' }}>
+                View all paid orders from your customers.
+              </p>
+            </div>
+
+            {/* Orders Table */}
+            <div style={{ overflowX: 'auto' }}>
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
         <thead>
           <tr style={{ background: '#f9f9f9', textAlign: 'left' }}>
@@ -77,10 +100,16 @@ const PaidOrders = () => {
                   : '—'}
               </td>
               <td style={{ padding: '10px 12px' }}>{order?.email || '—'}</td>
+              <td style={{ padding: '10px 12px' }}>{order?.emailsent || '—'}</td>
+
             </tr>
           ))}
         </tbody>
       </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
