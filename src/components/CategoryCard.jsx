@@ -5,7 +5,7 @@ import ProductCardView from './ProductCardView'
 import { getProductsByCategory } from '../api/apiService'
 import Loader from './Loader'
 
-const CategoryCard = ({ category, heading }) => {
+const CategoryCard = ({ category, heading , subheading="" }) => {
   const navigate = useNavigate()
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -44,6 +44,11 @@ const CategoryCard = ({ category, heading }) => {
           <h2 className='font-hurricane text-4xl md:text-6xl mb-2' style={{ color: '#546B41' }}>
             {displayCategory}
           </h2>
+          {subheading && (
+            <p className='font-cormorant text-sm md:text-base mb-2' style={{ color: '#546B41' }}>
+              {subheading}
+            </p>
+          )}
           <p className='font-cormorant text-base md:text-lg' style={{ color: '#99AD7A' }}>
             Explore our {displayCategory.toLowerCase()} collection
           </p>
