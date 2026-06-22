@@ -17,6 +17,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     const userEmail = localStorage.getItem('userEmail')
+    console.log({hehehhee:userEmail})
     if (userEmail) {
       config.headers['X-User-Email'] = userEmail
     }
@@ -105,10 +106,12 @@ export const registerUser = async(data) => {
 
 export const loginUser = async(data) => {
   try{
-    const response = await apiClient.post('accounts/login/', data)
-    // Store user email in localStorage for header injection
-    if (response.data.email) {
-      localStorage.setItem('userEmail', response.data.email)
+    const response = await apiClient.post('accounts/login/', data)    
+    if (response?.data?.data?.email) {
+      localStorage.setItem('userEmail', response.data.data.email)
+  
+    } else {
+      console.log('Email not found in response path!')
     }
     return response;
   } catch(error){
