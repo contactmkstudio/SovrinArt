@@ -16,6 +16,10 @@ const apiClient = axios.create({
 // Request interceptor (for adding auth tokens, etc.)
 apiClient.interceptors.request.use(
   (config) => {
+    const userEmail = localStorage.getItem('userEmail')
+    if (userEmail) {
+      config.headers['X-User-Email'] = userEmail
+    }
     return config
   },
   (error) => {
@@ -102,6 +106,10 @@ export const registerUser = async(data) => {
 export const loginUser = async(data) => {
   try{
     const response = await apiClient.post('accounts/login/', data)
+    // Store user email in localStorage for header injection
+    if (response.data.email) {
+      localStorage.setItem('userEmail', response.data.email)
+    }
     return response;
   } catch(error){
     throw error;
@@ -313,4 +321,10 @@ export const getBannerImages = async() => {
   } catch(error){
     throw error;
   }
+}
+
+// Logout function to clear stored user data
+export const logoutUser = () => {
+  localStorage.removeItem('authToken')
+  localStorage.removeItem('userEmail')
 }
